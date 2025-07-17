@@ -1,0 +1,242 @@
+[
+  {
+    "id": "strike",
+    "name": "猛击",
+    "type": "active",
+    "levels": [
+      { "level": 1, "cost": 0, "damageMultiplier": 1.2, "description": "对敌人造成120%攻击力的伤害。" },
+      { "level": 2, "cost": 50, "damageMultiplier": 1.4, "description": "对敌人造成140%攻击力的伤害。" },
+      { "level": 3, "cost": 150, "damageMultiplier": 1.6, "description": "对敌人造成160%攻击力的伤害。" },
+      { "level": 4, "cost": 300, "damageMultiplier": 1.8, "description": "对敌人造成180%攻击力的伤害。" },
+      { "level": 5, "cost": 500, "damageMultiplier": 2.0, "description": "对敌人造成200%攻击力的伤害。" }
+    ]
+  },
+  {
+    "id": "heal",
+    "name": "治疗",
+    "type": "active",
+    "levels": [
+      { "level": 1, "cost": 10, "heal": 20, "description": "恢复自身生命值。" },
+      { "level": 2, "cost": 60, "heal": 25, "description": "恢复更多生命值。" },
+      { "level": 3, "cost": 180, "heal": 30, "description": "恢复大量生命值。" },
+      { "level": 4, "cost": 350, "heal": 35, "description": "恢复巨大生命值。" },
+      { "level": 5, "cost": 600, "heal": 40, "description": "恢复海量生命值。" }
+    ]
+  },
+  {
+    "id": "fireball",
+    "name": "火球术",
+    "type": "active",
+    "levels": [
+      { "level": 1, "cost": 15, "damageMultiplier": 1.5, "description": "发射火球，造成150%攻击力的伤害。" },
+      { "level": 2, "cost": 70, "damageMultiplier": 1.7, "description": "发射更强大的火球，造成170%攻击力的伤害。" },
+      { "level": 3, "cost": 200, "damageMultiplier": 1.9, "description": "发射炽热的火球，造成190%攻击力的伤害。" },
+      { "level": 4, "cost": 400, "damageMultiplier": 2.1, "description": "发射爆裂的火球，造成210%攻击力的伤害。" },
+      { "level": 5, "cost": 700, "damageMultiplier": 2.3, "description": "发射地狱火球，造成230%攻击力的伤害。" }
+    ]
+  },
+  {
+    "id": "iceshard",
+    "name": "冰锥术",
+    "type": "active",
+    "levels": [
+      { "level": 1, "cost": 15, "damageMultiplier": 1.5, "description": "召唤冰锥，造成150%攻击力的伤害。" },
+      { "level": 2, "cost": 70, "damageMultiplier": 1.7, "description": "召唤更锋利的冰锥，造成170%攻击力的伤害。" },
+      { "level": 3, "cost": 200, "damageMultiplier": 1.9, "description": "召唤冰冷的冰锥，造成190%攻击力的伤害。" },
+      { "level": 4, "cost": 400, "damageMultiplier": 2.1, "description": "召唤刺骨的冰锥，造成210%攻击力的伤害。" },
+      { "level": 5, "cost": 700, "damageMultiplier": 2.3, "description": "召唤极寒的冰锥，造成230%攻击力的伤害。" }
+    ]
+  },
+  {
+    "id": "thunderbolt",
+    "name": "雷电术",
+    "type": "active",
+    "levels": [
+      { "level": 1, "cost": 20, "damageMultiplier": 1.8, "description": "召唤闪电，造成180%攻击力的伤害。" },
+      { "level": 2, "cost": 80, "damageMultiplier": 2.0, "description": "召唤更强的闪电，造成200%攻击力的伤害。" },
+      { "level": 3, "cost": 250, "damageMultiplier": 2.2, "description": "召唤狂暴的闪电，造成220%攻击力的伤害。" },
+      { "level": 4, "cost": 450, "damageMultiplier": 2.4, "description": "召唤毁灭性的闪电，造成240%攻击力的伤害。" },
+      { "level": 5, "cost": 800, "damageMultiplier": 2.6, "description": "召唤天罚之雷，造成260%攻击力的伤害。" }
+    ]
+  },
+  {
+    "id": "poisoncloud",
+    "name": "毒云术",
+    "type": "active",
+    "levels": [
+      { "level": 1, "cost": 12, "damageMultiplier": 0.5, "dot": { "duration": 3, "damagePerTurn": 5 }, "description": "释放毒云，造成50%攻击力的初始伤害，并附加持续伤害。" },
+      { "level": 2, "cost": 65, "damageMultiplier": 0.6, "dot": { "duration": 3, "damagePerTurn": 7 }, "description": "释放更浓的毒云，造成60%攻击力的初始伤害，并附加持续伤害。" },
+      { "level": 3, "cost": 190, "damageMultiplier": 0.7, "dot": { "duration": 4, "damagePerTurn": 8 }, "description": "释放剧毒云雾，造成70%攻击力的初始伤害，并附加持续伤害。" },
+      { "level": 4, "cost": 380, "damageMultiplier": 0.8, "dot": { "duration": 4, "damagePerTurn": 10 }, "description": "释放致命毒云，造成80%攻击力的初始伤害，并附加持续伤害。" },
+      { "level": 5, "cost": 650, "damageMultiplier": 0.9, "dot": { "duration": 5, "damagePerTurn": 12 }, "description": "释放腐蚀毒云，造成90%攻击力的初始伤害，并附加持续伤害。" }
+    ]
+  },
+  {
+    "id": "shieldbash",
+    "name": "盾击",
+    "type": "active",
+    "levels": [
+      { "level": 1, "cost": 8, "damageMultiplier": 1.0, "debuff": { "attribute": "attack", "value": -3, "duration": 2 }, "description": "用盾牌猛击敌人，造成100%攻击力的伤害，并降低其攻击力。" },
+      { "level": 2, "cost": 55, "damageMultiplier": 1.1, "debuff": { "attribute": "attack", "value": -4, "duration": 2 }, "description": "用盾牌猛击敌人，造成110%攻击力的伤害，并显著降低其攻击力。" },
+      { "level": 3, "cost": 160, "damageMultiplier": 1.2, "debuff": { "attribute": "attack", "value": -5, "duration": 3 }, "description": "用盾牌重击敌人，造成120%攻击力的伤害，并大幅降低其攻击力。" },
+      { "level": 4, "cost": 320, "damageMultiplier": 1.3, "debuff": { "attribute": "attack", "value": -6, "duration": 3 }, "description": "用盾牌毁灭性地打击敌人，造成130%攻击力的伤害，并极大地降低其攻击力。" },
+      { "level": 5, "cost": 550, "damageMultiplier": 1.4, "debuff": { "attribute": "attack", "value": -7, "duration": 4 }, "description": "用盾牌粉碎敌人，造成140%攻击力的伤害，并彻底削弱其攻击力。" }
+    ]
+  },
+  {
+    "id": "lifedrain",
+    "name": "生命汲取",
+    "type": "active",
+    "levels": [
+      { "level": 1, "cost": 18, "damageMultiplier": 0.8, "lifesteal": 0.5, "description": "造成80%攻击力的伤害，并汲取生命。" },
+      { "level": 2, "cost": 80, "damageMultiplier": 0.9, "lifesteal": 0.6, "description": "造成90%攻击力的伤害，并汲取更多生命。" },
+      { "level": 3, "cost": 220, "damageMultiplier": 1.0, "lifesteal": 0.7, "description": "造成100%攻击力的伤害，并汲取大量生命。" },
+      { "level": 4, "cost": 420, "damageMultiplier": 1.1, "lifesteal": 0.8, "description": "造成110%攻击力的伤害，并汲取巨大生命。" },
+      { "level": 5, "cost": 750, "damageMultiplier": 1.2, "lifesteal": 0.9, "description": "造成120%攻击力的伤害，并汲取所有生命。" }
+    ]
+  },
+  {
+    "id": "stunstrike",
+    "name": "震荡打击",
+    "type": "active",
+    "levels": [
+      { "level": 1, "cost": 10, "damageMultiplier": 0.8, "stunChance": 0.3, "stunDuration": 1, "description": "造成80%攻击力的伤害，并有几率眩晕敌人。" },
+      { "level": 2, "cost": 60, "damageMultiplier": 0.9, "stunChance": 0.4, "stunDuration": 1, "description": "造成90%攻击力的伤害，并有更高几率眩晕敌人。" },
+      { "level": 3, "cost": 180, "damageMultiplier": 1.0, "stunChance": 0.5, "stunDuration": 1, "description": "造成100%攻击力的伤害，并有很大几率眩晕敌人。" },
+      { "level": 4, "cost": 350, "damageMultiplier": 1.1, "stunChance": 0.6, "stunDuration": 2, "description": "造成110%攻击力的伤害，并有极高几率眩晕敌人，持续更久。" },
+      { "level": 5, "cost": 600, "damageMultiplier": 1.2, "stunChance": 0.7, "stunDuration": 2, "description": "造成120%攻击力的伤害，并几乎必定眩晕敌人，持续更久。" }
+    ]
+  },
+  {
+    "id": "cleave",
+    "name": "顺劈斩",
+    "type": "active",
+    "levels": [
+      { "level": 1, "cost": 10, "damageMultiplier": 0.8, "description": "对所有敌人造成80%攻击力的伤害。" },
+      { "level": 2, "cost": 60, "damageMultiplier": 0.9, "description": "对所有敌人造成90%攻击力的伤害。" },
+      { "level": 3, "cost": 180, "damageMultiplier": 1.0, "description": "对所有敌人造成100%攻击力的伤害。" },
+      { "level": 4, "cost": 350, "damageMultiplier": 1.1, "description": "对所有敌人造成110%攻击力的伤害。" },
+      { "level": 5, "cost": 600, "damageMultiplier": 1.2, "description": "对所有敌人造成120%攻击力的伤害。" }
+    ]
+  },
+  {
+    "id": "berserk",
+    "name": "狂暴",
+    "type": "passive",
+    "levels": [
+      { "level": 1, "cost": 0, "attack": 5, "description": "攻击力永久增加5点。" },
+      { "level": 2, "cost": 100, "attack": 8, "description": "攻击力永久增加8点。" },
+      { "level": 3, "cost": 250, "attack": 12, "description": "攻击力永久增加12点。" },
+      { "level": 4, "cost": 450, "attack": 16, "description": "攻击力永久增加16点。" },
+      { "level": 5, "cost": 800, "attack": 20, "description": "攻击力永久增加20点。" }
+    ]
+  },
+  {
+    "id": "toughskin",
+    "name": "硬化皮肤",
+    "type": "passive",
+    "levels": [
+      { "level": 1, "cost": 0, "defense": 3, "description": "防御力永久增加3点。" },
+      { "level": 2, "cost": 80, "defense": 5, "description": "防御力永久增加5点。" },
+      { "level": 3, "cost": 200, "defense": 8, "description": "防御力永久增加8点。" },
+      { "level": 4, "cost": 380, "defense": 12, "description": "防御力永久增加12点。" },
+      { "level": 5, "cost": 650, "defense": 15, "description": "防御力永久增加15点。" }
+    ]
+  },
+  {
+    "id": "critmastery",
+    "name": "暴击精通",
+    "type": "passive",
+    "levels": [
+      { "level": 1, "cost": 0, "critChance": 0.02, "description": "暴击率永久增加2%。" },
+      { "level": 2, "cost": 120, "critChance": 0.04, "description": "暴击率永久增加4%。" },
+      { "level": 3, "cost": 300, "critChance": 0.06, "description": "暴击率永久增加6%。" },
+      { "level": 4, "cost": 550, "critChance": 0.08, "description": "暴击率永久增加8%。" },
+      { "level": 5, "cost": 900, "critChance": 0.10, "description": "暴击率永久增加10%。" }
+    ]
+  },
+  {
+    "id": "evasion",
+    "name": "闪避",
+    "type": "passive",
+    "levels": [
+      { "level": 1, "cost": 0, "moveSpeed": 1, "description": "移动速度永久增加1点。" },
+      { "level": 2, "cost": 70, "moveSpeed": 2, "description": "移动速度永久增加2点。" },
+      { "level": 3, "cost": 200, "moveSpeed": 3, "description": "移动速度永久增加3点。" },
+      { "level": 4, "cost": 400, "moveSpeed": 4, "description": "移动速度永久增加4点。" },
+      { "level": 5, "cost": 700, "moveSpeed": 5, "description": "移动速度永久增加5点。" }
+    ]
+  },
+  {
+    "id": "goldfinder",
+    "name": "寻宝者",
+    "type": "passive",
+    "levels": [
+      { "level": 1, "cost": 0, "goldBonus": 0.1, "description": "击败敌人获得金币增加10%。" },
+      { "level": 2, "cost": 150, "goldBonus": 0.2, "description": "击败敌人获得金币增加20%。" },
+      { "level": 3, "cost": 350, "goldBonus": 0.3, "description": "击败敌人获得金币增加30%。" },
+      { "level": 4, "cost": 600, "goldBonus": 0.4, "description": "击败敌人获得金币增加40%。" },
+      { "level": 5, "cost": 1000, "goldBonus": 0.5, "description": "击败敌人获得金币增加50%。" }
+    ]
+  },
+  {
+    "id": "regen",
+    "name": "生命恢复",
+    "type": "passive",
+    "levels": [
+      { "level": 1, "cost": 0, "hpRegen": 1, "description": "每回合恢复1点生命值。" },
+      { "level": 2, "cost": 90, "hpRegen": 2, "description": "每回合恢复2点生命值。" },
+      { "level": 3, "cost": 220, "hpRegen": 3, "description": "每回合恢复3点生命值。" },
+      { "level": 4, "cost": 420, "hpRegen": 4, "description": "每回合恢复4点生命值。" },
+      { "level": 5, "cost": 750, "hpRegen": 5, "description": "每回合恢复5点生命值。" }
+    ]
+  },
+  {
+    "id": "toughness",
+    "name": "坚韧",
+    "type": "passive",
+    "levels": [
+      { "level": 1, "cost": 0, "maxHp": 20, "description": "最大生命值永久增加20点。" },
+      { "level": 2, "cost": 110, "maxHp": 30, "description": "最大生命值永久增加30点。" },
+      { "level": 3, "cost": 280, "maxHp": 40, "description": "最大生命值永久增加40点。" },
+      { "level": 4, "cost": 500, "maxHp": 50, "description": "最大生命值永久增加50点。" },
+      { "level": 5, "cost": 850, "maxHp": 60, "description": "最大生命值永久增加60点。" }
+    ]
+  },
+  {
+    "id": "counterattack",
+    "name": "反击姿态",
+    "type": "passive",
+    "levels": [
+      { "level": 1, "cost": 0, "counterChance": 0.02, "description": "反击几率永久增加2%。" },
+      { "level": 2, "cost": 100, "counterChance": 0.04, "description": "反击几率永久增加4%。" },
+      { "level": 3, "cost": 250, "counterChance": 0.06, "description": "反击几率永久增加6%。" },
+      { "level": 4, "cost": 450, "counterChance": 0.08, "description": "反击几率永久增加8%。" },
+      { "level": 5, "cost": 800, "counterChance": 0.10, "description": "反击几率永久增加10%。" }
+    ]
+  },
+  {
+    "id": "comboattack",
+    "name": "连击掌握",
+    "type": "passive",
+    "levels": [
+      { "level": 1, "cost": 0, "comboChance": 0.02, "description": "连击几率永久增加2%。" },
+      { "level": 2, "cost": 100, "comboChance": 0.04, "description": "连击几率永久增加4%。" },
+      { "level": 3, "cost": 250, "comboChance": 0.06, "description": "连击几率永久增加6%。" },
+      { "level": 4, "cost": 450, "comboChance": 0.08, "description": "连击几率永久增加8%。" },
+      { "level": 5, "cost": 800, "comboChance": 0.10, "description": "连击几率永久增加10%。" }
+    ]
+  },
+  {
+    "id": "defignore",
+    "name": "破甲",
+    "type": "passive",
+    "levels": [
+      { "level": 1, "cost": 0, "ignoreDefense": 0.01, "description": "忽视防御力永久增加1%。" },
+      { "level": 2, "cost": 120, "ignoreDefense": 0.02, "description": "忽视防御力永久增加2%。" },
+      { "level": 3, "cost": 300, "ignoreDefense": 0.03, "description": "忽视防御力永久增加3%。" },
+      { "level": 4, "cost": 550, "ignoreDefense": 0.04, "description": "忽视防御力永久增加4%。" },
+      { "level": 5, "cost": 900, "ignoreDefense": 0.05, "description": "忽视防御力永久增加5%。" }
+    ]
+  }
+]

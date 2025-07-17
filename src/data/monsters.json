@@ -1,0 +1,360 @@
+[
+  {
+    "level": 1,
+    "name": "小野猪",
+    "hp": 30,
+    "attack": 5,
+    "defense": 1,
+    "critChance": 0.05,
+    "critResist": 0.01,
+    "moveSpeed": 2,
+    "comboChance": 0.0,
+    "counterChance": 0.0,
+    "skills": [],
+    "drops": [
+      { "type": "equipment", "itemId": "wood_sword", "chance": 0.1 },
+      { "type": "equipment", "itemId": "cloth_armor", "chance": 0.08 },
+      { "type": "skill", "skillId": "strike", "chance": 0.05 }
+    ]
+  },
+  {
+    "level": 2,
+    "name": "森林狼",
+    "hp": 40,
+    "attack": 7,
+    "defense": 2,
+    "critChance": 0.08,
+    "critResist": 0.02,
+    "moveSpeed": 3,
+    "comboChance": 0.05,
+    "counterChance": 0.0,
+    "skills": [],
+    "drops": [
+      { "type": "equipment", "itemId": "leather_armor", "chance": 0.1 },
+      { "type": "equipment", "itemId": "leather_boots", "chance": 0.08 },
+      { "type": "skill", "skillId": "heal", "chance": 0.03 }
+    ]
+  },
+  {
+    "level": 3,
+    "name": "哥布林",
+    "hp": 50,
+    "attack": 10,
+    "defense": 2,
+    "critChance": 0.1,
+    "critResist": 0.03,
+    "moveSpeed": 2,
+    "comboChance": 0.05,
+    "counterChance": 0.02,
+    "skills": [
+      { "name": "投掷石块", "type": "damage", "damageMultiplier": 1.2, "cost": 0 }
+    ],
+    "drops": [
+      { "type": "equipment", "itemId": "copper_ring", "chance": 0.05 },
+      { "type": "equipment", "itemId": "old_shoes", "chance": 0.1 },
+      { "type": "skill", "skillId": "fireball", "chance": 0.02 }
+    ]
+  },
+  {
+    "level": 4,
+    "name": "巨型蜘蛛",
+    "hp": 60,
+    "attack": 12,
+    "defense": 3,
+    "critChance": 0.12,
+    "critResist": 0.04,
+    "moveSpeed": 4,
+    "comboChance": 0.0,
+    "counterChance": 0.0,
+    "skills": [
+      { "name": "毒液喷射", "type": "dot", "duration": 3, "damagePerTurn": 3, "cost": 0 }
+    ],
+    "drops": [
+        { "type": "equipment", "itemId": "cloth_armor", "chance": 0.05 },
+        { "type": "skill", "skillId": "poisoncloud", "chance": 0.03 }
+    ]
+  },
+  {
+    "level": 5,
+    "name": "骷髅战士",
+    "hp": 70,
+    "attack": 15,
+    "defense": 5,
+    "critChance": 0.15,
+    "critResist": 0.05,
+    "moveSpeed": 2,
+    "comboChance": 0.08,
+    "counterChance": 0.05,
+    "skills": [],
+    "drops": [
+      { "type": "equipment", "itemId": "iron_sword", "chance": 0.1 },
+      { "type": "equipment", "itemId": "silver_ring", "chance": 0.05 },
+      { "type": "skill", "skillId": "berserk", "chance": 0.02 }
+    ]
+  },
+  {
+    "level": 6,
+    "name": "僵尸",
+    "hp": 80,
+    "attack": 13,
+    "defense": 4,
+    "critChance": 0.05,
+    "critResist": 0.05,
+    "moveSpeed": 1,
+    "comboChance": 0.0,
+    "counterChance": 0.0,
+    "skills": [
+      { "name": "腐蚀", "type": "debuff", "attribute": "defense", "value": -2, "duration": 2, "cost": 0 }
+    ],
+    "drops": [
+        { "type": "equipment", "itemId": "old_shoes", "chance": 0.05 },
+        { "type": "skill", "skillId": "lifedrain", "chance": 0.02 }
+    ]
+  },
+  {
+    "level": 7,
+    "name": "食人魔",
+    "hp": 100,
+    "attack": 18,
+    "defense": 6,
+    "critChance": 0.1,
+    "critResist": 0.06,
+    "moveSpeed": 2,
+    "comboChance": 0.0,
+    "counterChance": 0.0,
+    "skills": [
+      { "name": "重击", "type": "damage", "damageMultiplier": 1.3, "cost": 0 }
+    ],
+    "drops": [
+        { "type": "equipment", "itemId": "leather_boots", "chance": 0.05 },
+        { "type": "skill", "skillId": "shieldbash", "chance": 0.03 }
+    ]
+  },
+  {
+    "level": 8,
+    "name": "地精弓箭手",
+    "hp": 70,
+    "attack": 16,
+    "defense": 3,
+    "critChance": 0.2,
+    "critResist": 0.05,
+    "moveSpeed": 3,
+    "comboChance": 0.0,
+    "counterChance": 0.0,
+    "skills": [],
+    "drops": [
+        { "type": "equipment", "itemId": "leather_armor", "chance": 0.05 },
+        { "type": "skill", "skillId": "iceshard", "chance": 0.02 }
+    ]
+  },
+  {
+    "level": 9,
+    "name": "石像鬼",
+    "hp": 90,
+    "attack": 17,
+    "defense": 7,
+    "critChance": 0.1,
+    "critResist": 0.08,
+    "moveSpeed": 3,
+    "comboChance": 0.0,
+    "counterChance": 0.0,
+    "skills": [],
+    "drops": [
+        { "type": "equipment", "itemId": "silver_ring", "chance": 0.03 },
+        { "type": "skill", "skillId": "toughskin", "chance": 0.04 }
+    ]
+  },
+  {
+    "level": 10,
+    "name": "黑暗骑士",
+    "hp": 120,
+    "attack": 20,
+    "defense": 10,
+    "critChance": 0.15,
+    "critResist": 0.1,
+    "moveSpeed": 2,
+    "comboChance": 0.1,
+    "counterChance": 0.08,
+    "skills": [
+      { "name": "暗影斩", "type": "damage", "damageMultiplier": 1.4, "cost": 0 }
+    ],
+    "drops": [
+      { "type": "equipment", "itemId": "steel_sword", "chance": 0.1 },
+      { "type": "equipment", "itemId": "chain_mail", "chance": 0.08 },
+      { "type": "equipment", "itemId": "iron_boots", "chance": 0.06 },
+      { "type": "skill", "skillId": "thunderbolt", "chance": 0.02 }
+    ]
+  },
+  {
+    "level": 15,
+    "name": "巨魔",
+    "hp": 180,
+    "attack": 30,
+    "defense": 12,
+    "critChance": 0.1,
+    "critResist": 0.1,
+    "moveSpeed": 2,
+    "comboChance": 0.05,
+    "counterChance": 0.05,
+    "skills": [
+      { "name": "再生", "type": "heal", "value": 10, "cost": 0 }
+    ],
+    "drops": [
+      { "type": "equipment", "itemId": "mithril_sword", "chance": 0.1 },
+      { "type": "equipment", "itemId": "plate_armor", "chance": 0.08 },
+      { "type": "equipment", "itemId": "mithril_boots", "chance": 0.06 },
+      { "type": "skill", "skillId": "critmastery", "chance": 0.02 }
+    ]
+  },
+  {
+    "level": 20,
+    "name": "龙人守卫",
+    "hp": 250,
+    "attack": 40,
+    "defense": 18,
+    "critChance": 0.2,
+    "critResist": 0.12,
+    "moveSpeed": 2,
+    "comboChance": 0.15,
+    "counterChance": 0.1,
+    "skills": [
+      { "name": "龙息", "type": "damage", "damageMultiplier": 1.5, "cost": 0 }
+    ],
+    "drops": [
+      { "type": "equipment", "itemId": "rune_sword", "chance": 0.1 },
+      { "type": "equipment", "itemId": "rune_plate_armor", "chance": 0.08 },
+      { "type": "equipment", "itemId": "rune_boots", "chance": 0.06 },
+      { "type": "skill", "skillId": "evasion", "chance": 0.02 }
+    ]
+  },
+  {
+    "level": 25,
+    "name": "火焰元素",
+    "hp": 200,
+    "attack": 45,
+    "defense": 12,
+    "critChance": 0.2,
+    "critResist": 0.15,
+    "moveSpeed": 3,
+    "comboChance": 0.0,
+    "counterChance": 0.0,
+    "skills": [
+      { "name": "烈焰冲击", "type": "damage", "damageMultiplier": 1.5, "cost": 0 }
+    ],
+    "drops": [
+      { "type": "equipment", "itemId": "dragon_bone_sword", "chance": 0.1 },
+      { "type": "equipment", "itemId": "dragon_scale_armor", "chance": 0.08 },
+      { "type": "equipment", "itemId": "ruby_ring", "chance": 0.05 },
+      { "type": "skill", "skillId": "goldfinder", "chance": 0.02 }
+    ]
+  },
+  {
+    "level": 30,
+    "name": "冰霜巨龙",
+    "hp": 400,
+    "attack": 60,
+    "defense": 25,
+    "critChance": 0.2,
+    "critResist": 0.2,
+    "moveSpeed": 3,
+    "comboChance": 0.15,
+    "counterChance": 0.1,
+    "skills": [
+      { "name": "冰霜吐息", "type": "damage", "damageMultiplier": 1.6, "cost": 0 }
+    ],
+    "drops": [
+      { "type": "equipment", "itemId": "titan_sword", "chance": 0.1 },
+      { "type": "equipment", "itemId": "titan_plate_armor", "chance": 0.08 },
+      { "type": "equipment", "itemId": "sapphire_ring", "chance": 0.05 },
+      { "type": "skill", "skillId": "regen", "chance": 0.02 }
+    ]
+  },
+  {
+    "level": 35,
+    "name": "克拉肯幼体",
+    "hp": 350,
+    "attack": 55,
+    "defense": 22,
+    "critChance": 0.18,
+    "critResist": 0.16,
+    "moveSpeed": 2,
+    "comboChance": 0.1,
+    "counterChance": 0.08,
+    "skills": [
+      { "name": "触手猛击", "type": "damage", "damageMultiplier": 1.6, "cost": 0 }
+    ],
+    "drops": [
+      { "type": "equipment", "itemId": "holy_sword", "chance": 0.1 },
+      { "type": "equipment", "itemId": "holy_plate_armor", "chance": 0.08 },
+      { "type": "equipment", "itemId": "amethyst_ring", "chance": 0.05 },
+      { "type": "skill", "skillId": "toughness", "chance": 0.02 }
+    ]
+  },
+  {
+    "level": 40,
+    "name": "火焰巨龙",
+    "hp": 500,
+    "attack": 70,
+    "defense": 30,
+    "critChance": 0.25,
+    "critResist": 0.22,
+    "moveSpeed": 3,
+    "comboChance": 0.2,
+    "counterChance": 0.15,
+    "skills": [
+      { "name": "火焰吐息", "type": "damage", "damageMultiplier": 1.7, "cost": 0 }
+    ],
+    "drops": [
+      { "type": "equipment", "itemId": "chaos_blade", "chance": 0.1 },
+      { "type": "equipment", "itemId": "chaos_armor", "chance": 0.08 },
+      { "type": "equipment", "itemId": "obsidian_ring", "chance": 0.05 },
+      { "type": "skill", "skillId": "counterattack", "chance": 0.02 }
+    ]
+  },
+  {
+    "level": 45,
+    "name": "深渊领主",
+    "hp": 450,
+    "attack": 75,
+    "defense": 30,
+    "critChance": 0.2,
+    "critResist": 0.25,
+    "moveSpeed": 2,
+    "comboChance": 0.15,
+    "counterChance": 0.12,
+    "skills": [
+      { "name": "地狱咆哮", "type": "debuff", "attribute": "defense", "value": -10, "duration": 2, "cost": 0 }
+    ],
+    "drops": [
+      { "type": "equipment", "itemId": "doom_blade", "chance": 0.1 },
+      { "type": "equipment", "itemId": "doom_plate_armor", "chance": 0.08 },
+      { "type": "equipment", "itemId": "void_ring", "chance": 0.05 },
+      { "type": "skill", "skillId": "comboattack", "chance": 0.02 }
+    ]
+  },
+  {
+    "level": 50,
+    "name": "远古邪神",
+    "hp": 1000,
+    "attack": 100,
+    "defense": 50,
+    "critChance": 0.35,
+    "critResist": 0.35,
+    "moveSpeed": 2,
+    "comboChance": 0.25,
+    "counterChance": 0.2,
+    "skills": [
+      { "name": "末日审判", "type": "damage", "damageMultiplier": 1.8, "cost": 0 },
+      { "name": "黑暗契约", "type": "buff", "attribute": "attack", "value": 20, "duration": 3, "cost": 0 }
+    ],
+    "drops": [
+      { "type": "equipment", "itemId": "genesis_sword", "chance": 0.1 },
+      { "type": "equipment", "itemId": "genesis_armor", "chance": 0.08 },
+      { "type": "equipment", "itemId": "genesis_boots", "chance": 0.06 },
+      { "type": "equipment", "itemId": "cosmic_heart", "chance": 0.04 },
+      { "type": "skill", "skillId": "defignore", "chance": 0.02 },
+      { "type": "skill", "skillId": "cleave", "chance": 0.01 },
+      { "type": "skill", "skillId": "stunstrike", "chance": 0.01 }
+    ]
+  }
+]
