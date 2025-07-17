@@ -30,14 +30,16 @@
         <h3>主动技能槽位 (Active Skills)</h3>
         <ul>
           <li v-for="(skill, index) in player.activeSkillSlots" :key="'active-' + index" @mouseover="showTooltip($event, skill)" @mouseout="hideTooltip">
-            槽位 {{ index + 1 }}: {{ skill ? skill.description : '空' }}
+            槽位 {{ index + 1 }}: {{ skill ? `L${skill.level} ${skill.description}` : '空' }}
+            <button v-if="skill" @click="upgradeSkill(skill, index, 'active')">升级</button>
             <button v-if="skill" @click="unequipSkill(skill, index, 'active')">卸下</button>
           </li>
         </ul>
         <h3>被动技能槽位 (Passive Skills)</h3>
         <ul>
           <li v-for="(skill, index) in player.passiveSkillSlots" :key="'passive-' + index" @mouseover="showTooltip($event, skill)" @mouseout="hideTooltip">
-            槽位 {{ index + 1 }}: {{ skill ? skill.description : '空' }}
+            槽位 {{ index + 1 }}: {{ skill ? `L${skill.level} ${skill.description}` : '空' }}
+            <button v-if="skill" @click="upgradeSkill(skill, index, 'passive')">升级</button>
             <button v-if="skill" @click="unequipSkill(skill, index, 'passive')">卸下</button>
           </li>
         </ul>
@@ -271,7 +273,8 @@ export default {
         if (item.skillId) { // It's a skill book from inventory
           skillData = this.skillsData.find(s => s.id === item.skillId)
           if (skillData) {
-            skillLevelData = skillData.levels[0] // Get level 1 data for description
+            const currentLevel = this.player.skillLevels[item.skillId] || 1
+            skillLevelData = skillData.levels[currentLevel - 1]
           }
         } else { // It's an equipped skill
           skillData = item
@@ -279,8 +282,13 @@ export default {
         }
 
         if (skillData && skillLevelData) {
-          content += `类型: ${skillData.type === 'active' ? '主动技能' : '被动技能'}<br>`
+          content += `类型: ${skillData.type === 'active' ? '主动技能' : '被动技能'} (等级 ${skillLevelData.level})<br>`
           if (skillLevelData.description) content += `描述: ${skillLevelData.description}<br>`
+          // Show next level description
+          const nextLevelData = skillData.levels[skillLevelData.level]
+          if (nextLevelData) {
+            content += `<hr>下一级 (L${nextLevelData.level}):<br>${nextLevelData.description}`
+          }
         }
       }
 
@@ -291,6 +299,67 @@ export default {
     },
     hideTooltip () {
       this.tooltip.visible = false
+    },
+    upgradeSkill (skill, slotIndex, slotType) {
+      if (!skill) return
+
+      const skillBaseData = this.skillsData.find(s => s.id === skill.id)
+      if (!skillBaseData) {
+        this.logBattle('错误：找不到技能基础数据。')
+        return
+      }
+
+      const currentLevel = this.player.skillLevels[skill.id] || 1
+      if (currentLevel >= skillBaseData.levels.length) {
+        this.logBattle(`${skill.name} 已达到最高等级。`)
+        return
+      }
+
+      const nextLevelData = skillBaseData.levels[currentLevel]
+      const cost = nextLevelData.cost
+      if (this.player.gold < cost) {
+        this.logBattle(`金币不足，需要 ${cost} 金币升级。`)
+        return
+      }
+
+      this.player.gold -= cost
+      this.logBattle(`花费了 ${cost} 金币尝试升级 ${skill.name}。`)
+
+      const failureRates = { 1: 0.1, 2: 0.3, 3: 0.6, 4: 0.9 }
+      const failureChance = failureRates[currentLevel] || 0
+      if (Math.random() < failureChance) {
+        this.logBattle('技能升级失败...')
+        this.saveGame()
+        return
+      }
+
+      // --- Upgrade success ---
+      this.logBattle(`恭喜！${skill.name} 升级至 ${nextLevelData.level} 级！`)
+
+      // For passive skills, remove old effects before applying new ones
+      if (skill.type === 'passive') {
+        this.removePassiveSkillEffects(skill)
+      }
+
+      // Create the new skill object by merging base data with new level data
+      const newSkill = { ...skillBaseData, ...nextLevelData }
+
+      // Update the central skill level tracker
+      this.player.skillLevels[skill.id] = newSkill.level
+
+      // Replace the skill in the slot with the new, upgraded skill object
+      if (slotType === 'active') {
+        this.player.activeSkillSlots.splice(slotIndex, 1, newSkill)
+      } else {
+        this.player.passiveSkillSlots.splice(slotIndex, 1, newSkill)
+      }
+
+      // Apply new passive effects if the skill is passive
+      if (newSkill.type === 'passive') {
+        this.applyPassiveSkillEffects(newSkill)
+      }
+
+      this.saveGame()
     },
     enhanceItem (item, location, identifier) {
       if (!item || item.enhancementLevel >= 10) {
