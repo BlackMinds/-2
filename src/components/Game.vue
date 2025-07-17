@@ -113,7 +113,7 @@ export default {
         comboChance: 0.05,
         counterChance: 0.03,
         ignoreDefense: 0.0,
-        gold: 1000000000000,
+        gold: 1,
         equipment: {
           weapon: null,
           armor: null,
