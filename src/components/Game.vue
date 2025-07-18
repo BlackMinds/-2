@@ -2,17 +2,20 @@
   <div id="game-container">
     <div class="left-panel">
       <div class="section character-attributes">
-        <h2>角色属性界面 (Character Attributes)</h2>
-        <div class="attributes-grid">
+        <h2 @click="toggleSection('character')">
+          角色属性界面 (Character Attributes)
+          <span class="toggle-arrow">{{ sections.character.collapsed ? '▼' : '▲' }}</span>
+        </h2>
+        <div v-if="!sections.character.collapsed" class="attributes-grid">
           <div class="primary-attributes">
             <p>姓名: {{ player.name }}</p>
             <p>等级: {{ player.level }}</p>
             <p>经验: {{ player.xp }} / {{ player.xpToNextLevel }}</p>
             <p v-if="player.attributePoints > 0">可用属性点: {{ player.attributePoints }}</p>
             <p>生命值: {{ player.hp }}/{{ player.maxHp }}</p>
-            <p>力量: {{ player.strength }} <button v-if="player.attributePoints > 0" @click="assignPoint('baseStrength')">+</button></p>
-            <p>敏捷: {{ player.agility }} <button v-if="player.attributePoints > 0" @click="assignPoint('baseAgility')">+</button></p>
-            <p>体质: {{ player.constitution }} <button v-if="player.attributePoints > 0" @click="assignPoint('baseConstitution')">+</button></p>
+            <p>力量: {{ player.strength }} <button v-if="player.attributePoints > 0" @click="assignPoint('baseStrength')" :disabled="inBattle">+</button></p>
+            <p>敏捷: {{ player.agility }} <button v-if="player.attributePoints > 0" @click="assignPoint('baseAgility')" :disabled="inBattle">+</button></p>
+            <p>体质: {{ player.constitution }} <button v-if="player.attributePoints > 0" @click="assignPoint('baseConstitution')" :disabled="inBattle">+</button></p>
             <p>攻击力: {{ player.attack }}</p>
             <p>防御力: {{ player.defense }}</p>
           </div>
@@ -29,60 +32,73 @@
           </div>
         </div>
       </div>
-      <div class="section pet-interface" :style="{ height: player.pets.length === 0 ? '160px' : '' }">
-        <h2>宠物界面 (Pet)</h2>
-        <div v-if="player.pets.length > 0">
-          <div v-for="(pet, index) in player.pets" :key="index" class="pet-details">
-            <hr v-if="index > 0">
-            <p><strong>{{ pet.name }}</strong> ({{ player.activePetId === pet.instanceId ? '出战中' : '休息中' }})</p>
-            <p>等级: {{ pet.level }}</p>
-            <div v-if="player.activePetId === pet.instanceId">
-              <p>经验: {{ pet.xp }} / {{ pet.xpToNextLevel }}</p>
-              <p v-if="pet.attributePoints > 0">可用属性点: {{ pet.attributePoints }}</p>
-              <p>生命值: {{ pet.hp }}/{{ pet.maxHp }}</p>
-              <p>力量: {{ pet.strength }} <button v-if="pet.attributePoints > 0" @click="assignPetPoint(pet.instanceId, 'baseStrength')">+</button></p>
-              <p>敏捷: {{ pet.agility }} <button v-if="pet.attributePoints > 0" @click="assignPetPoint(pet.instanceId, 'baseAgility')">+</button></p>
-              <p>体质: {{ pet.constitution }} <button v-if="pet.attributePoints > 0" @click="assignPetPoint(pet.instanceId, 'baseConstitution')">+</button></p>
-              <p>攻击力: {{ pet.attack }}</p>
-              <p>防御力: {{ pet.defense }}</p>
-              <p>闪避率: {{ (pet.evasion * 100).toFixed(1) }}%</p>
-              <p>暴击率: {{ (pet.critChance * 100).toFixed(1) }}%</p>
+      <div class="section pet-interface" :style="petInterfaceStyle">
+        <h2 @click="toggleSection('pet')">
+          宠物界面 (Pet)
+          <span class="toggle-arrow">{{ sections.pet.collapsed ? '▼' : '▲' }}</span>
+        </h2>
+        <div v-if="!sections.pet.collapsed">
+          <div v-if="player.pets.length > 0">
+            <div v-for="(pet, index) in player.pets" :key="index" class="pet-details">
+              <hr v-if="index > 0">
+              <p><strong>{{ pet.name }}</strong> ({{ player.activePetId === pet.instanceId ? '出战中' : '休息中' }})</p>
+              <p>等级: {{ pet.level }}</p>
+              <div v-if="player.activePetId === pet.instanceId">
+                <p>经验: {{ pet.xp }} / {{ pet.xpToNextLevel }}</p>
+                <p v-if="pet.attributePoints > 0">可用属性点: {{ pet.attributePoints }}</p>
+                <p>生命值: {{ pet.hp }}/{{ pet.maxHp }}</p>
+                <p>力量: {{ pet.strength }} <button v-if="pet.attributePoints > 0" @click="assignPetPoint(pet.instanceId, 'baseStrength')" :disabled="inBattle">+</button></p>
+                <p>敏捷: {{ pet.agility }} <button v-if="pet.attributePoints > 0" @click="assignPetPoint(pet.instanceId, 'baseAgility')" :disabled="inBattle">+</button></p>
+                <p>体质: {{ pet.constitution }} <button v-if="pet.attributePoints > 0" @click="assignPetPoint(pet.instanceId, 'baseConstitution')" :disabled="inBattle">+</button></p>
+                <p>攻击力: {{ pet.attack }}</p>
+                <p>防御力: {{ pet.defense }}</p>
+                <p>闪避率: {{ (pet.evasion * 100).toFixed(1) }}%</p>
+                <p>暴击率: {{ (pet.critChance * 100).toFixed(1) }}%</p>
+              </div>
+              <button v-if="player.activePetId !== pet.instanceId" @click="setPetStatus(pet.instanceId, true)" :disabled="inBattle">出战</button>
+              <button v-if="player.activePetId === pet.instanceId" @click="setPetStatus(pet.instanceId, false)" :disabled="inBattle">休息</button>
+              <button @click="releasePet(pet.instanceId)" :disabled="inBattle">放生</button>
             </div>
-            <button v-if="player.activePetId !== pet.instanceId" @click="setPetStatus(pet.instanceId, true)">出战</button>
-            <button v-if="player.activePetId === pet.instanceId" @click="setPetStatus(pet.instanceId, false)">休息</button>
-            <button @click="releasePet(pet.instanceId)">放生</button>
           </div>
+          <p v-else>无</p>
         </div>
-        <p v-else>无</p>
       </div>
       <div class="section equipment-interface">
-        <h2>装备界面 (Equipment)</h2>
-        <ul>
+        <h2 @click="toggleSection('equipment')">
+          装备界面 (Equipment)
+          <span class="toggle-arrow">{{ sections.equipment.collapsed ? '▼' : '▲' }}</span>
+        </h2>
+        <ul v-if="!sections.equipment.collapsed">
           <li v-for="(item, slot) in player.equipment" :key="slot" @mouseover="showTooltip($event, item)" @mouseout="hideTooltip">
             {{ slot }}: {{ item ? `${item.name} ${item.enhancementLevel > 0 ? '+' + item.enhancementLevel : ''}` : '无' }}
-            <button v-if="item" @click="enhanceItem(item, 'equipped', slot)">强化</button>
-            <button v-if="item" @click="unequipItem(slot)">卸下</button>
+            <button v-if="item" @click="enhanceItem(item, 'equipped', slot)" :disabled="inBattle">强化</button>
+            <button v-if="item" @click="unequipItem(slot)" :disabled="inBattle">卸下</button>
           </li>
         </ul>
       </div>
       <div class="section skill-interface">
-        <h2>技能界面 (Skills)</h2>
-        <h3>主动技能槽位 (Active Skills)</h3>
-        <ul>
-          <li v-for="(skill, index) in player.activeSkillSlots" :key="'active-' + index" @mouseover="showTooltip($event, skill)" @mouseout="hideTooltip">
+        <h2 @click="toggleSection('skill')">
+          技能界面 (Skills)
+          <span class="toggle-arrow">{{ sections.skill.collapsed ? '▼' : '▲' }}</span>
+        </h2>
+        <div v-if="!sections.skill.collapsed">
+          <h3>主动技能槽位 (Active Skills)</h3>
+          <ul>
+            <li v-for="(skill, index) in player.activeSkillSlots" :key="'active-' + index" @mouseover="showTooltip($event, skill)" @mouseout="hideTooltip">
             槽位 {{ index + 1 }}: {{ skill ? `L${skill.level} ${skill.description}` : '空' }}
-            <button v-if="skill" @click="upgradeSkill(skill, index, 'active')">升级</button>
-            <button v-if="skill" @click="unequipSkill(skill, index, 'active')">卸下</button>
+            <button v-if="skill" @click="upgradeSkill(skill, index, 'active')" :disabled="inBattle">升级</button>
+            <button v-if="skill" @click="unequipSkill(skill, index, 'active')" :disabled="inBattle">卸下</button>
           </li>
         </ul>
         <h3>被动技能槽位 (Passive Skills)</h3>
         <ul>
           <li v-for="(skill, index) in player.passiveSkillSlots" :key="'passive-' + index" @mouseover="showTooltip($event, skill)" @mouseout="hideTooltip">
             槽位 {{ index + 1 }}: {{ skill ? `L${skill.level} ${skill.description}` : '空' }}
-            <button v-if="skill" @click="upgradeSkill(skill, index, 'passive')">升级</button>
-            <button v-if="skill" @click="unequipSkill(skill, index, 'passive')">卸下</button>
+            <button v-if="skill" @click="upgradeSkill(skill, index, 'passive')" :disabled="inBattle">升级</button>
+            <button v-if="skill" @click="unequipSkill(skill, index, 'passive')" :disabled="inBattle">卸下</button>
           </li>
         </ul>
+        </div>
       </div>
     </div>
     <div class="right-panel">
@@ -108,34 +124,62 @@
           <button @click="startBattle" :disabled="inBattle">开始战斗</button>
           <button @click="fleeBattle" :disabled="!inBattle">逃跑</button>
         </div>
+        <div v-if="inBattle" class="battle-status">
+          <div class="character-status">
+            <span>{{ player.name }}</span>
+            <div class="health-bar-container">
+              <div class="health-bar" :style="{ width: (player.hp / player.maxHp) * 100 + '%' }"></div>
+            </div>
+            <span>{{ player.hp }} / {{ player.maxHp }}</span>
+          </div>
+          <div v-if="activePet" class="character-status">
+            <span>{{ activePet.name }}</span>
+            <div class="health-bar-container">
+              <div class="health-bar" :style="{ width: (activePet.hp / activePet.maxHp) * 100 + '%' }"></div>
+            </div>
+            <span>{{ activePet.hp }} / {{ activePet.maxHp }}</span>
+          </div>
+            <div v-if="enemy" class="character-status" @mouseover="showEnemyTooltip($event, enemy)" @mouseout="hideTooltip">
+              <span>{{ enemy.name }}</span>
+              <div class="health-bar-container">
+              <div class="health-bar enemy" :style="{ width: (enemy.hp / enemy.maxHp) * 100 + '%' }"></div>
+            </div>
+            <span>{{ enemy.hp }} / {{ enemy.maxHp }}</span>
+          </div>
+        </div>
         <div class="battle-log" ref="battleLogContainer">
           <p v-for="(log, index) in battleLog" :key="index">{{ log }}</p>
         </div>
       </div>
-      <div class="section backpack-interface">
-        <h2>背包界面 (Backpack)</h2>
-        <button @click="sellAllItems">一键出售装备</button>
-        <ul>
-          <li v-for="(item, index) in player.inventory" :key="index" @mouseover="showTooltip($event, item)" @mouseout="hideTooltip">
+      <div class="section backpack-interface" :style="backpackInterfaceStyle">
+        <h2 @click="toggleSection('backpack')">
+          背包界面 (Backpack)
+          <span class="toggle-arrow">{{ sections.backpack.collapsed ? '▼' : '▲' }}</span>
+        </h2>
+        <div v-if="!sections.backpack.collapsed">
+          <button @click="sellAllItems">一键出售装备</button>
+          <ul>
+            <li v-for="(item, index) in player.inventory" :key="index" @mouseover="showTooltip($event, item)" @mouseout="hideTooltip">
             {{ item.name }} {{ item.enhancementLevel > 0 ? '+' + item.enhancementLevel : '' }} ({{ item.type }})
-            <button v-if="item.slot" @click="enhanceItem(item, 'inventory', index)">强化</button>
-            <button v-if="item.slot" @click="equipItem(item, index)">装备</button>
-            <button v-if="item.type === 'consumable'" @click="useItem(item, index)">使用</button>
+            <button v-if="item.slot" @click="enhanceItem(item, 'inventory', index)" :disabled="inBattle">强化</button>
+            <button v-if="item.slot" @click="equipItem(item, index)" :disabled="inBattle">装备</button>
+            <button v-if="item.type === 'consumable'" @click="useItem(item, index)" :disabled="inBattle">使用</button>
             <span v-if="item.type === 'skill'">
               <span v-if="getSkillType(item) === 'active'">
-                <button @click="equipSkill(item, 0, 'active')">装备主动1</button>
-                <button @click="equipSkill(item, 1, 'active')">装备主动2</button>
-                <button @click="equipSkill(item, 2, 'active')">装备主动3</button>
+                <button @click="equipSkill(item, 0, 'active')" :disabled="inBattle">装备主动1</button>
+                <button @click="equipSkill(item, 1, 'active')" :disabled="inBattle">装备主动2</button>
+                <button @click="equipSkill(item, 2, 'active')" :disabled="inBattle">装备主动3</button>
               </span>
               <span v-if="getSkillType(item) === 'passive'">
-                <button @click="equipSkill(item, 0, 'passive')">装备被动1</button>
-                <button @click="equipSkill(item, 1, 'passive')">装备被动2</button>
-                <button @click="equipSkill(item, 2, 'passive')">装备被动3</button>
+                <button @click="equipSkill(item, 0, 'passive')" :disabled="inBattle">装备被动1</button>
+                <button @click="equipSkill(item, 1, 'passive')" :disabled="inBattle">装备被动2</button>
+                <button @click="equipSkill(item, 2, 'passive')" :disabled="inBattle">装备被动3</button>
               </span>
             </span>
-            <button @click="sellItem(item, index)">出售</button>
+            <button @click="sellItem(item, index)" :disabled="inBattle">出售</button>
           </li>
         </ul>
+        </div>
       </div>
     </div>
 
@@ -178,6 +222,13 @@ export default {
         content: '',
         top: 0,
         left: 0
+      },
+      sections: {
+        character: { collapsed: false },
+        pet: { collapsed: false },
+        equipment: { collapsed: false },
+        skill: { collapsed: false },
+        backpack: { collapsed: false }
       }
     }
   },
@@ -216,6 +267,21 @@ export default {
     activePet () {
       if (!this.player.activePetId) return null
       return this.player.pets.find(p => p.instanceId === this.player.activePetId)
+    },
+    petInterfaceStyle () {
+      if (this.sections.pet.collapsed) {
+        return { height: 'auto', flex: '0 0 auto' }
+      }
+      if (this.player.pets.length === 0) {
+        return { height: '160px' }
+      }
+      return {} // Fallback to CSS height
+    },
+    backpackInterfaceStyle () {
+      if (this.sections.backpack.collapsed) {
+        return { flex: '0 0 auto' }
+      }
+      return {} // Fallback to CSS
     }
   },
   methods: {
@@ -793,14 +859,26 @@ export default {
       }
     },
     calculateDamage (attackerAttack, defenderDefense, attackerCritChance, defenderCritResist, attackerIgnoreDefense = 0) {
-      const effectiveDefense = Math.max(0, defenderDefense * (1 - attackerIgnoreDefense))
-      let damage = Math.max(0, attackerAttack - effectiveDefense)
+      // New percentage-based damage formula
+      const ignoredDefense = defenderDefense * attackerIgnoreDefense
+      const effectiveDefense = Math.max(0, defenderDefense - ignoredDefense)
+
+      const damageReductionPercentage = (effectiveDefense / 20) / 100
+      const actualReduction = Math.min(0.75, damageReductionPercentage) // Capped at 75%
+
+      let damage = attackerAttack * (1 - actualReduction)
+
+      // Ensure at least some damage is done if attack is positive
+      if (damage < 1 && attackerAttack > 0) {
+        damage = 1
+      }
+
       const actualCritChance = Math.max(0, attackerCritChance - defenderCritResist)
       if (Math.random() < actualCritChance) {
         damage *= 1.5 // 1.5x critical damage
         this.logBattle('暴击！')
       }
-      return damage
+      return Math.round(damage)
     },
     getRandomMonster (playerLevel) {
       if (!this.monsters || this.monsters.length === 0) {
@@ -870,6 +948,49 @@ export default {
     },
     checkLevelUp () {
       characterService.checkLevelUp(this.player, this.logBattle, this.activePet)
+    },
+    toggleSection (sectionName) {
+      if (this.sections[sectionName]) {
+        this.sections[sectionName].collapsed = !this.sections[sectionName].collapsed
+      }
+    },
+    showEnemyTooltip (event, enemy) {
+      if (!enemy) return
+      let content = `<strong>${enemy.name}</strong><br>`
+      content += `等级: ${enemy.level}<br>`
+      content += `生命值: ${enemy.hp}/${enemy.maxHp}<br>`
+      content += `攻击力: ${enemy.attack}<br>`
+      content += `防御力: ${enemy.defense}<br>`
+      if (enemy.skills && enemy.skills.length > 0) {
+        content += '<hr><strong>技能:</strong><br>'
+        enemy.skills.forEach(skill => {
+          content += `${skill.name}<br>`
+        })
+      }
+      if (enemy.drops && enemy.drops.length > 0) {
+        content += '<hr><strong>掉落物:</strong><br>'
+        enemy.drops.forEach(drop => {
+          let itemName = ''
+          if (drop.type === 'equipment') {
+            const itemData = this.equipment.find(e => e.id === drop.itemId)
+            if (itemData) itemName = itemData.name
+          } else if (drop.type === 'skill') {
+            const skillData = this.skillsData.find(s => s.id === drop.skillId)
+            if (skillData) itemName = `${skillData.name} 技能书`
+          } else if (drop.type === 'pet') {
+            const petData = this.pets.find(p => p.id === drop.petId)
+            if (petData) itemName = petData.name
+          }
+          if (itemName) {
+            content += `${itemName} (${(drop.chance * 100).toFixed(1)}%)<br>`
+          }
+        })
+      }
+
+      this.tooltip.content = content
+      this.tooltip.visible = true
+      this.tooltip.top = event.pageY + 10
+      this.tooltip.left = event.pageX + 10
     }
   }
 }

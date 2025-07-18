@@ -2,14 +2,14 @@
   {
     "level": 1,
     "name": "缚灵守卫 (L1)",
-    "hp": 55,
-    "attack": 11,
-    "defense": 5,
-    "critChance": 0.052,
-    "critResist": 0.022,
+    "hp": 80,
+    "attack": 15,
+    "defense": 8,
+    "critChance": 0.055,
+    "critResist": 0.025,
     "moveSpeed": 2,
-    "comboChance": 0.051,
-    "counterChance": 0.031,
+    "comboChance": 0.052,
+    "counterChance": 0.032,
     "skills": [
       {
         "name": "重击",
@@ -21,7 +21,7 @@
     "drops": [
       {
         "type": "gold",
-        "amount": 10,
+        "amount": 15,
         "chance": 1
       }
     ]
@@ -29,48 +29,21 @@
   {
     "level": 2,
     "name": "缚灵守卫 (L2)",
-    "hp": 120,
-    "attack": 22,
-    "defense": 11,
-    "critChance": 0.054,
-    "critResist": 0.024,
+    "hp": 180,
+    "attack": 30,
+    "defense": 15,
+    "critChance": 0.058,
+    "critResist": 0.028,
     "moveSpeed": 2,
-    "comboChance": 0.052,
-    "counterChance": 0.032,
+    "comboChance": 0.054,
+    "counterChance": 0.034,
     "skills": [
       {
         "name": "破甲",
         "type": "debuff",
         "attribute": "defense",
-        "value": -5,
+        "value": -8,
         "duration": 2,
-        "cost": 0
-      }
-    ],
-    "drops": [
-      {
-        "type": "gold",
-        "amount": 20,
-        "chance": 1
-      }
-    ]
-  },
-  {
-    "level": 3,
-    "name": "缚灵守卫 (L3)",
-    "hp": 195,
-    "attack": 35,
-    "defense": 17,
-    "critChance": 0.056,
-    "critResist": 0.026,
-    "moveSpeed": 2,
-    "comboChance": 0.053,
-    "counterChance": 0.033,
-    "skills": [
-      {
-        "name": "重击",
-        "type": "damage",
-        "damageMultiplier": 1.2,
         "cost": 0
       }
     ],
@@ -83,75 +56,48 @@
     ]
   },
   {
-    "level": 4,
-    "name": "缚灵守卫 (L4)",
-    "hp": 280,
-    "attack": 48,
-    "defense": 24,
-    "critChance": 0.058,
-    "critResist": 0.028,
-    "moveSpeed": 2,
-    "comboChance": 0.054,
-    "counterChance": 0.034,
-    "skills": [
-      {
-        "name": "火球术",
-        "type": "damage",
-        "damageMultiplier": 1.5,
-        "cost": 0
-      }
-    ],
-    "drops": [
-      {
-        "type": "gold",
-        "amount": 40,
-        "chance": 1
-      }
-    ]
-  },
-  {
-    "level": 5,
-    "name": "缚灵守卫 (L5)",
-    "hp": 375,
-    "attack": 63,
-    "defense": 31,
-    "critChance": 0.06,
-    "critResist": 0.03,
-    "moveSpeed": 2,
-    "comboChance": 0.055,
-    "counterChance": 0.035,
-    "skills": [
-      {
-        "name": "快速治疗",
-        "type": "heal",
-        "value": 50,
-        "cost": 0
-      }
-    ],
-    "drops": [
-      {
-        "type": "gold",
-        "amount": 50,
-        "chance": 1
-      }
-    ]
-  },
-  {
-    "level": 6,
-    "name": "缚灵守卫 (L6)",
-    "hp": 480,
-    "attack": 78,
-    "defense": 39,
-    "critChance": 0.062,
-    "critResist": 0.032,
+    "level": 3,
+    "name": "缚灵守卫 (L3)",
+    "hp": 290,
+    "attack": 45,
+    "defense": 25,
+    "critChance": 0.061,
+    "critResist": 0.031,
     "moveSpeed": 2,
     "comboChance": 0.056,
     "counterChance": 0.036,
     "skills": [
       {
-        "name": "冰锥术",
+        "name": "重击",
         "type": "damage",
-        "damageMultiplier": 1.4,
+        "damageMultiplier": 1.3,
+        "cost": 0
+      }
+    ],
+    "drops": [
+      {
+        "type": "gold",
+        "amount": 45,
+        "chance": 1
+      }
+    ]
+  },
+  {
+    "level": 4,
+    "name": "缚灵守卫 (L4)",
+    "hp": 420,
+    "attack": 60,
+    "defense": 35,
+    "critChance": 0.064,
+    "critResist": 0.034,
+    "moveSpeed": 2,
+    "comboChance": 0.058,
+    "counterChance": 0.038,
+    "skills": [
+      {
+        "name": "火球术",
+        "type": "damage",
+        "damageMultiplier": 1.6,
         "cost": 0
       }
     ],
@@ -164,79 +110,48 @@
     ]
   },
   {
-    "level": 7,
-    "name": "缚灵守卫 (L7)",
-    "hp": 595,
-    "attack": 95,
-    "defense": 47,
-    "critChance": 0.064,
-    "critResist": 0.034,
+    "level": 5,
+    "name": "缚灵守卫 (L5)",
+    "hp": 560,
+    "attack": 75,
+    "defense": 45,
+    "critChance": 0.067,
+    "critResist": 0.037,
     "moveSpeed": 2,
-    "comboChance": 0.057,
-    "counterChance": 0.037,
+    "comboChance": 0.06,
+    "counterChance": 0.04,
     "skills": [
       {
-        "name": "石肤术",
-        "type": "buff",
-        "attribute": "defense",
-        "value": 20,
-        "duration": 3,
+        "name": "快速治疗",
+        "type": "heal",
+        "value": 80,
         "cost": 0
       }
     ],
     "drops": [
       {
         "type": "gold",
-        "amount": 70,
+        "amount": 75,
         "chance": 1
       }
     ]
   },
   {
-    "level": 8,
-    "name": "缚灵守卫 (L8)",
-    "hp": 720,
-    "attack": 112,
-    "defense": 56,
-    "critChance": 0.066,
-    "critResist": 0.036,
+    "level": 6,
+    "name": "缚灵守卫 (L6)",
+    "hp": 710,
+    "attack": 90,
+    "defense": 55,
+    "critChance": 0.07,
+    "critResist": 0.04,
     "moveSpeed": 2,
-    "comboChance": 0.058,
-    "counterChance": 0.038,
+    "comboChance": 0.062,
+    "counterChance": 0.042,
     "skills": [
       {
-        "name": "激怒",
-        "type": "buff",
-        "attribute": "attack",
-        "value": 10,
-        "duration": 3,
-        "cost": 0
-      }
-    ],
-    "drops": [
-      {
-        "type": "gold",
-        "amount": 80,
-        "chance": 1
-      }
-    ]
-  },
-  {
-    "level": 9,
-    "name": "缚灵守卫 (L9)",
-    "hp": 855,
-    "attack": 131,
-    "defense": 65,
-    "critChance": 0.068,
-    "critResist": 0.038,
-    "moveSpeed": 2,
-    "comboChance": 0.059,
-    "counterChance": 0.039,
-    "skills": [
-      {
-        "name": "重击",
+        "name": "冰锥术",
         "type": "damage",
-        "damageMultiplier": 1.2,
+        "damageMultiplier": 1.5,
         "cost": 0
       }
     ],
@@ -249,36 +164,22 @@
     ]
   },
   {
-    "level": 10,
-    "name": "缚灵首领 (L10)",
-    "hp": 1000,
-    "attack": 150,
-    "defense": 75,
-    "critChance": 0.07,
-    "critResist": 0.04,
+    "level": 7,
+    "name": "缚灵守卫 (L7)",
+    "hp": 870,
+    "attack": 105,
+    "defense": 65,
+    "critChance": 0.073,
+    "critResist": 0.043,
     "moveSpeed": 2,
-    "comboChance": 0.06,
-    "counterChance": 0.04,
+    "comboChance": 0.064,
+    "counterChance": 0.044,
     "skills": [
       {
-        "name": "重击",
-        "type": "damage",
-        "damageMultiplier": 1.2,
-        "cost": 0
-      },
-      {
-        "name": "破甲",
-        "type": "debuff",
-        "attribute": "defense",
-        "value": -5,
-        "duration": 2,
-        "cost": 0
-      },
-      {
-        "name": "激怒",
+        "name": "石肤术",
         "type": "buff",
-        "attribute": "attack",
-        "value": 10,
+        "attribute": "defense",
+        "value": 30,
         "duration": 3,
         "cost": 0
       }
@@ -286,55 +187,28 @@
     "drops": [
       {
         "type": "gold",
-        "amount": 100,
+        "amount": 105,
         "chance": 1
       }
     ]
   },
   {
-    "level": 11,
-    "name": "怨魂守卫 (L11)",
-    "hp": 1155,
-    "attack": 171,
-    "defense": 85,
-    "critChance": 0.072,
-    "critResist": 0.042,
+    "level": 8,
+    "name": "缚灵守卫 (L8)",
+    "hp": 1040,
+    "attack": 120,
+    "defense": 75,
+    "critChance": 0.076,
+    "critResist": 0.046,
     "moveSpeed": 2,
-    "comboChance": 0.061,
-    "counterChance": 0.041,
+    "comboChance": 0.066,
+    "counterChance": 0.046,
     "skills": [
       {
-        "name": "冰锥术",
-        "type": "damage",
-        "damageMultiplier": 1.4,
-        "cost": 0
-      }
-    ],
-    "drops": [
-      {
-        "type": "gold",
-        "amount": 110,
-        "chance": 1
-      }
-    ]
-  },
-  {
-    "level": 12,
-    "name": "怨魂守卫 (L12)",
-    "hp": 1320,
-    "attack": 192,
-    "defense": 96,
-    "critChance": 0.074,
-    "critResist": 0.044,
-    "moveSpeed": 2,
-    "comboChance": 0.062,
-    "counterChance": 0.042,
-    "skills": [
-      {
-        "name": "石肤术",
+        "name": "激怒",
         "type": "buff",
-        "attribute": "defense",
-        "value": 20,
+        "attribute": "attack",
+        "value": 15,
         "duration": 3,
         "cost": 0
       }
@@ -348,76 +222,64 @@
     ]
   },
   {
-    "level": 13,
-    "name": "怨魂守卫 (L13)",
-    "hp": 1495,
-    "attack": 215,
-    "defense": 107,
-    "critChance": 0.076,
-    "critResist": 0.046,
+    "level": 9,
+    "name": "缚灵守卫 (L9)",
+    "hp": 1220,
+    "attack": 135,
+    "defense": 85,
+    "critChance": 0.079,
+    "critResist": 0.049,
     "moveSpeed": 2,
-    "comboChance": 0.063,
-    "counterChance": 0.043,
+    "comboChance": 0.068,
+    "counterChance": 0.048,
     "skills": [
       {
         "name": "重击",
         "type": "damage",
-        "damageMultiplier": 1.2,
+        "damageMultiplier": 1.3,
         "cost": 0
       }
     ],
     "drops": [
       {
         "type": "gold",
-        "amount": 130,
+        "amount": 135,
         "chance": 1
       }
     ]
   },
   {
-    "level": 14,
-    "name": "怨魂守卫 (L14)",
-    "hp": 1680,
-    "attack": 238,
-    "defense": 119,
-    "critChance": 0.078,
-    "critResist": 0.048,
+    "level": 10,
+    "name": "缚灵首领 (L10)",
+    "hp": 1500,
+    "attack": 150,
+    "defense": 100,
+    "critChance": 0.082,
+    "critResist": 0.052,
     "moveSpeed": 2,
-    "comboChance": 0.064,
-    "counterChance": 0.044,
+    "comboChance": 0.07,
+    "counterChance": 0.05,
     "skills": [
       {
-        "name": "生命吸取",
-        "type": "damage_heal",
-        "damageMultiplier": 0.8,
-        "healMultiplier": 0.5,
-        "cost": 0
-      }
-    ],
-    "drops": [
-      {
-        "type": "gold",
-        "amount": 140,
-        "chance": 1
-      }
-    ]
-  },
-  {
-    "level": 15,
-    "name": "怨魂守卫 (L15)",
-    "hp": 1875,
-    "attack": 263,
-    "defense": 131,
-    "critChance": 0.08,
-    "critResist": 0.05,
-    "moveSpeed": 2,
-    "comboChance": 0.065,
-    "counterChance": 0.045,
-    "skills": [
-      {
-        "name": "火球术",
+        "name": "重击",
         "type": "damage",
-        "damageMultiplier": 1.5,
+        "damageMultiplier": 1.4,
+        "cost": 0
+      },
+      {
+        "name": "破甲",
+        "type": "debuff",
+        "attribute": "defense",
+        "value": -10,
+        "duration": 2,
+        "cost": 0
+      },
+      {
+        "name": "激怒",
+        "type": "buff",
+        "attribute": "attack",
+        "value": 20,
+        "duration": 3,
         "cost": 0
       }
     ],
@@ -430,79 +292,50 @@
     ]
   },
   {
-    "level": 16,
-    "name": "怨魂守卫 (L16)",
-    "hp": 2080,
-    "attack": 288,
-    "defense": 144,
-    "critChance": 0.082,
-    "critResist": 0.052,
+    "level": 11,
+    "name": "怨魂守卫 (L11)",
+    "hp": 1650,
+    "attack": 165,
+    "defense": 110,
+    "critChance": 0.085,
+    "critResist": 0.055,
     "moveSpeed": 2,
-    "comboChance": 0.066,
-    "counterChance": 0.046,
+    "comboChance": 0.072,
+    "counterChance": 0.052,
     "skills": [
       {
-        "name": "破甲",
-        "type": "debuff",
-        "attribute": "defense",
-        "value": -5,
-        "duration": 2,
+        "name": "冰锥术",
+        "type": "damage",
+        "damageMultiplier": 1.5,
         "cost": 0
       }
     ],
     "drops": [
       {
         "type": "gold",
-        "amount": 160,
+        "amount": 165,
         "chance": 1
       }
     ]
   },
   {
-    "level": 17,
-    "name": "怨魂守卫 (L17)",
-    "hp": 2295,
-    "attack": 315,
-    "defense": 157,
-    "critChance": 0.084,
-    "critResist": 0.054,
+    "level": 12,
+    "name": "怨魂守卫 (L12)",
+    "hp": 1810,
+    "attack": 180,
+    "defense": 120,
+    "critChance": 0.088,
+    "critResist": 0.058,
     "moveSpeed": 2,
-    "comboChance": 0.067,
-    "counterChance": 0.047,
+    "comboChance": 0.074,
+    "counterChance": 0.054,
     "skills": [
       {
-        "name": "激怒",
+        "name": "石肤术",
         "type": "buff",
-        "attribute": "attack",
-        "value": 10,
+        "attribute": "defense",
+        "value": 35,
         "duration": 3,
-        "cost": 0
-      }
-    ],
-    "drops": [
-      {
-        "type": "gold",
-        "amount": 170,
-        "chance": 1
-      }
-    ]
-  },
-  {
-    "level": 18,
-    "name": "怨魂守卫 (L18)",
-    "hp": 2520,
-    "attack": 342,
-    "defense": 171,
-    "critChance": 0.086,
-    "critResist": 0.056,
-    "moveSpeed": 2,
-    "comboChance": 0.068,
-    "counterChance": 0.048,
-    "skills": [
-      {
-        "name": "快速治疗",
-        "type": "heal",
-        "value": 50,
         "cost": 0
       }
     ],
@@ -515,93 +348,49 @@
     ]
   },
   {
-    "level": 19,
-    "name": "怨魂守卫 (L19)",
-    "hp": 2755,
-    "attack": 371,
-    "defense": 185,
-    "critChance": 0.088,
-    "critResist": 0.058,
+    "level": 13,
+    "name": "怨魂守卫 (L13)",
+    "hp": 1980,
+    "attack": 195,
+    "defense": 130,
+    "critChance": 0.091,
+    "critResist": 0.061,
     "moveSpeed": 2,
-    "comboChance": 0.069,
-    "counterChance": 0.049,
-    "skills": [
-      {
-        "name": "毒镖",
-        "type": "dot",
-        "duration": 3,
-        "damagePerTurn": 10,
-        "cost": 0
-      }
-    ],
-    "drops": [
-      {
-        "type": "gold",
-        "amount": 190,
-        "chance": 1
-      }
-    ]
-  },
-  {
-    "level": 20,
-    "name": "怨魂首领 (L20)",
-    "hp": 3000,
-    "attack": 400,
-    "defense": 200,
-    "critChance": 0.09,
-    "critResist": 0.06,
-    "moveSpeed": 3,
-    "comboChance": 0.07,
-    "counterChance": 0.05,
-    "skills": [
-      {
-        "name": "群体减速",
-        "type": "debuff",
-        "attribute": "moveSpeed",
-        "value": -2,
-        "duration": 2,
-        "cost": 0
-      },
-      {
-        "name": "生命吸取",
-        "type": "damage_heal",
-        "damageMultiplier": 0.8,
-        "healMultiplier": 0.5,
-        "cost": 0
-      },
-      {
-        "name": "石肤术",
-        "type": "buff",
-        "attribute": "defense",
-        "value": 20,
-        "duration": 3,
-        "cost": 0
-      }
-    ],
-    "drops": [
-      {
-        "type": "gold",
-        "amount": 200,
-        "chance": 1
-      }
-    ]
-  },
-  {
-    "level": 21,
-    "name": "魔兵守卫 (L21)",
-    "hp": 3255,
-    "attack": 431,
-    "defense": 215,
-    "critChance": 0.092,
-    "critResist": 0.062,
-    "moveSpeed": 3,
-    "comboChance": 0.071,
-    "counterChance": 0.051,
+    "comboChance": 0.076,
+    "counterChance": 0.056,
     "skills": [
       {
         "name": "重击",
         "type": "damage",
-        "damageMultiplier": 1.2,
+        "damageMultiplier": 1.3,
+        "cost": 0
+      }
+    ],
+    "drops": [
+      {
+        "type": "gold",
+        "amount": 195,
+        "chance": 1
+      }
+    ]
+  },
+  {
+    "level": 14,
+    "name": "怨魂守卫 (L14)",
+    "hp": 2160,
+    "attack": 210,
+    "defense": 140,
+    "critChance": 0.094,
+    "critResist": 0.064,
+    "moveSpeed": 2,
+    "comboChance": 0.078,
+    "counterChance": 0.058,
+    "skills": [
+      {
+        "name": "生命吸取",
+        "type": "damage_heal",
+        "damageMultiplier": 0.9,
+        "healMultiplier": 0.6,
         "cost": 0
       }
     ],
@@ -614,79 +403,50 @@
     ]
   },
   {
-    "level": 22,
-    "name": "魔兵守卫 (L22)",
-    "hp": 3520,
-    "attack": 462,
-    "defense": 231,
-    "critChance": 0.094,
-    "critResist": 0.064,
-    "moveSpeed": 3,
-    "comboChance": 0.072,
-    "counterChance": 0.052,
+    "level": 15,
+    "name": "怨魂守卫 (L15)",
+    "hp": 2350,
+    "attack": 225,
+    "defense": 150,
+    "critChance": 0.097,
+    "critResist": 0.067,
+    "moveSpeed": 2,
+    "comboChance": 0.08,
+    "counterChance": 0.06,
     "skills": [
       {
-        "name": "冰锥术",
+        "name": "火球术",
         "type": "damage",
-        "damageMultiplier": 1.4,
+        "damageMultiplier": 1.6,
         "cost": 0
       }
     ],
     "drops": [
       {
         "type": "gold",
-        "amount": 220,
+        "amount": 225,
         "chance": 1
       }
     ]
   },
   {
-    "level": 23,
-    "name": "魔兵守卫 (L23)",
-    "hp": 3795,
-    "attack": 495,
-    "defense": 247,
-    "critChance": 0.096,
-    "critResist": 0.066,
-    "moveSpeed": 3,
-    "comboChance": 0.073,
-    "counterChance": 0.053,
+    "level": 16,
+    "name": "怨魂守卫 (L16)",
+    "hp": 2550,
+    "attack": 240,
+    "defense": 160,
+    "critChance": 0.1,
+    "critResist": 0.07,
+    "moveSpeed": 2,
+    "comboChance": 0.082,
+    "counterChance": 0.062,
     "skills": [
       {
         "name": "破甲",
         "type": "debuff",
         "attribute": "defense",
-        "value": -5,
+        "value": -12,
         "duration": 2,
-        "cost": 0
-      }
-    ],
-    "drops": [
-      {
-        "type": "gold",
-        "amount": 230,
-        "chance": 1
-      }
-    ]
-  },
-  {
-    "level": 24,
-    "name": "魔兵守卫 (L24)",
-    "hp": 4080,
-    "attack": 528,
-    "defense": 264,
-    "critChance": 0.098,
-    "critResist": 0.068,
-    "moveSpeed": 3,
-    "comboChance": 0.074,
-    "counterChance": 0.054,
-    "skills": [
-      {
-        "name": "激怒",
-        "type": "buff",
-        "attribute": "attack",
-        "value": 10,
-        "duration": 3,
         "cost": 0
       }
     ],
@@ -699,28 +459,22 @@
     ]
   },
   {
-    "level": 25,
-    "name": "魔兵守卫 (L25)",
-    "hp": 4375,
-    "attack": 563,
-    "defense": 281,
-    "critChance": 0.1,
-    "critResist": 0.07,
-    "moveSpeed": 3,
-    "comboChance": 0.075,
-    "counterChance": 0.055,
+    "level": 17,
+    "name": "怨魂守卫 (L17)",
+    "hp": 2760,
+    "attack": 255,
+    "defense": 170,
+    "critChance": 0.103,
+    "critResist": 0.073,
+    "moveSpeed": 2,
+    "comboChance": 0.084,
+    "counterChance": 0.064,
     "skills": [
       {
-        "name": "火球术",
-        "type": "damage",
-        "damageMultiplier": 1.5,
-        "cost": 0
-      },
-      {
-        "name": "石肤术",
+        "name": "激怒",
         "type": "buff",
-        "attribute": "defense",
-        "value": 20,
+        "attribute": "attack",
+        "value": 25,
         "duration": 3,
         "cost": 0
       }
@@ -728,55 +482,27 @@
     "drops": [
       {
         "type": "gold",
-        "amount": 250,
+        "amount": 255,
         "chance": 1
       }
     ]
   },
   {
-    "level": 26,
-    "name": "魔兵守卫 (L26)",
-    "hp": 4680,
-    "attack": 598,
-    "defense": 299,
-    "critChance": 0.102,
-    "critResist": 0.072,
-    "moveSpeed": 3,
-    "comboChance": 0.076,
-    "counterChance": 0.056,
+    "level": 18,
+    "name": "怨魂守卫 (L18)",
+    "hp": 2980,
+    "attack": 270,
+    "defense": 180,
+    "critChance": 0.106,
+    "critResist": 0.076,
+    "moveSpeed": 2,
+    "comboChance": 0.086,
+    "counterChance": 0.066,
     "skills": [
       {
         "name": "快速治疗",
         "type": "heal",
-        "value": 50,
-        "cost": 0
-      }
-    ],
-    "drops": [
-      {
-        "type": "gold",
-        "amount": 260,
-        "chance": 1
-      }
-    ]
-  },
-  {
-    "level": 27,
-    "name": "魔兵守卫 (L27)",
-    "hp": 4995,
-    "attack": 635,
-    "defense": 317,
-    "critChance": 0.104,
-    "critResist": 0.074,
-    "moveSpeed": 3,
-    "comboChance": 0.077,
-    "counterChance": 0.057,
-    "skills": [
-      {
-        "name": "毒镖",
-        "type": "dot",
-        "duration": 3,
-        "damagePerTurn": 10,
+        "value": 120,
         "cost": 0
       }
     ],
@@ -789,89 +515,65 @@
     ]
   },
   {
-    "level": 28,
-    "name": "魔兵守卫 (L28)",
-    "hp": 5320,
-    "attack": 672,
-    "defense": 336,
-    "critChance": 0.106,
-    "critResist": 0.076,
-    "moveSpeed": 3,
-    "comboChance": 0.078,
-    "counterChance": 0.058,
+    "level": 19,
+    "name": "怨魂守卫 (L19)",
+    "hp": 3210,
+    "attack": 285,
+    "defense": 190,
+    "critChance": 0.109,
+    "critResist": 0.079,
+    "moveSpeed": 2,
+    "comboChance": 0.088,
+    "counterChance": 0.068,
     "skills": [
+      {
+        "name": "毒镖",
+        "type": "dot",
+        "duration": 3,
+        "damagePerTurn": 15,
+        "cost": 0
+      }
+    ],
+    "drops": [
+      {
+        "type": "gold",
+        "amount": 285,
+        "chance": 1
+      }
+    ]
+  },
+  {
+    "level": 20,
+    "name": "怨魂首领 (L20)",
+    "hp": 3500,
+    "attack": 300,
+    "defense": 200,
+    "critChance": 0.112,
+    "critResist": 0.082,
+    "moveSpeed": 3,
+    "comboChance": 0.09,
+    "counterChance": 0.07,
+    "skills": [
+      {
+        "name": "群体减速",
+        "type": "debuff",
+        "attribute": "moveSpeed",
+        "value": -3,
+        "duration": 2,
+        "cost": 0
+      },
       {
         "name": "生命吸取",
         "type": "damage_heal",
-        "damageMultiplier": 0.8,
-        "healMultiplier": 0.5,
-        "cost": 0
-      }
-    ],
-    "drops": [
-      {
-        "type": "gold",
-        "amount": 280,
-        "chance": 1
-      }
-    ]
-  },
-  {
-    "level": 29,
-    "name": "魔兵守卫 (L29)",
-    "hp": 5655,
-    "attack": 711,
-    "defense": 355,
-    "critChance": 0.108,
-    "critResist": 0.078,
-    "moveSpeed": 3,
-    "comboChance": 0.079,
-    "counterChance": 0.059,
-    "skills": [
-      {
-        "name": "重击",
-        "type": "damage",
-        "damageMultiplier": 1.2,
-        "cost": 0
-      }
-    ],
-    "drops": [
-      {
-        "type": "gold",
-        "amount": 290,
-        "chance": 1
-      }
-    ]
-  },
-  {
-    "level": 30,
-    "name": "魔兵首领 (L30)",
-    "hp": 6000,
-    "attack": 750,
-    "defense": 375,
-    "critChance": 0.11,
-    "critResist": 0.08,
-    "moveSpeed": 3,
-    "comboChance": 0.08,
-    "counterChance": 0.06,
-    "skills": [
-      {
-        "name": "雷暴",
-        "type": "aoe_damage",
-        "damageMultiplier": 1,
+        "damageMultiplier": 1.0,
+        "healMultiplier": 0.7,
         "cost": 0
       },
       {
-        "name": "圣盾",
-        "type": "invulnerability",
-        "duration": 1,
-        "cost": 0
-      },
-      {
-        "name": "激怒",
+        "name": "石肤术",
         "type": "buff",
-        "attribute": "attack",
-        "value": 10,
+        "attribute": "defense",
+        "value": 40,
         "duration": 3,
         "cost": 0
       }
@@ -885,77 +587,48 @@
     ]
   },
   {
-    "level": 31,
-    "name": "妖将守卫 (L31)",
-    "hp": 6355,
-    "attack": 791,
-    "defense": 395,
-    "critChance": 0.112,
-    "critResist": 0.082,
+    "level": 21,
+    "name": "魔兵守卫 (L21)",
+    "hp": 3800,
+    "attack": 315,
+    "defense": 210,
+    "critChance": 0.115,
+    "critResist": 0.085,
     "moveSpeed": 3,
-    "comboChance": 0.081,
-    "counterChance": 0.061,
+    "comboChance": 0.092,
+    "counterChance": 0.072,
     "skills": [
       {
-        "name": "破甲",
-        "type": "debuff",
-        "attribute": "defense",
-        "value": -5,
-        "duration": 2,
-        "cost": 0
-      }
-    ],
-    "drops": [
-      {
-        "type": "gold",
-        "amount": 310,
-        "chance": 1
-      }
-    ]
-  },
-  {
-    "level": 32,
-    "name": "妖将守卫 (L32)",
-    "hp": 6720,
-    "attack": 832,
-    "defense": 416,
-    "critChance": 0.114,
-    "critResist": 0.084,
-    "moveSpeed": 3,
-    "comboChance": 0.082,
-    "counterChance": 0.062,
-    "skills": [
-      {
-        "name": "火球术",
+        "name": "重击",
         "type": "damage",
-        "damageMultiplier": 1.5,
+        "damageMultiplier": 1.4,
         "cost": 0
       }
     ],
     "drops": [
       {
         "type": "gold",
-        "amount": 320,
+        "amount": 315,
         "chance": 1
       }
     ]
   },
   {
-    "level": 33,
-    "name": "妖将守卫 (L33)",
-    "hp": 7095,
-    "attack": 875,
-    "defense": 437,
-    "critChance": 0.116,
-    "critResist": 0.086,
+    "level": 22,
+    "name": "魔兵守卫 (L22)",
+    "hp": 4110,
+    "attack": 330,
+    "defense": 220,
+    "critChance": 0.118,
+    "critResist": 0.088,
     "moveSpeed": 3,
-    "comboChance": 0.083,
-    "counterChance": 0.063,
+    "comboChance": 0.094,
+    "counterChance": 0.074,
     "skills": [
       {
         "name": "冰锥术",
         "type": "damage",
-        "damageMultiplier": 1.4,
+        "damageMultiplier": 1.6,
         "cost": 0
       }
     ],
@@ -968,77 +641,52 @@
     ]
   },
   {
-    "level": 34,
-    "name": "妖将守卫 (L34)",
-    "hp": 7480,
-    "attack": 918,
-    "defense": 459,
-    "critChance": 0.118,
-    "critResist": 0.088,
+    "level": 23,
+    "name": "魔兵守卫 (L23)",
+    "hp": 4430,
+    "attack": 345,
+    "defense": 230,
+    "critChance": 0.121,
+    "critResist": 0.091,
     "moveSpeed": 3,
-    "comboChance": 0.084,
-    "counterChance": 0.064,
+    "comboChance": 0.096,
+    "counterChance": 0.076,
     "skills": [
       {
-        "name": "石肤术",
-        "type": "buff",
+        "name": "破甲",
+        "type": "debuff",
         "attribute": "defense",
-        "value": 20,
+        "value": -15,
+        "duration": 2,
+        "cost": 0
+      }
+    ],
+    "drops": [
+      {
+        "type": "gold",
+        "amount": 345,
+        "chance": 1
+      }
+    ]
+  },
+  {
+    "level": 24,
+    "name": "魔兵守卫 (L24)",
+    "hp": 4760,
+    "attack": 360,
+    "defense": 240,
+    "critChance": 0.124,
+    "critResist": 0.094,
+    "moveSpeed": 3,
+    "comboChance": 0.098,
+    "counterChance": 0.078,
+    "skills": [
+      {
+        "name": "激怒",
+        "type": "buff",
+        "attribute": "attack",
+        "value": 30,
         "duration": 3,
-        "cost": 0
-      }
-    ],
-    "drops": [
-      {
-        "type": "gold",
-        "amount": 340,
-        "chance": 1
-      }
-    ]
-  },
-  {
-    "level": 35,
-    "name": "妖将守卫 (L35)",
-    "hp": 7875,
-    "attack": 963,
-    "defense": 481,
-    "critChance": 0.12,
-    "critResist": 0.09,
-    "moveSpeed": 3,
-    "comboChance": 0.085,
-    "counterChance": 0.065,
-    "skills": [
-      {
-        "name": "快速治疗",
-        "type": "heal",
-        "value": 50,
-        "cost": 0
-      }
-    ],
-    "drops": [
-      {
-        "type": "gold",
-        "amount": 350,
-        "chance": 1
-      }
-    ]
-  },
-  {
-    "level": 36,
-    "name": "妖将守卫 (L36)",
-    "hp": 8280,
-    "attack": 1008,
-    "defense": 504,
-    "critChance": 0.122,
-    "critResist": 0.092,
-    "moveSpeed": 3,
-    "comboChance": 0.086,
-    "counterChance": 0.066,
-    "skills": [
-      {
-        "name": "重击",
-        "type": "damage",
-        "damageMultiplier": 1.2,
         "cost": 0
       }
     ],
@@ -1051,79 +699,56 @@
     ]
   },
   {
-    "level": 37,
-    "name": "妖将守卫 (L37)",
-    "hp": 8695,
-    "attack": 1055,
-    "defense": 527,
-    "critChance": 0.124,
-    "critResist": 0.094,
+    "level": 25,
+    "name": "魔兵守卫 (L25)",
+    "hp": 5100,
+    "attack": 375,
+    "defense": 250,
+    "critChance": 0.127,
+    "critResist": 0.097,
     "moveSpeed": 3,
-    "comboChance": 0.087,
-    "counterChance": 0.067,
+    "comboChance": 0.1,
+    "counterChance": 0.08,
     "skills": [
       {
-        "name": "生命吸取",
-        "type": "damage_heal",
-        "damageMultiplier": 0.8,
-        "healMultiplier": 0.5,
+        "name": "火球术",
+        "type": "damage",
+        "damageMultiplier": 1.7,
         "cost": 0
-      }
-    ],
-    "drops": [
+      },
       {
-        "type": "gold",
-        "amount": 370,
-        "chance": 1
-      }
-    ]
-  },
-  {
-    "level": 38,
-    "name": "妖将守卫 (L38)",
-    "hp": 9120,
-    "attack": 1102,
-    "defense": 551,
-    "critChance": 0.126,
-    "critResist": 0.096,
-    "moveSpeed": 3,
-    "comboChance": 0.088,
-    "counterChance": 0.068,
-    "skills": [
-      {
-        "name": "毒镖",
-        "type": "dot",
-        "duration": 3,
-        "damagePerTurn": 10,
-        "cost": 0
-      }
-    ],
-    "drops": [
-      {
-        "type": "gold",
-        "amount": 380,
-        "chance": 1
-      }
-    ]
-  },
-  {
-    "level": 39,
-    "name": "妖将守卫 (L39)",
-    "hp": 9555,
-    "attack": 1151,
-    "defense": 575,
-    "critChance": 0.128,
-    "critResist": 0.098,
-    "moveSpeed": 3,
-    "comboChance": 0.089,
-    "counterChance": 0.069,
-    "skills": [
-      {
-        "name": "激怒",
+        "name": "石肤术",
         "type": "buff",
-        "attribute": "attack",
-        "value": 10,
+        "attribute": "defense",
+        "value": 45,
         "duration": 3,
+        "cost": 0
+      }
+    ],
+    "drops": [
+      {
+        "type": "gold",
+        "amount": 375,
+        "chance": 1
+      }
+    ]
+  },
+  {
+    "level": 26,
+    "name": "魔兵守卫 (L26)",
+    "hp": 5450,
+    "attack": 390,
+    "defense": 260,
+    "critChance": 0.13,
+    "critResist": 0.1,
+    "moveSpeed": 3,
+    "comboChance": 0.102,
+    "counterChance": 0.082,
+    "skills": [
+      {
+        "name": "快速治疗",
+        "type": "heal",
+        "value": 150,
         "cost": 0
       }
     ],
@@ -1136,91 +761,50 @@
     ]
   },
   {
-    "level": 40,
-    "name": "妖将首领 (L40)",
-    "hp": 10000,
-    "attack": 1200,
-    "defense": 600,
-    "critChance": 0.13,
-    "critResist": 0.1,
-    "moveSpeed": 4,
-    "comboChance": 0.09,
-    "counterChance": 0.07,
+    "level": 27,
+    "name": "魔兵守卫 (L27)",
+    "hp": 5810,
+    "attack": 405,
+    "defense": 270,
+    "critChance": 0.133,
+    "critResist": 0.103,
+    "moveSpeed": 3,
+    "comboChance": 0.104,
+    "counterChance": 0.084,
     "skills": [
       {
-        "name": "群体减速",
-        "type": "debuff",
-        "attribute": "moveSpeed",
-        "value": -2,
-        "duration": 2,
-        "cost": 0
-      },
-      {
-        "name": "火球术",
-        "type": "damage",
-        "damageMultiplier": 1.5,
-        "cost": 0
-      },
-      {
-        "name": "快速治疗",
-        "type": "heal",
-        "value": 50,
+        "name": "毒镖",
+        "type": "dot",
+        "duration": 3,
+        "damagePerTurn": 20,
         "cost": 0
       }
     ],
     "drops": [
       {
         "type": "gold",
-        "amount": 400,
+        "amount": 405,
         "chance": 1
       }
     ]
   },
   {
-    "level": 41,
-    "name": "鬼帅守卫 (L41)",
-    "hp": 10455,
-    "attack": 1251,
-    "defense": 625,
-    "critChance": 0.132,
-    "critResist": 0.102,
-    "moveSpeed": 4,
-    "comboChance": 0.091,
-    "counterChance": 0.071,
+    "level": 28,
+    "name": "魔兵守卫 (L28)",
+    "hp": 6180,
+    "attack": 420,
+    "defense": 280,
+    "critChance": 0.136,
+    "critResist": 0.106,
+    "moveSpeed": 3,
+    "comboChance": 0.106,
+    "counterChance": 0.086,
     "skills": [
       {
-        "name": "重击",
-        "type": "damage",
-        "damageMultiplier": 1.2,
-        "cost": 0
-      }
-    ],
-    "drops": [
-      {
-        "type": "gold",
-        "amount": 410,
-        "chance": 1
-      }
-    ]
-  },
-  {
-    "level": 42,
-    "name": "鬼帅守卫 (L42)",
-    "hp": 10920,
-    "attack": 1302,
-    "defense": 651,
-    "critChance": 0.134,
-    "critResist": 0.104,
-    "moveSpeed": 4,
-    "comboChance": 0.092,
-    "counterChance": 0.072,
-    "skills": [
-      {
-        "name": "破甲",
-        "type": "debuff",
-        "attribute": "defense",
-        "value": -5,
-        "duration": 2,
+        "name": "生命吸取",
+        "type": "damage_heal",
+        "damageMultiplier": 1.1,
+        "healMultiplier": 0.8,
         "cost": 0
       }
     ],
@@ -1233,19 +817,19 @@
     ]
   },
   {
-    "level": 43,
-    "name": "鬼帅守卫 (L43)",
-    "hp": 11395,
-    "attack": 1355,
-    "defense": 677,
-    "critChance": 0.136,
-    "critResist": 0.106,
-    "moveSpeed": 4,
-    "comboChance": 0.093,
-    "counterChance": 0.073,
+    "level": 29,
+    "name": "魔兵守卫 (L29)",
+    "hp": 6560,
+    "attack": 435,
+    "defense": 290,
+    "critChance": 0.139,
+    "critResist": 0.109,
+    "moveSpeed": 3,
+    "comboChance": 0.108,
+    "counterChance": 0.088,
     "skills": [
       {
-        "name": "冰锥术",
+        "name": "重击",
         "type": "damage",
         "damageMultiplier": 1.4,
         "cost": 0
@@ -1254,57 +838,41 @@
     "drops": [
       {
         "type": "gold",
-        "amount": 430,
+        "amount": 435,
         "chance": 1
       }
     ]
   },
   {
-    "level": 44,
-    "name": "鬼帅守卫 (L44)",
-    "hp": 11880,
-    "attack": 1408,
-    "defense": 704,
-    "critChance": 0.138,
-    "critResist": 0.108,
-    "moveSpeed": 4,
-    "comboChance": 0.094,
-    "counterChance": 0.074,
+    "level": 30,
+    "name": "魔兵首领 (L30)",
+    "hp": 7000,
+    "attack": 450,
+    "defense": 300,
+    "critChance": 0.142,
+    "critResist": 0.112,
+    "moveSpeed": 3,
+    "comboChance": 0.11,
+    "counterChance": 0.09,
     "skills": [
       {
-        "name": "石肤术",
-        "type": "buff",
-        "attribute": "defense",
-        "value": 20,
-        "duration": 3,
+        "name": "雷暴",
+        "type": "aoe_damage",
+        "damageMultiplier": 1.2,
         "cost": 0
-      }
-    ],
-    "drops": [
+      },
       {
-        "type": "gold",
-        "amount": 440,
-        "chance": 1
-      }
-    ]
-  },
-  {
-    "level": 45,
-    "name": "鬼帅守卫 (L45)",
-    "hp": 12375,
-    "attack": 1463,
-    "defense": 731,
-    "critChance": 0.14,
-    "critResist": 0.11,
-    "moveSpeed": 4,
-    "comboChance": 0.095,
-    "counterChance": 0.075,
-    "skills": [
+        "name": "圣盾",
+        "type": "invulnerability",
+        "duration": 1,
+        "cost": 0
+      },
       {
-        "name": "生命吸取",
-        "type": "damage_heal",
-        "damageMultiplier": 0.8,
-        "healMultiplier": 0.5,
+        "name": "激怒",
+        "type": "buff",
+        "attribute": "attack",
+        "value": 35,
+        "duration": 3,
         "cost": 0
       }
     ],
@@ -1317,78 +885,50 @@
     ]
   },
   {
-    "level": 46,
-    "name": "鬼帅守卫 (L46)",
-    "hp": 12880,
-    "attack": 1518,
-    "defense": 759,
-    "critChance": 0.142,
-    "critResist": 0.112,
-    "moveSpeed": 4,
-    "comboChance": 0.096,
-    "counterChance": 0.076,
+    "level": 31,
+    "name": "妖将守卫 (L31)",
+    "hp": 7450,
+    "attack": 465,
+    "defense": 310,
+    "critChance": 0.145,
+    "critResist": 0.115,
+    "moveSpeed": 3,
+    "comboChance": 0.112,
+    "counterChance": 0.092,
     "skills": [
       {
-        "name": "激怒",
-        "type": "buff",
-        "attribute": "attack",
-        "value": 10,
-        "duration": 3,
+        "name": "破甲",
+        "type": "debuff",
+        "attribute": "defense",
+        "value": -18,
+        "duration": 2,
         "cost": 0
       }
     ],
     "drops": [
       {
         "type": "gold",
-        "amount": 460,
+        "amount": 465,
         "chance": 1
       }
     ]
   },
   {
-    "level": 47,
-    "name": "鬼帅守卫 (L47)",
-    "hp": 13395,
-    "attack": 1575,
-    "defense": 787,
-    "critChance": 0.144,
-    "critResist": 0.114,
-    "moveSpeed": 4,
-    "comboChance": 0.097,
-    "counterChance": 0.077,
+    "level": 32,
+    "name": "妖将守卫 (L32)",
+    "hp": 7910,
+    "attack": 480,
+    "defense": 320,
+    "critChance": 0.148,
+    "critResist": 0.118,
+    "moveSpeed": 3,
+    "comboChance": 0.114,
+    "counterChance": 0.094,
     "skills": [
       {
-        "name": "快速治疗",
-        "type": "heal",
-        "value": 50,
-        "cost": 0
-      }
-    ],
-    "drops": [
-      {
-        "type": "gold",
-        "amount": 470,
-        "chance": 1
-      }
-    ]
-  },
-  {
-    "level": 48,
-    "name": "鬼帅守卫 (L48)",
-    "hp": 13920,
-    "attack": 1632,
-    "defense": 816,
-    "critChance": 0.146,
-    "critResist": 0.116,
-    "moveSpeed": 4,
-    "comboChance": 0.098,
-    "counterChance": 0.078,
-    "skills": [
-      {
-        "name": "毒镖",
-        "type": "dot",
-        "duration": 3,
-        "damagePerTurn": 10,
+        "name": "火球术",
+        "type": "damage",
+        "damageMultiplier": 1.8,
         "cost": 0
       }
     ],
@@ -1401,96 +941,50 @@
     ]
   },
   {
-    "level": 49,
-    "name": "鬼帅守卫 (L49)",
-    "hp": 14455,
-    "attack": 1691,
-    "defense": 845,
-    "critChance": 0.148,
-    "critResist": 0.118,
-    "moveSpeed": 4,
-    "comboChance": 0.099,
-    "counterChance": 0.079,
+    "level": 33,
+    "name": "妖将守卫 (L33)",
+    "hp": 8380,
+    "attack": 495,
+    "defense": 330,
+    "critChance": 0.151,
+    "critResist": 0.121,
+    "moveSpeed": 3,
+    "comboChance": 0.116,
+    "counterChance": 0.096,
     "skills": [
       {
-        "name": "火球术",
+        "name": "冰锥术",
         "type": "damage",
-        "damageMultiplier": 1.5,
-        "cost": 0
-      },
-      {
-        "name": "重击",
-        "type": "damage",
-        "damageMultiplier": 1.2,
+        "damageMultiplier": 1.7,
         "cost": 0
       }
     ],
     "drops": [
       {
         "type": "gold",
-        "amount": 490,
+        "amount": 495,
         "chance": 1
       }
     ]
   },
   {
-    "level": 50,
-    "name": "鬼帅首领 (L50)",
-    "hp": 15000,
-    "attack": 1750,
-    "defense": 875,
-    "critChance": 0.15,
-    "critResist": 0.12,
-    "moveSpeed": 4,
-    "comboChance": 0.1,
-    "counterChance": 0.08,
+    "level": 34,
+    "name": "妖将守卫 (L34)",
+    "hp": 8860,
+    "attack": 510,
+    "defense": 340,
+    "critChance": 0.154,
+    "critResist": 0.124,
+    "moveSpeed": 3,
+    "comboChance": 0.118,
+    "counterChance": 0.098,
     "skills": [
       {
-        "name": "圣盾",
-        "type": "invulnerability",
-        "duration": 1,
-        "cost": 0
-      },
-      {
-        "name": "雷暴",
-        "type": "aoe_damage",
-        "damageMultiplier": 1,
-        "cost": 0
-      },
-      {
-        "name": "生命吸取",
-        "type": "damage_heal",
-        "damageMultiplier": 0.8,
-        "healMultiplier": 0.5,
-        "cost": 0
-      }
-    ],
-    "drops": [
-      {
-        "type": "gold",
-        "amount": 500,
-        "chance": 1
-      }
-    ]
-  },
-  {
-    "level": 51,
-    "name": "邪君守卫 (L51)",
-    "hp": 15555,
-    "attack": 1811,
-    "defense": 905,
-    "critChance": 0.152,
-    "critResist": 0.122,
-    "moveSpeed": 4,
-    "comboChance": 0.101,
-    "counterChance": 0.081,
-    "skills": [
-      {
-        "name": "破甲",
-        "type": "debuff",
+        "name": "石肤术",
+        "type": "buff",
         "attribute": "defense",
-        "value": -5,
-        "duration": 2,
+        "value": 50,
+        "duration": 3,
         "cost": 0
       }
     ],
@@ -1503,77 +997,48 @@
     ]
   },
   {
-    "level": 52,
-    "name": "邪君守卫 (L52)",
-    "hp": 16120,
-    "attack": 1872,
-    "defense": 936,
-    "critChance": 0.154,
-    "critResist": 0.124,
-    "moveSpeed": 4,
-    "comboChance": 0.102,
-    "counterChance": 0.082,
+    "level": 35,
+    "name": "妖将守卫 (L35)",
+    "hp": 9350,
+    "attack": 525,
+    "defense": 350,
+    "critChance": 0.157,
+    "critResist": 0.127,
+    "moveSpeed": 3,
+    "comboChance": 0.12,
+    "counterChance": 0.1,
+    "skills": [
+      {
+        "name": "快速治疗",
+        "type": "heal",
+        "value": 180,
+        "cost": 0
+      }
+    ],
+    "drops": [
+      {
+        "type": "gold",
+        "amount": 525,
+        "chance": 1
+      }
+    ]
+  },
+  {
+    "level": 36,
+    "name": "妖将守卫 (L36)",
+    "hp": 9850,
+    "attack": 540,
+    "defense": 360,
+    "critChance": 0.16,
+    "critResist": 0.13,
+    "moveSpeed": 3,
+    "comboChance": 0.122,
+    "counterChance": 0.102,
     "skills": [
       {
         "name": "重击",
         "type": "damage",
-        "damageMultiplier": 1.2,
-        "cost": 0
-      }
-    ],
-    "drops": [
-      {
-        "type": "gold",
-        "amount": 520,
-        "chance": 1
-      }
-    ]
-  },
-  {
-    "level": 53,
-    "name": "邪君守卫 (L53)",
-    "hp": 16695,
-    "attack": 1935,
-    "defense": 967,
-    "critChance": 0.156,
-    "critResist": 0.126,
-    "moveSpeed": 4,
-    "comboChance": 0.103,
-    "counterChance": 0.083,
-    "skills": [
-      {
-        "name": "冰锥术",
-        "type": "damage",
-        "damageMultiplier": 1.4,
-        "cost": 0
-      }
-    ],
-    "drops": [
-      {
-        "type": "gold",
-        "amount": 530,
-        "chance": 1
-      }
-    ]
-  },
-  {
-    "level": 54,
-    "name": "邪君守卫 (L54)",
-    "hp": 17280,
-    "attack": 1998,
-    "defense": 999,
-    "critChance": 0.158,
-    "critResist": 0.128,
-    "moveSpeed": 4,
-    "comboChance": 0.104,
-    "counterChance": 0.084,
-    "skills": [
-      {
-        "name": "石肤术",
-        "type": "buff",
-        "attribute": "defense",
-        "value": 20,
-        "duration": 3,
+        "damageMultiplier": 1.5,
         "cost": 0
       }
     ],
@@ -1586,78 +1051,50 @@
     ]
   },
   {
-    "level": 55,
-    "name": "邪君守卫 (L55)",
-    "hp": 17875,
-    "attack": 2063,
-    "defense": 1031,
-    "critChance": 0.16,
-    "critResist": 0.13,
-    "moveSpeed": 4,
-    "comboChance": 0.105,
-    "counterChance": 0.085,
+    "level": 37,
+    "name": "妖将守卫 (L37)",
+    "hp": 10360,
+    "attack": 555,
+    "defense": 370,
+    "critChance": 0.163,
+    "critResist": 0.133,
+    "moveSpeed": 3,
+    "comboChance": 0.124,
+    "counterChance": 0.104,
     "skills": [
       {
-        "name": "激怒",
-        "type": "buff",
-        "attribute": "attack",
-        "value": 10,
-        "duration": 3,
+        "name": "生命吸取",
+        "type": "damage_heal",
+        "damageMultiplier": 1.2,
+        "healMultiplier": 0.9,
         "cost": 0
       }
     ],
     "drops": [
       {
         "type": "gold",
-        "amount": 550,
+        "amount": 555,
         "chance": 1
       }
     ]
   },
   {
-    "level": 56,
-    "name": "邪君守卫 (L56)",
-    "hp": 18480,
-    "attack": 2128,
-    "defense": 1064,
-    "critChance": 0.162,
-    "critResist": 0.132,
-    "moveSpeed": 4,
-    "comboChance": 0.106,
-    "counterChance": 0.086,
-    "skills": [
-      {
-        "name": "快速治疗",
-        "type": "heal",
-        "value": 50,
-        "cost": 0
-      }
-    ],
-    "drops": [
-      {
-        "type": "gold",
-        "amount": 560,
-        "chance": 1
-      }
-    ]
-  },
-  {
-    "level": 57,
-    "name": "邪君守卫 (L57)",
-    "hp": 19095,
-    "attack": 2195,
-    "defense": 1097,
-    "critChance": 0.164,
-    "critResist": 0.134,
-    "moveSpeed": 4,
-    "comboChance": 0.107,
-    "counterChance": 0.087,
+    "level": 38,
+    "name": "妖将守卫 (L38)",
+    "hp": 10880,
+    "attack": 570,
+    "defense": 380,
+    "critChance": 0.166,
+    "critResist": 0.136,
+    "moveSpeed": 3,
+    "comboChance": 0.126,
+    "counterChance": 0.106,
     "skills": [
       {
         "name": "毒镖",
         "type": "dot",
         "duration": 3,
-        "damagePerTurn": 10,
+        "damagePerTurn": 25,
         "cost": 0
       }
     ],
@@ -1670,90 +1107,64 @@
     ]
   },
   {
-    "level": 58,
-    "name": "邪君守卫 (L58)",
-    "hp": 19720,
-    "attack": 2262,
-    "defense": 1131,
-    "critChance": 0.166,
-    "critResist": 0.136,
-    "moveSpeed": 4,
-    "comboChance": 0.108,
-    "counterChance": 0.088,
+    "level": 39,
+    "name": "妖将守卫 (L39)",
+    "hp": 11410,
+    "attack": 585,
+    "defense": 390,
+    "critChance": 0.169,
+    "critResist": 0.139,
+    "moveSpeed": 3,
+    "comboChance": 0.128,
+    "counterChance": 0.108,
     "skills": [
       {
-        "name": "生命吸取",
-        "type": "damage_heal",
-        "damageMultiplier": 0.8,
-        "healMultiplier": 0.5,
+        "name": "激怒",
+        "type": "buff",
+        "attribute": "attack",
+        "value": 40,
+        "duration": 3,
         "cost": 0
       }
     ],
     "drops": [
       {
         "type": "gold",
-        "amount": 580,
+        "amount": 585,
         "chance": 1
       }
     ]
   },
   {
-    "level": 59,
-    "name": "邪君守卫 (L59)",
-    "hp": 20355,
-    "attack": 2331,
-    "defense": 1165,
-    "critChance": 0.168,
-    "critResist": 0.138,
+    "level": 40,
+    "name": "妖将首领 (L40)",
+    "hp": 12000,
+    "attack": 600,
+    "defense": 400,
+    "critChance": 0.172,
+    "critResist": 0.142,
     "moveSpeed": 4,
-    "comboChance": 0.109,
-    "counterChance": 0.089,
-    "skills": [
-      {
-        "name": "火球术",
-        "type": "damage",
-        "damageMultiplier": 1.5,
-        "cost": 0
-      }
-    ],
-    "drops": [
-      {
-        "type": "gold",
-        "amount": 590,
-        "chance": 1
-      }
-    ]
-  },
-  {
-    "level": 60,
-    "name": "邪君首领 (L60)",
-    "hp": 21000,
-    "attack": 2400,
-    "defense": 1200,
-    "critChance": 0.17,
-    "critResist": 0.14,
-    "moveSpeed": 5,
-    "comboChance": 0.11,
-    "counterChance": 0.09,
+    "comboChance": 0.13,
+    "counterChance": 0.11,
     "skills": [
       {
         "name": "群体减速",
         "type": "debuff",
         "attribute": "moveSpeed",
-        "value": -2,
+        "value": -4,
         "duration": 2,
         "cost": 0
       },
       {
-        "name": "雷暴",
-        "type": "aoe_damage",
-        "damageMultiplier": 1,
+        "name": "火球术",
+        "type": "damage",
+        "damageMultiplier": 1.9,
         "cost": 0
       },
       {
         "name": "快速治疗",
         "type": "heal",
-        "value": 50,
+        "value": 200,
         "cost": 0
       }
     ],
@@ -1766,77 +1177,50 @@
     ]
   },
   {
-    "level": 61,
-    "name": "魔尊守卫 (L61)",
-    "hp": 21655,
-    "attack": 2471,
-    "defense": 1235,
-    "critChance": 0.172,
-    "critResist": 0.142,
-    "moveSpeed": 5,
-    "comboChance": 0.111,
-    "counterChance": 0.091,
+    "level": 41,
+    "name": "鬼帅守卫 (L41)",
+    "hp": 12600,
+    "attack": 615,
+    "defense": 410,
+    "critChance": 0.175,
+    "critResist": 0.145,
+    "moveSpeed": 4,
+    "comboChance": 0.132,
+    "counterChance": 0.112,
     "skills": [
       {
         "name": "重击",
         "type": "damage",
-        "damageMultiplier": 1.2,
+        "damageMultiplier": 1.6,
         "cost": 0
       }
     ],
     "drops": [
       {
         "type": "gold",
-        "amount": 610,
+        "amount": 615,
         "chance": 1
       }
     ]
   },
   {
-    "level": 62,
-    "name": "魔尊守卫 (L62)",
-    "hp": 22320,
-    "attack": 2542,
-    "defense": 1271,
-    "critChance": 0.174,
-    "critResist": 0.144,
-    "moveSpeed": 5,
-    "comboChance": 0.112,
-    "counterChance": 0.092,
+    "level": 42,
+    "name": "鬼帅守卫 (L42)",
+    "hp": 13210,
+    "attack": 630,
+    "defense": 420,
+    "critChance": 0.178,
+    "critResist": 0.148,
+    "moveSpeed": 4,
+    "comboChance": 0.134,
+    "counterChance": 0.114,
     "skills": [
       {
         "name": "破甲",
         "type": "debuff",
         "attribute": "defense",
-        "value": -5,
+        "value": -20,
         "duration": 2,
-        "cost": 0
-      }
-    ],
-    "drops": [
-      {
-        "type": "gold",
-        "amount": 620,
-        "chance": 1
-      }
-    ]
-  },
-  {
-    "level": 63,
-    "name": "魔尊守卫 (L63)",
-    "hp": 22995,
-    "attack": 2615,
-    "defense": 1307,
-    "critChance": 0.176,
-    "critResist": 0.146,
-    "moveSpeed": 5,
-    "comboChance": 0.113,
-    "counterChance": 0.093,
-    "skills": [
-      {
-        "name": "冰锥术",
-        "type": "damage",
-        "damageMultiplier": 1.4,
         "cost": 0
       }
     ],
@@ -1849,79 +1233,49 @@
     ]
   },
   {
-    "level": 64,
-    "name": "魔尊守卫 (L64)",
-    "hp": 23680,
-    "attack": 2688,
-    "defense": 1344,
-    "critChance": 0.178,
-    "critResist": 0.148,
-    "moveSpeed": 5,
-    "comboChance": 0.114,
-    "counterChance": 0.094,
+    "level": 43,
+    "name": "鬼帅守卫 (L43)",
+    "hp": 13830,
+    "attack": 645,
+    "defense": 430,
+    "critChance": 0.181,
+    "critResist": 0.151,
+    "moveSpeed": 4,
+    "comboChance": 0.136,
+    "counterChance": 0.116,
+    "skills": [
+      {
+        "name": "冰锥术",
+        "type": "damage",
+        "damageMultiplier": 1.8,
+        "cost": 0
+      }
+    ],
+    "drops": [
+      {
+        "type": "gold",
+        "amount": 645,
+        "chance": 1
+      }
+    ]
+  },
+  {
+    "level": 44,
+    "name": "鬼帅守卫 (L44)",
+    "hp": 14460,
+    "attack": 660,
+    "defense": 440,
+    "critChance": 0.184,
+    "critResist": 0.154,
+    "moveSpeed": 4,
+    "comboChance": 0.138,
+    "counterChance": 0.118,
     "skills": [
       {
         "name": "石肤术",
         "type": "buff",
         "attribute": "defense",
-        "value": 20,
-        "duration": 3,
-        "cost": 0
-      }
-    ],
-    "drops": [
-      {
-        "type": "gold",
-        "amount": 640,
-        "chance": 1
-      }
-    ]
-  },
-  {
-    "level": 65,
-    "name": "魔尊守卫 (L65)",
-    "hp": 24375,
-    "attack": 2763,
-    "defense": 1381,
-    "critChance": 0.18,
-    "critResist": 0.15,
-    "moveSpeed": 5,
-    "comboChance": 0.115,
-    "counterChance": 0.095,
-    "skills": [
-      {
-        "name": "生命吸取",
-        "type": "damage_heal",
-        "damageMultiplier": 0.8,
-        "healMultiplier": 0.5,
-        "cost": 0
-      }
-    ],
-    "drops": [
-      {
-        "type": "gold",
-        "amount": 650,
-        "chance": 1
-      }
-    ]
-  },
-  {
-    "level": 66,
-    "name": "魔尊守卫 (L66)",
-    "hp": 25080,
-    "attack": 2838,
-    "defense": 1419,
-    "critChance": 0.182,
-    "critResist": 0.152,
-    "moveSpeed": 5,
-    "comboChance": 0.116,
-    "counterChance": 0.096,
-    "skills": [
-      {
-        "name": "激怒",
-        "type": "buff",
-        "attribute": "attack",
-        "value": 10,
+        "value": 55,
         "duration": 3,
         "cost": 0
       }
@@ -1935,82 +1289,51 @@
     ]
   },
   {
-    "level": 67,
-    "name": "魔尊守卫 (L67)",
-    "hp": 25795,
-    "attack": 2915,
-    "defense": 1457,
-    "critChance": 0.184,
-    "critResist": 0.154,
-    "moveSpeed": 5,
-    "comboChance": 0.117,
-    "counterChance": 0.097,
+    "level": 45,
+    "name": "鬼帅守卫 (L45)",
+    "hp": 15100,
+    "attack": 675,
+    "defense": 450,
+    "critChance": 0.187,
+    "critResist": 0.157,
+    "moveSpeed": 4,
+    "comboChance": 0.14,
+    "counterChance": 0.12,
     "skills": [
       {
-        "name": "快速治疗",
-        "type": "heal",
-        "value": 50,
+        "name": "生命吸取",
+        "type": "damage_heal",
+        "damageMultiplier": 1.3,
+        "healMultiplier": 1.0,
         "cost": 0
       }
     ],
     "drops": [
       {
         "type": "gold",
-        "amount": 670,
+        "amount": 675,
         "chance": 1
       }
     ]
   },
   {
-    "level": 68,
-    "name": "魔尊守卫 (L68)",
-    "hp": 26520,
-    "attack": 2992,
-    "defense": 1496,
-    "critChance": 0.186,
-    "critResist": 0.156,
-    "moveSpeed": 5,
-    "comboChance": 0.118,
-    "counterChance": 0.098,
+    "level": 46,
+    "name": "鬼帅守卫 (L46)",
+    "hp": 15750,
+    "attack": 690,
+    "defense": 460,
+    "critChance": 0.19,
+    "critResist": 0.16,
+    "moveSpeed": 4,
+    "comboChance": 0.142,
+    "counterChance": 0.122,
     "skills": [
       {
-        "name": "毒镖",
-        "type": "dot",
+        "name": "激怒",
+        "type": "buff",
+        "attribute": "attack",
+        "value": 45,
         "duration": 3,
-        "damagePerTurn": 10,
-        "cost": 0
-      }
-    ],
-    "drops": [
-      {
-        "type": "gold",
-        "amount": 680,
-        "chance": 1
-      }
-    ]
-  },
-  {
-    "level": 69,
-    "name": "魔尊守卫 (L69)",
-    "hp": 27255,
-    "attack": 3071,
-    "defense": 1535,
-    "critChance": 0.188,
-    "critResist": 0.158,
-    "moveSpeed": 5,
-    "comboChance": 0.119,
-    "counterChance": 0.099,
-    "skills": [
-      {
-        "name": "火球术",
-        "type": "damage",
-        "damageMultiplier": 1.5,
-        "cost": 0
-      },
-      {
-        "name": "重击",
-        "type": "damage",
-        "damageMultiplier": 1.2,
         "cost": 0
       }
     ],
@@ -2023,90 +1346,49 @@
     ]
   },
   {
-    "level": 70,
-    "name": "魔尊首领 (L70)",
-    "hp": 28000,
-    "attack": 3150,
-    "defense": 1575,
-    "critChance": 0.19,
-    "critResist": 0.16,
-    "moveSpeed": 5,
-    "comboChance": 0.12,
-    "counterChance": 0.1,
+    "level": 47,
+    "name": "鬼帅守卫 (L47)",
+    "hp": 16410,
+    "attack": 705,
+    "defense": 470,
+    "critChance": 0.193,
+    "critResist": 0.163,
+    "moveSpeed": 4,
+    "comboChance": 0.144,
+    "counterChance": 0.124,
     "skills": [
       {
-        "name": "圣盾",
-        "type": "invulnerability",
-        "duration": 1,
-        "cost": 0
-      },
-      {
-        "name": "雷暴",
-        "type": "aoe_damage",
-        "damageMultiplier": 1,
-        "cost": 0
-      },
-      {
-        "name": "生命吸取",
-        "type": "damage_heal",
-        "damageMultiplier": 0.8,
-        "healMultiplier": 0.5,
+        "name": "快速治疗",
+        "type": "heal",
+        "value": 220,
         "cost": 0
       }
     ],
     "drops": [
       {
         "type": "gold",
-        "amount": 700,
+        "amount": 705,
         "chance": 1
       }
     ]
   },
   {
-    "level": 71,
-    "name": "妖圣守卫 (L71)",
-    "hp": 28755,
-    "attack": 3231,
-    "defense": 1615,
-    "critChance": 0.192,
-    "critResist": 0.162,
-    "moveSpeed": 5,
-    "comboChance": 0.121,
-    "counterChance": 0.101,
+    "level": 48,
+    "name": "鬼帅守卫 (L48)",
+    "hp": 17080,
+    "attack": 720,
+    "defense": 480,
+    "critChance": 0.196,
+    "critResist": 0.166,
+    "moveSpeed": 4,
+    "comboChance": 0.146,
+    "counterChance": 0.126,
     "skills": [
       {
-        "name": "破甲",
-        "type": "debuff",
-        "attribute": "defense",
-        "value": -5,
-        "duration": 2,
-        "cost": 0
-      }
-    ],
-    "drops": [
-      {
-        "type": "gold",
-        "amount": 710,
-        "chance": 1
-      }
-    ]
-  },
-  {
-    "level": 72,
-    "name": "妖圣守卫 (L72)",
-    "hp": 29520,
-    "attack": 3312,
-    "defense": 1656,
-    "critChance": 0.194,
-    "critResist": 0.164,
-    "moveSpeed": 5,
-    "comboChance": 0.122,
-    "counterChance": 0.102,
-    "skills": [
-      {
-        "name": "重击",
-        "type": "damage",
-        "damageMultiplier": 1.2,
+        "name": "毒镖",
+        "type": "dot",
+        "duration": 3,
+        "damagePerTurn": 30,
         "cost": 0
       }
     ],
@@ -2119,85 +1401,67 @@
     ]
   },
   {
-    "level": 73,
-    "name": "妖圣守卫 (L73)",
-    "hp": 30295,
-    "attack": 3395,
-    "defense": 1697,
-    "critChance": 0.196,
-    "critResist": 0.166,
-    "moveSpeed": 5,
-    "comboChance": 0.123,
-    "counterChance": 0.103,
+    "level": 49,
+    "name": "鬼帅守卫 (L49)",
+    "hp": 17760,
+    "attack": 735,
+    "defense": 490,
+    "critChance": 0.199,
+    "critResist": 0.169,
+    "moveSpeed": 4,
+    "comboChance": 0.148,
+    "counterChance": 0.128,
     "skills": [
       {
-        "name": "冰锥术",
+        "name": "火球术",
         "type": "damage",
-        "damageMultiplier": 1.4,
-        "cost": 0
-      }
-    ],
-    "drops": [
-      {
-        "type": "gold",
-        "amount": 730,
-        "chance": 1
-      }
-    ]
-  },
-  {
-    "level": 74,
-    "name": "妖圣守卫 (L74)",
-    "hp": 31080,
-    "attack": 3478,
-    "defense": 1739,
-    "critChance": 0.198,
-    "critResist": 0.168,
-    "moveSpeed": 5,
-    "comboChance": 0.124,
-    "counterChance": 0.104,
-    "skills": [
-      {
-        "name": "石肤术",
-        "type": "buff",
-        "attribute": "defense",
-        "value": 20,
-        "duration": 3,
-        "cost": 0
-      }
-    ],
-    "drops": [
-      {
-        "type": "gold",
-        "amount": 740,
-        "chance": 1
-      }
-    ]
-  },
-  {
-    "level": 75,
-    "name": "妖圣守卫 (L75)",
-    "hp": 31875,
-    "attack": 3563,
-    "defense": 1781,
-    "critChance": 0.2,
-    "critResist": 0.17,
-    "moveSpeed": 5,
-    "comboChance": 0.125,
-    "counterChance": 0.105,
-    "skills": [
-      {
-        "name": "激怒",
-        "type": "buff",
-        "attribute": "attack",
-        "value": 10,
-        "duration": 3,
+        "damageMultiplier": 2.0,
         "cost": 0
       },
       {
-        "name": "快速治疗",
-        "type": "heal",
-        "value": 50,
+        "name": "重击",
+        "type": "damage",
+        "damageMultiplier": 1.7,
+        "cost": 0
+      }
+    ],
+    "drops": [
+      {
+        "type": "gold",
+        "amount": 735,
+        "chance": 1
+      }
+    ]
+  },
+  {
+    "level": 50,
+    "name": "鬼帅首领 (L50)",
+    "hp": 18500,
+    "attack": 750,
+    "defense": 500,
+    "critChance": 0.202,
+    "critResist": 0.172,
+    "moveSpeed": 4,
+    "comboChance": 0.15,
+    "counterChance": 0.13,
+    "skills": [
+      {
+        "name": "圣盾",
+        "type": "invulnerability",
+        "duration": 1,
+        "cost": 0
+      },
+      {
+        "name": "雷暴",
+        "type": "aoe_damage",
+        "damageMultiplier": 1.5,
+        "cost": 0
+      },
+      {
+        "name": "生命吸取",
+        "type": "damage_heal",
+        "damageMultiplier": 1.4,
+        "healMultiplier": 1.1,
         "cost": 0
       }
     ],
@@ -2210,77 +1474,50 @@
     ]
   },
   {
-    "level": 76,
-    "name": "妖圣守卫 (L76)",
-    "hp": 32680,
-    "attack": 3648,
-    "defense": 1824,
-    "critChance": 0.202,
-    "critResist": 0.172,
-    "moveSpeed": 5,
-    "comboChance": 0.126,
-    "counterChance": 0.106,
+    "level": 51,
+    "name": "邪君守卫 (L51)",
+    "hp": 19250,
+    "attack": 765,
+    "defense": 510,
+    "critChance": 0.205,
+    "critResist": 0.175,
+    "moveSpeed": 4,
+    "comboChance": 0.152,
+    "counterChance": 0.132,
     "skills": [
       {
-        "name": "毒镖",
-        "type": "dot",
-        "duration": 3,
-        "damagePerTurn": 10,
+        "name": "破甲",
+        "type": "debuff",
+        "attribute": "defense",
+        "value": -22,
+        "duration": 2,
         "cost": 0
       }
     ],
     "drops": [
       {
         "type": "gold",
-        "amount": 760,
+        "amount": 765,
         "chance": 1
       }
     ]
   },
   {
-    "level": 77,
-    "name": "妖圣守卫 (L77)",
-    "hp": 33495,
-    "attack": 3735,
-    "defense": 1867,
-    "critChance": 0.204,
-    "critResist": 0.174,
-    "moveSpeed": 5,
-    "comboChance": 0.127,
-    "counterChance": 0.107,
+    "level": 52,
+    "name": "邪君守卫 (L52)",
+    "hp": 20010,
+    "attack": 780,
+    "defense": 520,
+    "critChance": 0.208,
+    "critResist": 0.178,
+    "moveSpeed": 4,
+    "comboChance": 0.154,
+    "counterChance": 0.134,
     "skills": [
       {
-        "name": "生命吸取",
-        "type": "damage_heal",
-        "damageMultiplier": 0.8,
-        "healMultiplier": 0.5,
-        "cost": 0
-      }
-    ],
-    "drops": [
-      {
-        "type": "gold",
-        "amount": 770,
-        "chance": 1
-      }
-    ]
-  },
-  {
-    "level": 78,
-    "name": "妖圣守卫 (L78)",
-    "hp": 34320,
-    "attack": 3822,
-    "defense": 1911,
-    "critChance": 0.206,
-    "critResist": 0.176,
-    "moveSpeed": 5,
-    "comboChance": 0.128,
-    "counterChance": 0.108,
-    "skills": [
-      {
-        "name": "火球术",
+        "name": "重击",
         "type": "damage",
-        "damageMultiplier": 1.5,
+        "damageMultiplier": 1.8,
         "cost": 0
       }
     ],
@@ -2293,91 +1530,50 @@
     ]
   },
   {
-    "level": 79,
-    "name": "妖圣守卫 (L79)",
-    "hp": 35155,
-    "attack": 3911,
-    "defense": 1955,
-    "critChance": 0.208,
-    "critResist": 0.178,
-    "moveSpeed": 5,
-    "comboChance": 0.129,
-    "counterChance": 0.109,
+    "level": 53,
+    "name": "邪君守卫 (L53)",
+    "hp": 20780,
+    "attack": 795,
+    "defense": 530,
+    "critChance": 0.211,
+    "critResist": 0.181,
+    "moveSpeed": 4,
+    "comboChance": 0.156,
+    "counterChance": 0.136,
     "skills": [
       {
-        "name": "重击",
+        "name": "冰锥术",
         "type": "damage",
-        "damageMultiplier": 1.2,
+        "damageMultiplier": 1.9,
         "cost": 0
       }
     ],
     "drops": [
       {
         "type": "gold",
-        "amount": 790,
+        "amount": 795,
         "chance": 1
       }
     ]
   },
   {
-    "level": 80,
-    "name": "妖圣首领 (L80)",
-    "hp": 36000,
-    "attack": 4000,
-    "defense": 2000,
-    "critChance": 0.21,
-    "critResist": 0.18,
-    "moveSpeed": 6,
-    "comboChance": 0.13,
-    "counterChance": 0.11,
+    "level": 54,
+    "name": "邪君守卫 (L54)",
+    "hp": 21560,
+    "attack": 810,
+    "defense": 540,
+    "critChance": 0.214,
+    "critResist": 0.184,
+    "moveSpeed": 4,
+    "comboChance": 0.158,
+    "counterChance": 0.138,
     "skills": [
       {
-        "name": "群体减速",
-        "type": "debuff",
-        "attribute": "moveSpeed",
-        "value": -2,
-        "duration": 2,
-        "cost": 0
-      },
-      {
-        "name": "圣盾",
-        "type": "invulnerability",
-        "duration": 1,
-        "cost": 0
-      },
-      {
-        "name": "雷暴",
-        "type": "aoe_damage",
-        "damageMultiplier": 1,
-        "cost": 0
-      }
-    ],
-    "drops": [
-      {
-        "type": "gold",
-        "amount": 800,
-        "chance": 1
-      }
-    ]
-  },
-  {
-    "level": 81,
-    "name": "鬼帝守卫 (L81)",
-    "hp": 36855,
-    "attack": 4091,
-    "defense": 2045,
-    "critChance": 0.212,
-    "critResist": 0.182,
-    "moveSpeed": 6,
-    "comboChance": 0.131,
-    "counterChance": 0.111,
-    "skills": [
-      {
-        "name": "破甲",
-        "type": "debuff",
+        "name": "石肤术",
+        "type": "buff",
         "attribute": "defense",
-        "value": -5,
-        "duration": 2,
+        "value": 60,
+        "duration": 3,
         "cost": 0
       }
     ],
@@ -2390,49 +1586,22 @@
     ]
   },
   {
-    "level": 82,
-    "name": "鬼帝守卫 (L82)",
-    "hp": 37720,
-    "attack": 4182,
-    "defense": 2091,
-    "critChance": 0.214,
-    "critResist": 0.184,
-    "moveSpeed": 6,
-    "comboChance": 0.132,
-    "counterChance": 0.112,
+    "level": 55,
+    "name": "邪君守卫 (L55)",
+    "hp": 22350,
+    "attack": 825,
+    "defense": 550,
+    "critChance": 0.217,
+    "critResist": 0.187,
+    "moveSpeed": 4,
+    "comboChance": 0.16,
+    "counterChance": 0.14,
     "skills": [
       {
-        "name": "冰锥术",
-        "type": "damage",
-        "damageMultiplier": 1.4,
-        "cost": 0
-      }
-    ],
-    "drops": [
-      {
-        "type": "gold",
-        "amount": 820,
-        "chance": 1
-      }
-    ]
-  },
-  {
-    "level": 83,
-    "name": "鬼帝守卫 (L83)",
-    "hp": 38595,
-    "attack": 4275,
-    "defense": 2137,
-    "critChance": 0.216,
-    "critResist": 0.186,
-    "moveSpeed": 6,
-    "comboChance": 0.133,
-    "counterChance": 0.113,
-    "skills": [
-      {
-        "name": "石肤术",
+        "name": "激怒",
         "type": "buff",
-        "attribute": "defense",
-        "value": 20,
+        "attribute": "attack",
+        "value": 50,
         "duration": 3,
         "cost": 0
       }
@@ -2440,28 +1609,27 @@
     "drops": [
       {
         "type": "gold",
-        "amount": 830,
+        "amount": 825,
         "chance": 1
       }
     ]
   },
   {
-    "level": 84,
-    "name": "鬼帝守卫 (L84)",
-    "hp": 39480,
-    "attack": 4368,
-    "defense": 2184,
-    "critChance": 0.218,
-    "critResist": 0.188,
-    "moveSpeed": 6,
-    "comboChance": 0.134,
-    "counterChance": 0.114,
+    "level": 56,
+    "name": "邪君守卫 (L56)",
+    "hp": 23150,
+    "attack": 840,
+    "defense": 560,
+    "critChance": 0.22,
+    "critResist": 0.19,
+    "moveSpeed": 4,
+    "comboChance": 0.162,
+    "counterChance": 0.142,
     "skills": [
       {
-        "name": "生命吸取",
-        "type": "damage_heal",
-        "damageMultiplier": 0.8,
-        "healMultiplier": 0.5,
+        "name": "快速治疗",
+        "type": "heal",
+        "value": 250,
         "cost": 0
       }
     ],
@@ -2474,78 +1642,50 @@
     ]
   },
   {
-    "level": 85,
-    "name": "鬼帝守卫 (L85)",
-    "hp": 40375,
-    "attack": 4463,
-    "defense": 2231,
-    "critChance": 0.22,
-    "critResist": 0.19,
-    "moveSpeed": 6,
-    "comboChance": 0.135,
-    "counterChance": 0.115,
-    "skills": [
-      {
-        "name": "激怒",
-        "type": "buff",
-        "attribute": "attack",
-        "value": 10,
-        "duration": 3,
-        "cost": 0
-      }
-    ],
-    "drops": [
-      {
-        "type": "gold",
-        "amount": 850,
-        "chance": 1
-      }
-    ]
-  },
-  {
-    "level": 86,
-    "name": "鬼帝守卫 (L86)",
-    "hp": 41280,
-    "attack": 4558,
-    "defense": 2279,
-    "critChance": 0.222,
-    "critResist": 0.192,
-    "moveSpeed": 6,
-    "comboChance": 0.136,
-    "counterChance": 0.116,
-    "skills": [
-      {
-        "name": "快速治疗",
-        "type": "heal",
-        "value": 50,
-        "cost": 0
-      }
-    ],
-    "drops": [
-      {
-        "type": "gold",
-        "amount": 860,
-        "chance": 1
-      }
-    ]
-  },
-  {
-    "level": 87,
-    "name": "鬼帝守卫 (L87)",
-    "hp": 42195,
-    "attack": 4655,
-    "defense": 2327,
-    "critChance": 0.224,
-    "critResist": 0.194,
-    "moveSpeed": 6,
-    "comboChance": 0.137,
-    "counterChance": 0.117,
+    "level": 57,
+    "name": "邪君守卫 (L57)",
+    "hp": 23960,
+    "attack": 855,
+    "defense": 570,
+    "critChance": 0.223,
+    "critResist": 0.193,
+    "moveSpeed": 4,
+    "comboChance": 0.164,
+    "counterChance": 0.144,
     "skills": [
       {
         "name": "毒镖",
         "type": "dot",
         "duration": 3,
-        "damagePerTurn": 10,
+        "damagePerTurn": 35,
+        "cost": 0
+      }
+    ],
+    "drops": [
+      {
+        "type": "gold",
+        "amount": 855,
+        "chance": 1
+      }
+    ]
+  },
+  {
+    "level": 58,
+    "name": "邪君守卫 (L58)",
+    "hp": 24780,
+    "attack": 870,
+    "defense": 580,
+    "critChance": 0.226,
+    "critResist": 0.196,
+    "moveSpeed": 4,
+    "comboChance": 0.166,
+    "counterChance": 0.146,
+    "skills": [
+      {
+        "name": "生命吸取",
+        "type": "damage_heal",
+        "damageMultiplier": 1.5,
+        "healMultiplier": 1.2,
         "cost": 0
       }
     ],
@@ -2558,96 +1698,62 @@
     ]
   },
   {
-    "level": 88,
-    "name": "鬼帝守卫 (L88)",
-    "hp": 43120,
-    "attack": 4752,
-    "defense": 2376,
-    "critChance": 0.226,
-    "critResist": 0.196,
-    "moveSpeed": 6,
-    "comboChance": 0.138,
-    "counterChance": 0.118,
+    "level": 59,
+    "name": "邪君守卫 (L59)",
+    "hp": 25610,
+    "attack": 885,
+    "defense": 590,
+    "critChance": 0.229,
+    "critResist": 0.199,
+    "moveSpeed": 4,
+    "comboChance": 0.168,
+    "counterChance": 0.148,
     "skills": [
       {
         "name": "火球术",
         "type": "damage",
-        "damageMultiplier": 1.5,
+        "damageMultiplier": 2.1,
         "cost": 0
       }
     ],
     "drops": [
       {
         "type": "gold",
-        "amount": 880,
+        "amount": 885,
         "chance": 1
       }
     ]
   },
   {
-    "level": 89,
-    "name": "鬼帝守卫 (L89)",
-    "hp": 44055,
-    "attack": 4851,
-    "defense": 2425,
-    "critChance": 0.228,
-    "critResist": 0.198,
-    "moveSpeed": 6,
-    "comboChance": 0.139,
-    "counterChance": 0.119,
-    "skills": [
-      {
-        "name": "重击",
-        "type": "damage",
-        "damageMultiplier": 1.2,
-        "cost": 0
-      }
-    ],
-    "drops": [
-      {
-        "type": "gold",
-        "amount": 890,
-        "chance": 1
-      }
-    ]
-  },
-  {
-    "level": 90,
-    "name": "鬼帝首领 (L90)",
-    "hp": 45000,
-    "attack": 4950,
-    "defense": 2475,
-    "critChance": 0.23,
-    "critResist": 0.2,
-    "moveSpeed": 6,
-    "comboChance": 0.14,
-    "counterChance": 0.12,
+    "level": 60,
+    "name": "邪君首领 (L60)",
+    "hp": 26500,
+    "attack": 900,
+    "defense": 600,
+    "critChance": 0.232,
+    "critResist": 0.202,
+    "moveSpeed": 5,
+    "comboChance": 0.17,
+    "counterChance": 0.15,
     "skills": [
       {
         "name": "群体减速",
         "type": "debuff",
         "attribute": "moveSpeed",
-        "value": -2,
+        "value": -5,
         "duration": 2,
-        "cost": 0
-      },
-      {
-        "name": "圣盾",
-        "type": "invulnerability",
-        "duration": 1,
         "cost": 0
       },
       {
         "name": "雷暴",
         "type": "aoe_damage",
-        "damageMultiplier": 1,
+        "damageMultiplier": 1.8,
         "cost": 0
       },
       {
-        "name": "生命吸取",
-        "type": "damage_heal",
-        "damageMultiplier": 0.8,
-        "healMultiplier": 0.5,
+        "name": "快速治疗",
+        "type": "heal",
+        "value": 300,
         "cost": 0
       }
     ],
@@ -2660,79 +1766,50 @@
     ]
   },
   {
-    "level": 91,
-    "name": "天魔守卫 (L91)",
-    "hp": 46055,
-    "attack": 5051,
-    "defense": 2525,
-    "critChance": 0.232,
-    "critResist": 0.202,
-    "moveSpeed": 6,
-    "comboChance": 0.141,
-    "counterChance": 0.121,
+    "level": 61,
+    "name": "魔尊守卫 (L61)",
+    "hp": 27400,
+    "attack": 915,
+    "defense": 610,
+    "critChance": 0.235,
+    "critResist": 0.205,
+    "moveSpeed": 5,
+    "comboChance": 0.172,
+    "counterChance": 0.152,
+    "skills": [
+      {
+        "name": "重击",
+        "type": "damage",
+        "damageMultiplier": 1.9,
+        "cost": 0
+      }
+    ],
+    "drops": [
+      {
+        "type": "gold",
+        "amount": 915,
+        "chance": 1
+      }
+    ]
+  },
+  {
+    "level": 62,
+    "name": "魔尊守卫 (L62)",
+    "hp": 28310,
+    "attack": 930,
+    "defense": 620,
+    "critChance": 0.238,
+    "critResist": 0.208,
+    "moveSpeed": 5,
+    "comboChance": 0.174,
+    "counterChance": 0.154,
     "skills": [
       {
         "name": "破甲",
         "type": "debuff",
         "attribute": "defense",
-        "value": -5,
+        "value": -25,
         "duration": 2,
-        "cost": 0
-      }
-    ],
-    "drops": [
-      {
-        "type": "gold",
-        "amount": 910,
-        "chance": 1
-      }
-    ]
-  },
-  {
-    "level": 92,
-    "name": "天魔守卫 (L92)",
-    "hp": 47020,
-    "attack": 5152,
-    "defense": 2576,
-    "critChance": 0.234,
-    "critResist": 0.204,
-    "moveSpeed": 6,
-    "comboChance": 0.142,
-    "counterChance": 0.122,
-    "skills": [
-      {
-        "name": "冰锥术",
-        "type": "damage",
-        "damageMultiplier": 1.4,
-        "cost": 0
-      }
-    ],
-    "drops": [
-      {
-        "type": "gold",
-        "amount": 920,
-        "chance": 1
-      }
-    ]
-  },
-  {
-    "level": 93,
-    "name": "天魔守卫 (L93)",
-    "hp": 47995,
-    "attack": 5255,
-    "defense": 2627,
-    "critChance": 0.236,
-    "critResist": 0.206,
-    "moveSpeed": 6,
-    "comboChance": 0.143,
-    "counterChance": 0.123,
-    "skills": [
-      {
-        "name": "石肤术",
-        "type": "buff",
-        "attribute": "defense",
-        "value": 20,
-        "duration": 3,
         "cost": 0
       }
     ],
@@ -2745,78 +1822,50 @@
     ]
   },
   {
-    "level": 94,
-    "name": "天魔守卫 (L94)",
-    "hp": 48980,
-    "attack": 5358,
-    "defense": 2679,
-    "critChance": 0.238,
-    "critResist": 0.208,
-    "moveSpeed": 6,
-    "comboChance": 0.144,
-    "counterChance": 0.124,
+    "level": 63,
+    "name": "魔尊守卫 (L63)",
+    "hp": 29230,
+    "attack": 945,
+    "defense": 630,
+    "critChance": 0.241,
+    "critResist": 0.211,
+    "moveSpeed": 5,
+    "comboChance": 0.176,
+    "counterChance": 0.156,
     "skills": [
       {
-        "name": "生命吸取",
-        "type": "damage_heal",
-        "damageMultiplier": 0.8,
-        "healMultiplier": 0.5,
+        "name": "冰锥术",
+        "type": "damage",
+        "damageMultiplier": 2.0,
         "cost": 0
       }
     ],
     "drops": [
       {
         "type": "gold",
-        "amount": 940,
+        "amount": 945,
         "chance": 1
       }
     ]
   },
   {
-    "level": 95,
-    "name": "天魔守卫 (L95)",
-    "hp": 49975,
-    "attack": 5463,
-    "defense": 2731,
-    "critChance": 0.24,
-    "critResist": 0.21,
-    "moveSpeed": 6,
-    "comboChance": 0.145,
-    "counterChance": 0.125,
+    "level": 64,
+    "name": "魔尊守卫 (L64)",
+    "hp": 30160,
+    "attack": 960,
+    "defense": 640,
+    "critChance": 0.244,
+    "critResist": 0.214,
+    "moveSpeed": 5,
+    "comboChance": 0.178,
+    "counterChance": 0.158,
     "skills": [
       {
-        "name": "激怒",
+        "name": "石肤术",
         "type": "buff",
-        "attribute": "attack",
-        "value": 10,
+        "attribute": "defense",
+        "value": 65,
         "duration": 3,
-        "cost": 0
-      }
-    ],
-    "drops": [
-      {
-        "type": "gold",
-        "amount": 950,
-        "chance": 1
-      }
-    ]
-  },
-  {
-    "level": 96,
-    "name": "天魔守卫 (L96)",
-    "hp": 50980,
-    "attack": 5568,
-    "defense": 2784,
-    "critChance": 0.242,
-    "critResist": 0.212,
-    "moveSpeed": 6,
-    "comboChance": 0.146,
-    "counterChance": 0.126,
-    "skills": [
-      {
-        "name": "快速治疗",
-        "type": "heal",
-        "value": 50,
         "cost": 0
       }
     ],
@@ -2829,82 +1878,51 @@
     ]
   },
   {
-    "level": 97,
-    "name": "天魔守卫 (L97)",
-    "hp": 51995,
-    "attack": 5675,
-    "defense": 2837,
-    "critChance": 0.244,
-    "critResist": 0.214,
-    "moveSpeed": 6,
-    "comboChance": 0.147,
-    "counterChance": 0.127,
+    "level": 65,
+    "name": "魔尊守卫 (L65)",
+    "hp": 31100,
+    "attack": 975,
+    "defense": 650,
+    "critChance": 0.247,
+    "critResist": 0.217,
+    "moveSpeed": 5,
+    "comboChance": 0.18,
+    "counterChance": 0.16,
     "skills": [
       {
-        "name": "毒镖",
-        "type": "dot",
+        "name": "生命吸取",
+        "type": "damage_heal",
+        "damageMultiplier": 1.6,
+        "healMultiplier": 1.3,
+        "cost": 0
+      }
+    ],
+    "drops": [
+      {
+        "type": "gold",
+        "amount": 975,
+        "chance": 1
+      }
+    ]
+  },
+  {
+    "level": 66,
+    "name": "魔尊守卫 (L66)",
+    "hp": 32050,
+    "attack": 990,
+    "defense": 660,
+    "critChance": 0.25,
+    "critResist": 0.22,
+    "moveSpeed": 5,
+    "comboChance": 0.182,
+    "counterChance": 0.162,
+    "skills": [
+      {
+        "name": "激怒",
+        "type": "buff",
+        "attribute": "attack",
+        "value": 55,
         "duration": 3,
-        "damagePerTurn": 10,
-        "cost": 0
-      }
-    ],
-    "drops": [
-      {
-        "type": "gold",
-        "amount": 970,
-        "chance": 1
-      }
-    ]
-  },
-  {
-    "level": 98,
-    "name": "天魔守卫 (L98)",
-    "hp": 53020,
-    "attack": 5782,
-    "defense": 2891,
-    "critChance": 0.246,
-    "critResist": 0.216,
-    "moveSpeed": 6,
-    "comboChance": 0.148,
-    "counterChance": 0.128,
-    "skills": [
-      {
-        "name": "火球术",
-        "type": "damage",
-        "damageMultiplier": 1.5,
-        "cost": 0
-      }
-    ],
-    "drops": [
-      {
-        "type": "gold",
-        "amount": 980,
-        "chance": 1
-      }
-    ]
-  },
-  {
-    "level": 99,
-    "name": "天魔守卫 (L99)",
-    "hp": 54055,
-    "attack": 5891,
-    "defense": 2945,
-    "critChance": 0.248,
-    "critResist": 0.218,
-    "moveSpeed": 6,
-    "comboChance": 0.149,
-    "counterChance": 0.129,
-    "skills": [
-      {
-        "name": "重击",
-        "type": "damage",
-        "damageMultiplier": 1.2,
-        "cost": 0
-      },
-      {
-        "name": "冰锥术",
-        "type": "damage",
-        "damageMultiplier": 1.4,
         "cost": 0
       }
     ],
@@ -2917,22 +1935,407 @@
     ]
   },
   {
-    "level": 100,
-    "name": "天魔首领 (L100)",
-    "hp": 55100,
-    "attack": 6000,
-    "defense": 3000,
-    "critChance": 0.25,
-    "critResist": 0.22,
-    "moveSpeed": 7,
-    "comboChance": 0.15,
-    "counterChance": 0.13,
+    "level": 67,
+    "name": "魔尊守卫 (L67)",
+    "hp": 33010,
+    "attack": 1005,
+    "defense": 670,
+    "critChance": 0.253,
+    "critResist": 0.223,
+    "moveSpeed": 5,
+    "comboChance": 0.184,
+    "counterChance": 0.164,
+    "skills": [
+      {
+        "name": "快速治疗",
+        "type": "heal",
+        "value": 300,
+        "cost": 0
+      }
+    ],
+    "drops": [
+      {
+        "type": "gold",
+        "amount": 1005,
+        "chance": 1
+      }
+    ]
+  },
+  {
+    "level": 68,
+    "name": "魔尊守卫 (L68)",
+    "hp": 33980,
+    "attack": 1020,
+    "defense": 680,
+    "critChance": 0.256,
+    "critResist": 0.226,
+    "moveSpeed": 5,
+    "comboChance": 0.186,
+    "counterChance": 0.166,
+    "skills": [
+      {
+        "name": "毒镖",
+        "type": "dot",
+        "duration": 3,
+        "damagePerTurn": 40,
+        "cost": 0
+      }
+    ],
+    "drops": [
+      {
+        "type": "gold",
+        "amount": 1020,
+        "chance": 1
+      }
+    ]
+  },
+  {
+    "level": 69,
+    "name": "魔尊守卫 (L69)",
+    "hp": 34960,
+    "attack": 1035,
+    "defense": 690,
+    "critChance": 0.259,
+    "critResist": 0.229,
+    "moveSpeed": 5,
+    "comboChance": 0.188,
+    "counterChance": 0.168,
+    "skills": [
+      {
+        "name": "火球术",
+        "type": "damage",
+        "damageMultiplier": 2.2,
+        "cost": 0
+      },
+      {
+        "name": "重击",
+        "type": "damage",
+        "damageMultiplier": 2.0,
+        "cost": 0
+      }
+    ],
+    "drops": [
+      {
+        "type": "gold",
+        "amount": 1035,
+        "chance": 1
+      }
+    ]
+  },
+  {
+    "level": 70,
+    "name": "魔尊首领 (L70)",
+    "hp": 36000,
+    "attack": 1050,
+    "defense": 700,
+    "critChance": 0.262,
+    "critResist": 0.232,
+    "moveSpeed": 5,
+    "comboChance": 0.19,
+    "counterChance": 0.17,
+    "skills": [
+      {
+        "name": "圣盾",
+        "type": "invulnerability",
+        "duration": 1,
+        "cost": 0
+      },
+      {
+        "name": "雷暴",
+        "type": "aoe_damage",
+        "damageMultiplier": 2.0,
+        "cost": 0
+      },
+      {
+        "name": "生命吸取",
+        "type": "damage_heal",
+        "damageMultiplier": 1.7,
+        "healMultiplier": 1.4,
+        "cost": 0
+      }
+    ],
+    "drops": [
+      {
+        "type": "gold",
+        "amount": 1050,
+        "chance": 1
+      }
+    ]
+  },
+  {
+    "level": 71,
+    "name": "妖圣守卫 (L71)",
+    "hp": 37050,
+    "attack": 1065,
+    "defense": 710,
+    "critChance": 0.265,
+    "critResist": 0.235,
+    "moveSpeed": 5,
+    "comboChance": 0.192,
+    "counterChance": 0.172,
+    "skills": [
+      {
+        "name": "破甲",
+        "type": "debuff",
+        "attribute": "defense",
+        "value": -28,
+        "duration": 2,
+        "cost": 0
+      }
+    ],
+    "drops": [
+      {
+        "type": "gold",
+        "amount": 1065,
+        "chance": 1
+      }
+    ]
+  },
+  {
+    "level": 72,
+    "name": "妖圣守卫 (L72)",
+    "hp": 38110,
+    "attack": 1080,
+    "defense": 720,
+    "critChance": 0.268,
+    "critResist": 0.238,
+    "moveSpeed": 5,
+    "comboChance": 0.194,
+    "counterChance": 0.174,
+    "skills": [
+      {
+        "name": "重击",
+        "type": "damage",
+        "damageMultiplier": 2.1,
+        "cost": 0
+      }
+    ],
+    "drops": [
+      {
+        "type": "gold",
+        "amount": 1080,
+        "chance": 1
+      }
+    ]
+  },
+  {
+    "level": 73,
+    "name": "妖圣守卫 (L73)",
+    "hp": 39180,
+    "attack": 1095,
+    "defense": 730,
+    "critChance": 0.271,
+    "critResist": 0.241,
+    "moveSpeed": 5,
+    "comboChance": 0.196,
+    "counterChance": 0.176,
+    "skills": [
+      {
+        "name": "冰锥术",
+        "type": "damage",
+        "damageMultiplier": 2.1,
+        "cost": 0
+      }
+    ],
+    "drops": [
+      {
+        "type": "gold",
+        "amount": 1095,
+        "chance": 1
+      }
+    ]
+  },
+  {
+    "level": 74,
+    "name": "妖圣守卫 (L74)",
+    "hp": 40260,
+    "attack": 1110,
+    "defense": 740,
+    "critChance": 0.274,
+    "critResist": 0.244,
+    "moveSpeed": 5,
+    "comboChance": 0.198,
+    "counterChance": 0.178,
+    "skills": [
+      {
+        "name": "石肤术",
+        "type": "buff",
+        "attribute": "defense",
+        "value": 70,
+        "duration": 3,
+        "cost": 0
+      }
+    ],
+    "drops": [
+      {
+        "type": "gold",
+        "amount": 1110,
+        "chance": 1
+      }
+    ]
+  },
+  {
+    "level": 75,
+    "name": "妖圣守卫 (L75)",
+    "hp": 41350,
+    "attack": 1125,
+    "defense": 750,
+    "critChance": 0.277,
+    "critResist": 0.247,
+    "moveSpeed": 5,
+    "comboChance": 0.2,
+    "counterChance": 0.18,
+    "skills": [
+      {
+        "name": "激怒",
+        "type": "buff",
+        "attribute": "attack",
+        "value": 60,
+        "duration": 3,
+        "cost": 0
+      },
+      {
+        "name": "快速治疗",
+        "type": "heal",
+        "value": 350,
+        "cost": 0
+      }
+    ],
+    "drops": [
+      {
+        "type": "gold",
+        "amount": 1125,
+        "chance": 1
+      }
+    ]
+  },
+  {
+    "level": 76,
+    "name": "妖圣守卫 (L76)",
+    "hp": 42450,
+    "attack": 1140,
+    "defense": 760,
+    "critChance": 0.28,
+    "critResist": 0.25,
+    "moveSpeed": 5,
+    "comboChance": 0.202,
+    "counterChance": 0.182,
+    "skills": [
+      {
+        "name": "毒镖",
+        "type": "dot",
+        "duration": 3,
+        "damagePerTurn": 45,
+        "cost": 0
+      }
+    ],
+    "drops": [
+      {
+        "type": "gold",
+        "amount": 1140,
+        "chance": 1
+      }
+    ]
+  },
+  {
+    "level": 77,
+    "name": "妖圣守卫 (L77)",
+    "hp": 43560,
+    "attack": 1155,
+    "defense": 770,
+    "critChance": 0.283,
+    "critResist": 0.253,
+    "moveSpeed": 5,
+    "comboChance": 0.204,
+    "counterChance": 0.184,
+    "skills": [
+      {
+        "name": "生命吸取",
+        "type": "damage_heal",
+        "damageMultiplier": 1.8,
+        "healMultiplier": 1.5,
+        "cost": 0
+      }
+    ],
+    "drops": [
+      {
+        "type": "gold",
+        "amount": 1155,
+        "chance": 1
+      }
+    ]
+  },
+  {
+    "level": 78,
+    "name": "妖圣守卫 (L78)",
+    "hp": 44680,
+    "attack": 1170,
+    "defense": 780,
+    "critChance": 0.286,
+    "critResist": 0.256,
+    "moveSpeed": 5,
+    "comboChance": 0.206,
+    "counterChance": 0.186,
+    "skills": [
+      {
+        "name": "火球术",
+        "type": "damage",
+        "damageMultiplier": 2.3,
+        "cost": 0
+      }
+    ],
+    "drops": [
+      {
+        "type": "gold",
+        "amount": 1170,
+        "chance": 1
+      }
+    ]
+  },
+  {
+    "level": 79,
+    "name": "妖圣守卫 (L79)",
+    "hp": 45810,
+    "attack": 1185,
+    "defense": 790,
+    "critChance": 0.289,
+    "critResist": 0.259,
+    "moveSpeed": 5,
+    "comboChance": 0.208,
+    "counterChance": 0.188,
+    "skills": [
+      {
+        "name": "重击",
+        "type": "damage",
+        "damageMultiplier": 2.2,
+        "cost": 0
+      }
+    ],
+    "drops": [
+      {
+        "type": "gold",
+        "amount": 1185,
+        "chance": 1
+      }
+    ]
+  },
+  {
+    "level": 80,
+    "name": "妖圣首领 (L80)",
+    "hp": 47000,
+    "attack": 1200,
+    "defense": 800,
+    "critChance": 0.292,
+    "critResist": 0.262,
+    "moveSpeed": 6,
+    "comboChance": 0.21,
+    "counterChance": 0.19,
     "skills": [
       {
         "name": "群体减速",
         "type": "debuff",
         "attribute": "moveSpeed",
-        "value": -2,
+        "value": -6,
         "duration": 2,
         "cost": 0
       },
@@ -2945,27 +2348,624 @@
       {
         "name": "雷暴",
         "type": "aoe_damage",
-        "damageMultiplier": 1,
-        "cost": 0
-      },
-      {
-        "name": "生命吸取",
-        "type": "damage_heal",
-        "damageMultiplier": 0.8,
-        "healMultiplier": 0.5,
-        "cost": 0
-      },
-      {
-        "name": "快速治疗",
-        "type": "heal",
-        "value": 50,
+        "damageMultiplier": 2.2,
         "cost": 0
       }
     ],
     "drops": [
       {
         "type": "gold",
-        "amount": 1000,
+        "amount": 1200,
+        "chance": 1
+      }
+    ]
+  },
+  {
+    "level": 81,
+    "name": "鬼帝守卫 (L81)",
+    "hp": 48200,
+    "attack": 1215,
+    "defense": 810,
+    "critChance": 0.295,
+    "critResist": 0.265,
+    "moveSpeed": 6,
+    "comboChance": 0.212,
+    "counterChance": 0.192,
+    "skills": [
+      {
+        "name": "破甲",
+        "type": "debuff",
+        "attribute": "defense",
+        "value": -30,
+        "duration": 2,
+        "cost": 0
+      }
+    ],
+    "drops": [
+      {
+        "type": "gold",
+        "amount": 1215,
+        "chance": 1
+      }
+    ]
+  },
+  {
+    "level": 82,
+    "name": "鬼帝守卫 (L82)",
+    "hp": 49410,
+    "attack": 1230,
+    "defense": 820,
+    "critChance": 0.298,
+    "critResist": 0.268,
+    "moveSpeed": 6,
+    "comboChance": 0.214,
+    "counterChance": 0.194,
+    "skills": [
+      {
+        "name": "冰锥术",
+        "type": "damage",
+        "damageMultiplier": 2.2,
+        "cost": 0
+      }
+    ],
+    "drops": [
+      {
+        "type": "gold",
+        "amount": 1230,
+        "chance": 1
+      }
+    ]
+  },
+  {
+    "level": 83,
+    "name": "鬼帝守卫 (L83)",
+    "hp": 50630,
+    "attack": 1245,
+    "defense": 830,
+    "critChance": 0.301,
+    "critResist": 0.271,
+    "moveSpeed": 6,
+    "comboChance": 0.216,
+    "counterChance": 0.196,
+    "skills": [
+      {
+        "name": "石肤术",
+        "type": "buff",
+        "attribute": "defense",
+        "value": 75,
+        "duration": 3,
+        "cost": 0
+      }
+    ],
+    "drops": [
+      {
+        "type": "gold",
+        "amount": 1245,
+        "chance": 1
+      }
+    ]
+  },
+  {
+    "level": 84,
+    "name": "鬼帝守卫 (L84)",
+    "hp": 51860,
+    "attack": 1260,
+    "defense": 840,
+    "critChance": 0.304,
+    "critResist": 0.274,
+    "moveSpeed": 6,
+    "comboChance": 0.218,
+    "counterChance": 0.198,
+    "skills": [
+      {
+        "name": "生命吸取",
+        "type": "damage_heal",
+        "damageMultiplier": 1.9,
+        "healMultiplier": 1.6,
+        "cost": 0
+      }
+    ],
+    "drops": [
+      {
+        "type": "gold",
+        "amount": 1260,
+        "chance": 1
+      }
+    ]
+  },
+  {
+    "level": 85,
+    "name": "鬼帝守卫 (L85)",
+    "hp": 53100,
+    "attack": 1275,
+    "defense": 850,
+    "critChance": 0.307,
+    "critResist": 0.277,
+    "moveSpeed": 6,
+    "comboChance": 0.22,
+    "counterChance": 0.2,
+    "skills": [
+      {
+        "name": "激怒",
+        "type": "buff",
+        "attribute": "attack",
+        "value": 65,
+        "duration": 3,
+        "cost": 0
+      }
+    ],
+    "drops": [
+      {
+        "type": "gold",
+        "amount": 1275,
+        "chance": 1
+      }
+    ]
+  },
+  {
+    "level": 86,
+    "name": "鬼帝守卫 (L86)",
+    "hp": 54350,
+    "attack": 1290,
+    "defense": 860,
+    "critChance": 0.31,
+    "critResist": 0.28,
+    "moveSpeed": 6,
+    "comboChance": 0.222,
+    "counterChance": 0.202,
+    "skills": [
+      {
+        "name": "快速治疗",
+        "type": "heal",
+        "value": 400,
+        "cost": 0
+      }
+    ],
+    "drops": [
+      {
+        "type": "gold",
+        "amount": 1290,
+        "chance": 1
+      }
+    ]
+  },
+  {
+    "level": 87,
+    "name": "鬼帝守卫 (L87)",
+    "hp": 55610,
+    "attack": 1305,
+    "defense": 870,
+    "critChance": 0.313,
+    "critResist": 0.283,
+    "moveSpeed": 6,
+    "comboChance": 0.224,
+    "counterChance": 0.204,
+    "skills": [
+      {
+        "name": "毒镖",
+        "type": "dot",
+        "duration": 3,
+        "damagePerTurn": 50,
+        "cost": 0
+      }
+    ],
+    "drops": [
+      {
+        "type": "gold",
+        "amount": 1305,
+        "chance": 1
+      }
+    ]
+  },
+  {
+    "level": 88,
+    "name": "鬼帝守卫 (L88)",
+    "hp": 56880,
+    "attack": 1320,
+    "defense": 880,
+    "critChance": 0.316,
+    "critResist": 0.286,
+    "moveSpeed": 6,
+    "comboChance": 0.226,
+    "counterChance": 0.206,
+    "skills": [
+      {
+        "name": "火球术",
+        "type": "damage",
+        "damageMultiplier": 2.4,
+        "cost": 0
+      }
+    ],
+    "drops": [
+      {
+        "type": "gold",
+        "amount": 1320,
+        "chance": 1
+      }
+    ]
+  },
+  {
+    "level": 89,
+    "name": "鬼帝守卫 (L89)",
+    "hp": 58160,
+    "attack": 1335,
+    "defense": 890,
+    "critChance": 0.319,
+    "critResist": 0.289,
+    "moveSpeed": 6,
+    "comboChance": 0.228,
+    "counterChance": 0.208,
+    "skills": [
+      {
+        "name": "重击",
+        "type": "damage",
+        "damageMultiplier": 2.3,
+        "cost": 0
+      }
+    ],
+    "drops": [
+      {
+        "type": "gold",
+        "amount": 1335,
+        "chance": 1
+      }
+    ]
+  },
+  {
+    "level": 90,
+    "name": "鬼帝首领 (L90)",
+    "hp": 60000,
+    "attack": 1350,
+    "defense": 900,
+    "critChance": 0.322,
+    "critResist": 0.292,
+    "moveSpeed": 6,
+    "comboChance": 0.23,
+    "counterChance": 0.21,
+    "skills": [
+      {
+        "name": "群体减速",
+        "type": "debuff",
+        "attribute": "moveSpeed",
+        "value": -7,
+        "duration": 2,
+        "cost": 0
+      },
+      {
+        "name": "圣盾",
+        "type": "invulnerability",
+        "duration": 1,
+        "cost": 0
+      },
+      {
+        "name": "雷暴",
+        "type": "aoe_damage",
+        "damageMultiplier": 2.5,
+        "cost": 0
+      },
+      {
+        "name": "生命吸取",
+        "type": "damage_heal",
+        "damageMultiplier": 2.0,
+        "healMultiplier": 1.7,
+        "cost": 0
+      }
+    ],
+    "drops": [
+      {
+        "type": "gold",
+        "amount": 1350,
+        "chance": 1
+      }
+    ]
+  },
+  {
+    "level": 91,
+    "name": "天魔守卫 (L91)",
+    "hp": 61500,
+    "attack": 1365,
+    "defense": 910,
+    "critChance": 0.325,
+    "critResist": 0.295,
+    "moveSpeed": 6,
+    "comboChance": 0.232,
+    "counterChance": 0.212,
+    "skills": [
+      {
+        "name": "破甲",
+        "type": "debuff",
+        "attribute": "defense",
+        "value": -35,
+        "duration": 2,
+        "cost": 0
+      }
+    ],
+    "drops": [
+      {
+        "type": "gold",
+        "amount": 1365,
+        "chance": 1
+      }
+    ]
+  },
+  {
+    "level": 92,
+    "name": "天魔守卫 (L92)",
+    "hp": 63010,
+    "attack": 1380,
+    "defense": 920,
+    "critChance": 0.328,
+    "critResist": 0.298,
+    "moveSpeed": 6,
+    "comboChance": 0.234,
+    "counterChance": 0.214,
+    "skills": [
+      {
+        "name": "冰锥术",
+        "type": "damage",
+        "damageMultiplier": 2.3,
+        "cost": 0
+      }
+    ],
+    "drops": [
+      {
+        "type": "gold",
+        "amount": 1380,
+        "chance": 1
+      }
+    ]
+  },
+  {
+    "level": 93,
+    "name": "天魔守卫 (L93)",
+    "hp": 64530,
+    "attack": 1395,
+    "defense": 930,
+    "critChance": 0.331,
+    "critResist": 0.301,
+    "moveSpeed": 6,
+    "comboChance": 0.236,
+    "counterChance": 0.216,
+    "skills": [
+      {
+        "name": "石肤术",
+        "type": "buff",
+        "attribute": "defense",
+        "value": 80,
+        "duration": 3,
+        "cost": 0
+      }
+    ],
+    "drops": [
+      {
+        "type": "gold",
+        "amount": 1395,
+        "chance": 1
+      }
+    ]
+  },
+  {
+    "level": 94,
+    "name": "天魔守卫 (L94)",
+    "hp": 66060,
+    "attack": 1410,
+    "defense": 940,
+    "critChance": 0.334,
+    "critResist": 0.304,
+    "moveSpeed": 6,
+    "comboChance": 0.238,
+    "counterChance": 0.218,
+    "skills": [
+      {
+        "name": "生命吸取",
+        "type": "damage_heal",
+        "damageMultiplier": 2.1,
+        "healMultiplier": 1.8,
+        "cost": 0
+      }
+    ],
+    "drops": [
+      {
+        "type": "gold",
+        "amount": 1410,
+        "chance": 1
+      }
+    ]
+  },
+  {
+    "level": 95,
+    "name": "天魔守卫 (L95)",
+    "hp": 67600,
+    "attack": 1425,
+    "defense": 950,
+    "critChance": 0.337,
+    "critResist": 0.307,
+    "moveSpeed": 6,
+    "comboChance": 0.24,
+    "counterChance": 0.22,
+    "skills": [
+      {
+        "name": "激怒",
+        "type": "buff",
+        "attribute": "attack",
+        "value": 70,
+        "duration": 3,
+        "cost": 0
+      }
+    ],
+    "drops": [
+      {
+        "type": "gold",
+        "amount": 1425,
+        "chance": 1
+      }
+    ]
+  },
+  {
+    "level": 96,
+    "name": "天魔守卫 (L96)",
+    "hp": 69150,
+    "attack": 1440,
+    "defense": 960,
+    "critChance": 0.34,
+    "critResist": 0.31,
+    "moveSpeed": 6,
+    "comboChance": 0.242,
+    "counterChance": 0.222,
+    "skills": [
+      {
+        "name": "快速治疗",
+        "type": "heal",
+        "value": 450,
+        "cost": 0
+      }
+    ],
+    "drops": [
+      {
+        "type": "gold",
+        "amount": 1440,
+        "chance": 1
+      }
+    ]
+  },
+  {
+    "level": 97,
+    "name": "天魔守卫 (L97)",
+    "hp": 70710,
+    "attack": 1455,
+    "defense": 970,
+    "critChance": 0.343,
+    "critResist": 0.313,
+    "moveSpeed": 6,
+    "comboChance": 0.244,
+    "counterChance": 0.224,
+    "skills": [
+      {
+        "name": "毒镖",
+        "type": "dot",
+        "duration": 3,
+        "damagePerTurn": 55,
+        "cost": 0
+      }
+    ],
+    "drops": [
+      {
+        "type": "gold",
+        "amount": 1455,
+        "chance": 1
+      }
+    ]
+  },
+  {
+    "level": 98,
+    "name": "天魔守卫 (L98)",
+    "hp": 72280,
+    "attack": 1470,
+    "defense": 980,
+    "critChance": 0.346,
+    "critResist": 0.316,
+    "moveSpeed": 6,
+    "comboChance": 0.246,
+    "counterChance": 0.226,
+    "skills": [
+      {
+        "name": "火球术",
+        "type": "damage",
+        "damageMultiplier": 2.5,
+        "cost": 0
+      }
+    ],
+    "drops": [
+      {
+        "type": "gold",
+        "amount": 1470,
+        "chance": 1
+      }
+    ]
+  },
+  {
+    "level": 99,
+    "name": "天魔守卫 (L99)",
+    "hp": 73860,
+    "attack": 1485,
+    "defense": 990,
+    "critChance": 0.349,
+    "critResist": 0.319,
+    "moveSpeed": 6,
+    "comboChance": 0.248,
+    "counterChance": 0.228,
+    "skills": [
+      {
+        "name": "重击",
+        "type": "damage",
+        "damageMultiplier": 2.4,
+        "cost": 0
+      },
+      {
+        "name": "冰锥术",
+        "type": "damage",
+        "damageMultiplier": 2.4,
+        "cost": 0
+      }
+    ],
+    "drops": [
+      {
+        "type": "gold",
+        "amount": 1485,
+        "chance": 1
+      }
+    ]
+  },
+  {
+    "level": 100,
+    "name": "天魔首领 (L100)",
+    "hp": 75000,
+    "attack": 1500,
+    "defense": 1000,
+    "critChance": 0.352,
+    "critResist": 0.322,
+    "moveSpeed": 7,
+    "comboChance": 0.25,
+    "counterChance": 0.23,
+    "skills": [
+      {
+        "name": "群体减速",
+        "type": "debuff",
+        "attribute": "moveSpeed",
+        "value": -8,
+        "duration": 2,
+        "cost": 0
+      },
+      {
+        "name": "圣盾",
+        "type": "invulnerability",
+        "duration": 1,
+        "cost": 0
+      },
+      {
+        "name": "雷暴",
+        "type": "aoe_damage",
+        "damageMultiplier": 2.8,
+        "cost": 0
+      },
+      {
+        "name": "生命吸取",
+        "type": "damage_heal",
+        "damageMultiplier": 2.2,
+        "healMultiplier": 2.0,
+        "cost": 0
+      },
+      {
+        "name": "快速治疗",
+        "type": "heal",
+        "value": 500,
+        "cost": 0
+      }
+    ],
+    "drops": [
+      {
+        "type": "gold",
+        "amount": 1500,
         "chance": 1
       }
     ]
