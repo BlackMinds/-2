@@ -32,7 +32,8 @@
     "drops": [
       { "type": "equipment", "itemId": "leather_armor", "chance": 0.1 },
       { "type": "equipment", "itemId": "leather_boots", "chance": 0.08 },
-      { "type": "skill", "skillId": "heal", "chance": 0.03 }
+      { "type": "skill", "skillId": "heal", "chance": 0.03 },
+      { "type": "pet", "petId": "wolf", "chance": 0.01 }
     ]
   },
   {
@@ -161,7 +162,8 @@
     "skills": [],
     "drops": [
         { "type": "equipment", "itemId": "silver_ring", "chance": 0.03 },
-        { "type": "skill", "skillId": "toughskin", "chance": 0.04 }
+        { "type": "skill", "skillId": "toughskin", "chance": 0.04 },
+        { "type": "pet", "petId": "golem", "chance": 0.01 }
     ]
   },
   {
@@ -354,7 +356,8 @@
       { "type": "equipment", "itemId": "cosmic_heart", "chance": 0.04 },
       { "type": "skill", "skillId": "defignore", "chance": 0.02 },
       { "type": "skill", "skillId": "cleave", "chance": 0.01 },
-      { "type": "skill", "skillId": "stunstrike", "chance": 0.01 }
+      { "type": "skill", "skillId": "stunstrike", "chance": 0.01 },
+      { "type": "pet", "petId": "fairy", "chance": 1 }
     ]
   }
 ]

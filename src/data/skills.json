@@ -124,11 +124,11 @@
     "name": "狂暴",
     "type": "passive",
     "levels": [
-      { "level": 1, "cost": 0, "attack": 5, "description": "攻击力永久增加5点。" },
-      { "level": 2, "cost": 100, "attack": 8, "description": "攻击力永久增加8点。" },
-      { "level": 3, "cost": 250, "attack": 12, "description": "攻击力永久增加12点。" },
-      { "level": 4, "cost": 450, "attack": 16, "description": "攻击力永久增加16点。" },
-      { "level": 5, "cost": 800, "attack": 20, "description": "攻击力永久增加20点。" }
+      { "level": 1, "cost": 0, "strength": 2, "description": "力量永久增加2点。" },
+      { "level": 2, "cost": 100, "strength": 4, "description": "力量永久增加4点。" },
+      { "level": 3, "cost": 250, "strength": 6, "description": "力量永久增加6点。" },
+      { "level": 4, "cost": 450, "strength": 8, "description": "力量永久增加8点。" },
+      { "level": 5, "cost": 800, "strength": 10, "description": "力量永久增加10点。" }
     ]
   },
   {
@@ -136,11 +136,11 @@
     "name": "硬化皮肤",
     "type": "passive",
     "levels": [
-      { "level": 1, "cost": 0, "defense": 3, "description": "防御力永久增加3点。" },
-      { "level": 2, "cost": 80, "defense": 5, "description": "防御力永久增加5点。" },
-      { "level": 3, "cost": 200, "defense": 8, "description": "防御力永久增加8点。" },
-      { "level": 4, "cost": 380, "defense": 12, "description": "防御力永久增加12点。" },
-      { "level": 5, "cost": 650, "defense": 15, "description": "防御力永久增加15点。" }
+      { "level": 1, "cost": 0, "constitution": 3, "description": "体质永久增加3点。" },
+      { "level": 2, "cost": 80, "constitution": 5, "description": "体质永久增加5点。" },
+      { "level": 3, "cost": 200, "constitution": 8, "description": "体质永久增加8点。" },
+      { "level": 4, "cost": 380, "constitution": 12, "description": "体质永久增加12点。" },
+      { "level": 5, "cost": 650, "constitution": 15, "description": "体质永久增加15点。" }
     ]
   },
   {
@@ -160,11 +160,11 @@
     "name": "闪避",
     "type": "passive",
     "levels": [
-      { "level": 1, "cost": 0, "moveSpeed": 1, "description": "移动速度永久增加1点。" },
-      { "level": 2, "cost": 70, "moveSpeed": 2, "description": "移动速度永久增加2点。" },
-      { "level": 3, "cost": 200, "moveSpeed": 3, "description": "移动速度永久增加3点。" },
-      { "level": 4, "cost": 400, "moveSpeed": 4, "description": "移动速度永久增加4点。" },
-      { "level": 5, "cost": 700, "moveSpeed": 5, "description": "移动速度永久增加5点。" }
+      { "level": 1, "cost": 0, "agility": 2, "evasion": 0.01, "description": "敏捷永久增加2点，闪避率增加1%。" },
+      { "level": 2, "cost": 70, "agility": 4, "evasion": 0.02, "description": "敏捷永久增加4点，闪避率增加2%。" },
+      { "level": 3, "cost": 200, "agility": 6, "evasion": 0.03, "description": "敏捷永久增加6点，闪避率增加3%。" },
+      { "level": 4, "cost": 400, "agility": 8, "evasion": 0.04, "description": "敏捷永久增加8点，闪避率增加4%。" },
+      { "level": 5, "cost": 700, "agility": 10, "evasion": 0.05, "description": "敏捷永久增加10点，闪避率增加5%。" }
     ]
   },
   {
@@ -196,11 +196,11 @@
     "name": "坚韧",
     "type": "passive",
     "levels": [
-      { "level": 1, "cost": 0, "maxHp": 20, "description": "最大生命值永久增加20点。" },
-      { "level": 2, "cost": 110, "maxHp": 30, "description": "最大生命值永久增加30点。" },
-      { "level": 3, "cost": 280, "maxHp": 40, "description": "最大生命值永久增加40点。" },
-      { "level": 4, "cost": 500, "maxHp": 50, "description": "最大生命值永久增加50点。" },
-      { "level": 5, "cost": 850, "maxHp": 60, "description": "最大生命值永久增加60点。" }
+      { "level": 1, "cost": 0, "constitution": 2, "description": "体质永久增加2点。" },
+      { "level": 2, "cost": 110, "constitution": 3, "description": "体质永久增加3点。" },
+      { "level": 3, "cost": 280, "constitution": 4, "description": "体质永久增加4点。" },
+      { "level": 4, "cost": 500, "constitution": 5, "description": "体质永久增加5点。" },
+      { "level": 5, "cost": 850, "constitution": 6, "description": "体质永久增加6点。" }
     ]
   },
   {

@@ -1,0 +1,26 @@
+[
+  {
+    "id": "wolf",
+    "name": "幼狼",
+    "baseStrength": 8,
+    "baseAgility": 10,
+    "baseConstitution": 6,
+    "description": "一只忠诚的狼伙伴，会协助你攻击敌人。"
+  },
+  {
+    "id": "fairy",
+    "name": "小仙灵",
+    "baseStrength": 2,
+    "baseAgility": 8,
+    "baseConstitution": 5,
+    "description": "一个善良的仙灵，会周期性地为你恢复生命值。"
+  },
+  {
+    "id": "golem",
+    "name": "迷你石巨人",
+    "baseStrength": 10,
+    "baseAgility": 2,
+    "baseConstitution": 12,
+    "description": "一个坚固的石巨人，能为你提供额外的防御力。"
+  }
+]

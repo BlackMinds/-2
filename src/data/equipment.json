@@ -6,6 +6,7 @@
     "type": "weapon",
     "slot": "weapon",
     "attack": 5,
+    "strength": 1,
     "critChance": 0.01,
     "comboChance": 0.0
   },
@@ -17,6 +18,7 @@
     "slot": "armor",
     "hp": 10,
     "defense": 2,
+    "constitution": 1,
     "critResist": 0.01,
     "counterChance": 0.0
   },
@@ -28,6 +30,7 @@
     "slot": "boots",
     "defense": 1,
     "moveSpeed": 1,
+    "agility": 1,
     "counterChance": 0.0,
     "comboChance": 0.0,
     "hp": 5
@@ -40,6 +43,8 @@
     "slot": "ring",
     "hp": 5,
     "attack": 1,
+    "strength": 1,
+    "agility": 1,
     "critChance": 0.01,
     "ignoreDefense": 0.01
   },
@@ -50,6 +55,7 @@
     "type": "weapon",
     "slot": "weapon",
     "attack": 10,
+    "strength": 2,
     "critChance": 0.03,
     "comboChance": 0.02
   },
@@ -61,6 +67,7 @@
     "slot": "armor",
     "hp": 20,
     "defense": 5,
+    "constitution": 2,
     "critResist": 0.03,
     "counterChance": 0.01
   },
@@ -72,6 +79,8 @@
     "slot": "boots",
     "defense": 3,
     "moveSpeed": 2,
+    "agility": 2,
+    "evasion": 0.01,
     "counterChance": 0.01,
     "comboChance": 0.01,
     "hp": 10
@@ -84,6 +93,8 @@
     "slot": "ring",
     "hp": 10,
     "attack": 3,
+    "constitution": 1,
+    "agility": 1,
     "critChance": 0.03,
     "ignoreDefense": 0.02
   },
@@ -94,6 +105,7 @@
     "type": "weapon",
     "slot": "weapon",
     "attack": 18,
+    "strength": 4,
     "critChance": 0.05,
     "comboChance": 0.03,
     "hp": 10
@@ -106,6 +118,7 @@
     "slot": "armor",
     "hp": 35,
     "defense": 8,
+    "constitution": 4,
     "critResist": 0.05,
     "counterChance": 0.02
   },
@@ -117,6 +130,7 @@
     "slot": "boots",
     "defense": 5,
     "moveSpeed": 3,
+    "agility": 4,
     "counterChance": 0.02,
     "comboChance": 0.02,
     "hp": 15
@@ -129,6 +143,8 @@
     "slot": "ring",
     "hp": 15,
     "attack": 5,
+    "strength": 2,
+    "constitution": 2,
     "critChance": 0.05,
     "ignoreDefense": 0.03
   },
@@ -139,6 +155,7 @@
     "type": "weapon",
     "slot": "weapon",
     "attack": 25,
+    "strength": 6,
     "critChance": 0.08,
     "comboChance": 0.05,
     "hp": 20
@@ -151,6 +168,7 @@
     "slot": "armor",
     "hp": 50,
     "defense": 12,
+    "constitution": 6,
     "critResist": 0.08,
     "counterChance": 0.03,
     "attack": 5
@@ -163,6 +181,7 @@
     "slot": "boots",
     "defense": 8,
     "moveSpeed": 4,
+    "agility": 6,
     "counterChance": 0.03,
     "comboChance": 0.03,
     "hp": 25
@@ -175,6 +194,8 @@
     "slot": "ring",
     "hp": 25,
     "attack": 8,
+    "agility": 4,
+    "constitution": 4,
     "critChance": 0.08,
     "ignoreDefense": 0.04
   },
@@ -185,6 +206,7 @@
     "type": "weapon",
     "slot": "weapon",
     "attack": 35,
+    "strength": 8,
     "critChance": 0.1,
     "comboChance": 0.07,
     "hp": 30
@@ -197,6 +219,7 @@
     "slot": "armor",
     "hp": 70,
     "defense": 18,
+    "constitution": 8,
     "critResist": 0.1,
     "counterChance": 0.05,
     "attack": 8
@@ -209,6 +232,7 @@
     "slot": "boots",
     "defense": 12,
     "moveSpeed": 5,
+    "agility": 8,
     "counterChance": 0.05,
     "comboChance": 0.05,
     "hp": 35,
@@ -222,6 +246,8 @@
     "slot": "ring",
     "hp": 35,
     "attack": 12,
+    "strength": 5,
+    "agility": 5,
     "critChance": 0.1,
     "ignoreDefense": 0.05
   },
@@ -232,6 +258,7 @@
     "type": "weapon",
     "slot": "weapon",
     "attack": 45,
+    "strength": 10,
     "critChance": 0.12,
     "comboChance": 0.09,
     "hp": 40
@@ -244,6 +271,7 @@
     "slot": "armor",
     "hp": 90,
     "defense": 25,
+    "constitution": 10,
     "critResist": 0.12,
     "counterChance": 0.07,
     "attack": 10
@@ -256,6 +284,7 @@
     "slot": "boots",
     "defense": 16,
     "moveSpeed": 6,
+    "agility": 10,
     "counterChance": 0.07,
     "comboChance": 0.07,
     "hp": 45,
@@ -269,6 +298,8 @@
     "slot": "ring",
     "hp": 45,
     "attack": 15,
+    "strength": 6,
+    "constitution": 6,
     "critChance": 0.12,
     "ignoreDefense": 0.06
   },
@@ -279,6 +310,7 @@
     "type": "weapon",
     "slot": "weapon",
     "attack": 60,
+    "strength": 12,
     "critChance": 0.15,
     "comboChance": 0.12,
     "hp": 50
@@ -291,6 +323,7 @@
     "slot": "armor",
     "hp": 120,
     "defense": 35,
+    "constitution": 12,
     "critResist": 0.15,
     "counterChance": 0.1,
     "attack": 12
@@ -303,6 +336,7 @@
     "slot": "boots",
     "defense": 20,
     "moveSpeed": 7,
+    "agility": 12,
     "counterChance": 0.1,
     "comboChance": 0.1,
     "hp": 55,
@@ -316,6 +350,8 @@
     "slot": "ring",
     "hp": 55,
     "attack": 20,
+    "agility": 8,
+    "constitution": 8,
     "critChance": 0.15,
     "ignoreDefense": 0.07
   },
@@ -326,6 +362,7 @@
     "type": "weapon",
     "slot": "weapon",
     "attack": 75,
+    "strength": 14,
     "critChance": 0.18,
     "comboChance": 0.15,
     "hp": 60
@@ -338,6 +375,7 @@
     "slot": "armor",
     "hp": 150,
     "defense": 45,
+    "constitution": 14,
     "critResist": 0.18,
     "counterChance": 0.12,
     "attack": 15
@@ -350,6 +388,7 @@
     "slot": "boots",
     "defense": 25,
     "moveSpeed": 8,
+    "agility": 14,
     "counterChance": 0.12,
     "comboChance": 0.12,
     "hp": 65,
@@ -363,6 +402,8 @@
     "slot": "ring",
     "hp": 65,
     "attack": 25,
+    "strength": 9,
+    "agility": 9,
     "critChance": 0.18,
     "ignoreDefense": 0.08
   },
@@ -373,6 +414,7 @@
     "type": "weapon",
     "slot": "weapon",
     "attack": 90,
+    "strength": 16,
     "critChance": 0.2,
     "comboChance": 0.18,
     "hp": 70
@@ -385,6 +427,7 @@
     "slot": "armor",
     "hp": 180,
     "defense": 55,
+    "constitution": 16,
     "critResist": 0.2,
     "counterChance": 0.15,
     "attack": 18
@@ -397,6 +440,7 @@
     "slot": "boots",
     "defense": 30,
     "moveSpeed": 9,
+    "agility": 16,
     "counterChance": 0.15,
     "comboChance": 0.15,
     "hp": 75,
@@ -410,6 +454,8 @@
     "slot": "ring",
     "hp": 75,
     "attack": 30,
+    "strength": 10,
+    "constitution": 10,
     "critChance": 0.2,
     "ignoreDefense": 0.09
   },
@@ -420,6 +466,7 @@
     "type": "weapon",
     "slot": "weapon",
     "attack": 110,
+    "strength": 18,
     "critChance": 0.22,
     "comboChance": 0.2,
     "hp": 80
@@ -432,6 +479,7 @@
     "slot": "armor",
     "hp": 220,
     "defense": 65,
+    "constitution": 18,
     "critResist": 0.22,
     "counterChance": 0.18,
     "attack": 20
@@ -444,6 +492,7 @@
     "slot": "boots",
     "defense": 35,
     "moveSpeed": 10,
+    "agility": 18,
     "counterChance": 0.18,
     "comboChance": 0.18,
     "hp": 85,
@@ -457,6 +506,8 @@
     "slot": "ring",
     "hp": 85,
     "attack": 35,
+    "agility": 11,
+    "constitution": 11,
     "critChance": 0.22,
     "ignoreDefense": 0.10
   },
@@ -467,6 +518,7 @@
     "type": "weapon",
     "slot": "weapon",
     "attack": 130,
+    "strength": 20,
     "critChance": 0.25,
     "comboChance": 0.22,
     "hp": 100
@@ -479,6 +531,7 @@
     "slot": "armor",
     "hp": 250,
     "defense": 75,
+    "constitution": 20,
     "critResist": 0.25,
     "counterChance": 0.2,
     "attack": 25
@@ -491,6 +544,7 @@
     "slot": "boots",
     "defense": 40,
     "moveSpeed": 12,
+    "agility": 20,
     "counterChance": 0.2,
     "comboChance": 0.2,
     "hp": 100,
@@ -504,6 +558,9 @@
     "slot": "ring",
     "hp": 100,
     "attack": 40,
+    "strength": 12,
+    "agility": 12,
+    "constitution": 12,
     "critChance": 0.25,
     "ignoreDefense": 0.12
   }

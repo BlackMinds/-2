@@ -3,17 +3,57 @@
     <div class="left-panel">
       <div class="section character-attributes">
         <h2>角色属性界面 (Character Attributes)</h2>
-        <p>姓名: {{ player.name }}</p>
-        <p>生命值: {{ player.hp }}/{{ player.maxHp }}</p>
-        <p>攻击力: {{ player.attack }}</p>
-        <p>防御力: {{ player.defense }}</p>
-        <p>暴击率: {{ (player.critChance * 100).toFixed(1) }}%</p>
-        <p>抗暴击率: {{ (player.critResist * 100).toFixed(1) }}%</p>
-        <p>移动速度: {{ player.moveSpeed }}</p>
-        <p>连击几率: {{ (player.comboChance * 100).toFixed(1) }}%</p>
-        <p>反击几率: {{ (player.counterChance * 100).toFixed(1) }}%</p>
-        <p>忽视防御力: {{ (player.ignoreDefense * 100).toFixed(1) }}%</p>
-        <p>金币: {{ player.gold }}</p>
+        <div class="attributes-grid">
+          <div class="primary-attributes">
+            <p>姓名: {{ player.name }}</p>
+            <p>等级: {{ player.level }}</p>
+            <p>经验: {{ player.xp }} / {{ player.xpToNextLevel }}</p>
+            <p v-if="player.attributePoints > 0">可用属性点: {{ player.attributePoints }}</p>
+            <p>生命值: {{ player.hp }}/{{ player.maxHp }}</p>
+            <p>力量: {{ player.strength }} <button v-if="player.attributePoints > 0" @click="assignPoint('baseStrength')">+</button></p>
+            <p>敏捷: {{ player.agility }} <button v-if="player.attributePoints > 0" @click="assignPoint('baseAgility')">+</button></p>
+            <p>体质: {{ player.constitution }} <button v-if="player.attributePoints > 0" @click="assignPoint('baseConstitution')">+</button></p>
+            <p>攻击力: {{ player.attack }}</p>
+            <p>防御力: {{ player.defense }}</p>
+          </div>
+          <div class="special-attributes">
+            <h3>特殊属性</h3>
+            <p>闪避率: {{ (player.evasion * 100).toFixed(1) }}%</p>
+            <p>暴击率: {{ (player.critChance * 100).toFixed(1) }}%</p>
+            <p>抗暴击率: {{ (player.critResist * 100).toFixed(1) }}%</p>
+            <p>移动速度: {{ player.moveSpeed }}</p>
+            <p>连击几率: {{ (player.comboChance * 100).toFixed(1) }}%</p>
+            <p>反击几率: {{ (player.counterChance * 100).toFixed(1) }}%</p>
+            <p>忽视防御力: {{ (player.ignoreDefense * 100).toFixed(1) }}%</p>
+            <p>金币: {{ player.gold }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="section pet-interface" :style="{ height: player.pets.length === 0 ? '160px' : '' }">
+        <h2>宠物界面 (Pet)</h2>
+        <div v-if="player.pets.length > 0">
+          <div v-for="(pet, index) in player.pets" :key="index" class="pet-details">
+            <hr v-if="index > 0">
+            <p><strong>{{ pet.name }}</strong> ({{ player.activePetId === pet.instanceId ? '出战中' : '休息中' }})</p>
+            <p>等级: {{ pet.level }}</p>
+            <div v-if="player.activePetId === pet.instanceId">
+              <p>经验: {{ pet.xp }} / {{ pet.xpToNextLevel }}</p>
+              <p v-if="pet.attributePoints > 0">可用属性点: {{ pet.attributePoints }}</p>
+              <p>生命值: {{ pet.hp }}/{{ pet.maxHp }}</p>
+              <p>力量: {{ pet.strength }} <button v-if="pet.attributePoints > 0" @click="assignPetPoint(pet.instanceId, 'baseStrength')">+</button></p>
+              <p>敏捷: {{ pet.agility }} <button v-if="pet.attributePoints > 0" @click="assignPetPoint(pet.instanceId, 'baseAgility')">+</button></p>
+              <p>体质: {{ pet.constitution }} <button v-if="pet.attributePoints > 0" @click="assignPetPoint(pet.instanceId, 'baseConstitution')">+</button></p>
+              <p>攻击力: {{ pet.attack }}</p>
+              <p>防御力: {{ pet.defense }}</p>
+              <p>闪避率: {{ (pet.evasion * 100).toFixed(1) }}%</p>
+              <p>暴击率: {{ (pet.critChance * 100).toFixed(1) }}%</p>
+            </div>
+            <button v-if="player.activePetId !== pet.instanceId" @click="setPetStatus(pet.instanceId, true)">出战</button>
+            <button v-if="player.activePetId === pet.instanceId" @click="setPetStatus(pet.instanceId, false)">休息</button>
+            <button @click="releasePet(pet.instanceId)">放生</button>
+          </div>
+        </div>
+        <p v-else>无</p>
       </div>
       <div class="section equipment-interface">
         <h2>装备界面 (Equipment)</h2>
@@ -49,7 +89,17 @@
       <div class="section text-battle-interface">
         <h2>文字战斗界面 (Text Battle)</h2>
         <div class="battle-controls">
-          <label for="monster-level-select">选择怪物等级:</label>
+          <div class="tower-section">
+            <h3>锁妖塔？</h3>
+            <label for="tower-level-select">选择层数:</label>
+            <select id="tower-level-select" v-model="currentTowerLevel" :disabled="inBattle">
+              <option v-for="level in player.highestTowerLevel" :key="level" :value="level">
+                第 {{ level }} 层
+              </option>
+            </select>
+            <button @click="startTowerBattle" :disabled="inBattle">挑战锁妖塔</button>
+          </div>
+          <label for="monster-level-select">地图:</label>
           <select id="monster-level-select" v-model="selectedMonsterLevel" :disabled="inBattle">
             <option v-for="level in availableMonsterLevels" :key="level" :value="level">
               等级 {{ level }}
@@ -58,12 +108,13 @@
           <button @click="startBattle" :disabled="inBattle">开始战斗</button>
           <button @click="fleeBattle" :disabled="!inBattle">逃跑</button>
         </div>
-        <div class="battle-log">
+        <div class="battle-log" ref="battleLogContainer">
           <p v-for="(log, index) in battleLog" :key="index">{{ log }}</p>
         </div>
       </div>
       <div class="section backpack-interface">
         <h2>背包界面 (Backpack)</h2>
+        <button @click="sellAllItems">一键出售装备</button>
         <ul>
           <li v-for="(item, index) in player.inventory" :key="index" @mouseover="showTooltip($event, item)" @mouseout="hideTooltip">
             {{ item.name }} {{ item.enhancementLevel > 0 ? '+' + item.enhancementLevel : '' }} ({{ item.type }})
@@ -97,67 +148,31 @@
 import monstersData from '../data/monsters.json'
 import equipmentData from '../data/equipment.json'
 import skillsData from '../data/skills.json'
+import petsData from '../data/pets.json'
+import towerMonstersData from '../data/tower-monsters.json'
+import * as skillService from '../services/skillService.js'
+import * as inventoryService from '../services/inventoryService.js'
+import * as characterService from '../services/characterService.js'
+import * as petService from '../services/petService.js'
 
 export default {
   name: 'TextGame',
   data () {
     return {
-      player: {
-        name: '英雄',
-        level: 1,
-        hp: 100,
-        maxHp: 100,
-        attack: 10,
-        defense: 5,
-        critChance: 0.1,
-        critResist: 0.05,
-        moveSpeed: 3,
-        comboChance: 0.05,
-        counterChance: 0.03,
-        ignoreDefense: 0.0,
-        gold: 1,
-        equipment: {
-          weapon: null,
-          armor: null,
-          boots: null,
-          ring: null
-        },
-        activeSkillSlots: [null, null, null], // 3 active skill slots
-        passiveSkillSlots: [null, null, null], // 3 passive skill slots
-        skillLevels: { // Track current level of each skill
-          strike: 1,
-          heal: 1,
-          fireball: 1,
-          iceshard: 1,
-          thunderbolt: 1,
-          poisoncloud: 1,
-          shieldbash: 1,
-          lifedrain: 1,
-          stunstrike: 1,
-          cleave: 1,
-          berserk: 1,
-          toughskin: 1,
-          critmastery: 1,
-          evasion: 1,
-          goldfinder: 1,
-          regen: 1,
-          toughness: 1,
-          counterattack: 1,
-          comboattack: 1,
-          defignore: 1
-        },
-        inventory: [
-        ]
-      },
+      player: characterService.initializePlayer(skillsData),
       enemy: null,
       inBattle: false,
       battleLog: [],
       monsters: monstersData,
       equipment: equipmentData,
       skillsData: skillsData, // All skills data from JSON
+      pets: petsData,
+      towerMonsters: towerMonstersData,
+      currentTowerLevel: 1,
       selectedMonsterLevel: 1, // Default selected level
       currentTurn: null, // 'player' or 'enemy'
       battleEndTimer: null,
+      turnTimer: null,
       tooltip: {
         visible: false,
         content: '',
@@ -169,83 +184,53 @@ export default {
   created () {
     this.loadGame()
   },
+  watch: {
+    // Watch for changes in equipment or passive skills and update stats
+    'player.equipment': {
+      handler () {
+        characterService.updatePlayerStats(this.player, this.activePet)
+      },
+      deep: true
+    },
+    'player.passiveSkillSlots': {
+      handler () {
+        characterService.updatePlayerStats(this.player, this.activePet)
+      },
+      deep: true
+    },
+    battleLog () {
+      this.$nextTick(() => {
+        const container = this.$refs.battleLogContainer
+        if (container) {
+          container.scrollTop = container.scrollHeight
+        }
+      })
+    }
+  },
   computed: {
     availableMonsterLevels () {
       const levels = new Set()
       this.monsters.forEach(monster => levels.add(monster.level))
       return Array.from(levels).sort((a, b) => a - b)
+    },
+    activePet () {
+      if (!this.player.activePetId) return null
+      return this.player.pets.find(p => p.instanceId === this.player.activePetId)
     }
   },
   methods: {
     saveGame () {
-      localStorage.setItem('playerData', JSON.stringify(this.player))
+      characterService.savePlayer(this.player)
       this.logBattle('游戏进度已保存。')
     },
     loadGame () {
-      const savedData = localStorage.getItem('playerData')
-      if (savedData) {
-        this.player = JSON.parse(savedData)
-        this.logBattle('游戏进度已加载。')
-      } else {
-        this.initializePlayerState()
-      }
+      this.player = characterService.loadPlayer(this.skillsData)
+      this.currentTowerLevel = this.player.highestTowerLevel || 1
+      this.logBattle('游戏进度已加载。')
     },
     initializePlayerState () {
-      // --- Setup Initial Equipment ---
-      const initialEquipment = {
-        wood_sword: 'weapon',
-        cloth_armor: 'armor',
-        old_shoes: 'boots',
-        copper_ring: 'ring'
-      }
-
-      Object.keys(initialEquipment).forEach(itemId => {
-        const itemData = this.equipment.find(e => e.id === itemId)
-        if (itemData) {
-          const item = {
-            ...itemData,
-            enhancementLevel: 0,
-            baseAttack: itemData.attack || 0,
-            baseDefense: itemData.defense || 0,
-            baseHp: itemData.hp || 0
-          }
-          const slot = initialEquipment[itemId]
-          this.player.equipment[slot] = item
-
-          // Apply stats
-          this.player.attack += item.attack || 0
-          this.player.defense += item.defense || 0
-          this.player.maxHp += item.hp || 0
-          this.player.critChance += item.critChance || 0
-          this.player.critResist += item.critResist || 0
-          this.player.moveSpeed += item.moveSpeed || 0
-          this.player.comboChance += item.comboChance || 0
-          this.player.counterChance += item.counterChance || 0
-          this.player.ignoreDefense += item.ignoreDefense || 0
-        }
-      })
-      this.player.hp = this.player.maxHp // Set HP to new max HP
-
-      // --- Setup Initial Skills ---
-      const initialActiveSkills = ['strike', 'heal', 'fireball']
-      const initialPassiveSkills = ['berserk', 'toughskin', 'critmastery']
-
-      initialActiveSkills.forEach((skillId, index) => {
-        const skillData = this.skillsData.find(s => s.id === skillId)
-        if (skillData) {
-          const skill = { ...skillData, ...skillData.levels[0] } // Level 1
-          this.player.activeSkillSlots[index] = skill
-        }
-      })
-
-      initialPassiveSkills.forEach((skillId, index) => {
-        const skillData = this.skillsData.find(s => s.id === skillId)
-        if (skillData) {
-          const skill = { ...skillData, ...skillData.levels[0] } // Level 1
-          this.player.passiveSkillSlots[index] = skill
-          this.applyPassiveSkillEffects(skill) // Apply stats for passive skills
-        }
-      })
+      this.player = characterService.initializePlayer(this.skillsData)
+      this.updatePlayerStats() // Recalculate all stats
     },
     showTooltip (event, item) {
       if (!item) return
@@ -260,6 +245,10 @@ export default {
         else if (item.defense) content += `防御力: ${item.defense}<br>`
         if (item.baseHp) content += `生命值: ${item.baseHp} (${item.hp})<br>`
         else if (item.hp) content += `生命值: ${item.hp}<br>`
+        if (item.strength) content += `力量: ${item.baseStrength} (${item.strength})<br>`
+        if (item.agility) content += `敏捷: ${item.baseAgility} (${item.agility})<br>`
+        if (item.constitution) content += `体质: ${item.baseConstitution} (${item.constitution})<br>`
+        if (item.evasion) content += `闪避率: ${(item.evasion * 100).toFixed(1)}%<br>`
         if (item.critChance) content += `暴击率: ${(item.critChance * 100).toFixed(1)}%<br>`
         if (item.critResist) content += `抗暴击率: ${(item.critResist * 100).toFixed(1)}%<br>`
         if (item.moveSpeed) content += `移动速度: ${item.moveSpeed}<br>`
@@ -301,65 +290,8 @@ export default {
       this.tooltip.visible = false
     },
     upgradeSkill (skill, slotIndex, slotType) {
-      if (!skill) return
-
-      const skillBaseData = this.skillsData.find(s => s.id === skill.id)
-      if (!skillBaseData) {
-        this.logBattle('错误：找不到技能基础数据。')
-        return
-      }
-
-      const currentLevel = this.player.skillLevels[skill.id] || 1
-      if (currentLevel >= skillBaseData.levels.length) {
-        this.logBattle(`${skill.name} 已达到最高等级。`)
-        return
-      }
-
-      const nextLevelData = skillBaseData.levels[currentLevel]
-      const cost = nextLevelData.cost
-      if (this.player.gold < cost) {
-        this.logBattle(`金币不足，需要 ${cost} 金币升级。`)
-        return
-      }
-
-      this.player.gold -= cost
-      this.logBattle(`花费了 ${cost} 金币尝试升级 ${skill.name}。`)
-
-      const failureRates = { 1: 0.1, 2: 0.3, 3: 0.6, 4: 0.9 }
-      const failureChance = failureRates[currentLevel] || 0
-      if (Math.random() < failureChance) {
-        this.logBattle('技能升级失败...')
-        this.saveGame()
-        return
-      }
-
-      // --- Upgrade success ---
-      this.logBattle(`恭喜！${skill.name} 升级至 ${nextLevelData.level} 级！`)
-
-      // For passive skills, remove old effects before applying new ones
-      if (skill.type === 'passive') {
-        this.removePassiveSkillEffects(skill)
-      }
-
-      // Create the new skill object by merging base data with new level data
-      const newSkill = { ...skillBaseData, ...nextLevelData }
-
-      // Update the central skill level tracker
-      this.player.skillLevels[skill.id] = newSkill.level
-
-      // Replace the skill in the slot with the new, upgraded skill object
-      if (slotType === 'active') {
-        this.player.activeSkillSlots.splice(slotIndex, 1, newSkill)
-      } else {
-        this.player.passiveSkillSlots.splice(slotIndex, 1, newSkill)
-      }
-
-      // Apply new passive effects if the skill is passive
-      if (newSkill.type === 'passive') {
-        this.applyPassiveSkillEffects(newSkill)
-      }
-
-      this.saveGame()
+      skillService.upgradeSkill(this.player, skill, slotIndex, slotType, this.skillsData, this.logBattle, this.saveGame)
+      characterService.updatePlayerStats(this.player, this.activePet)
     },
     enhanceItem (item, location, identifier) {
       if (!item || item.enhancementLevel >= 10) {
@@ -385,35 +317,34 @@ export default {
       }
 
       if (success) {
-        // --- Remove old stats if item is equipped ---
-        if (location === 'equipped') {
-          this.player.attack -= item.attack || 0
-          this.player.defense -= item.defense || 0
-          this.player.maxHp -= item.hp || 0
-        }
-
         // --- Calculate and apply enhancement ---
         const enhancementMultiplier = 0.1 + Math.random() * 0.2 // 10% to 30%
         const attackBonus = Math.round(item.baseAttack * enhancementMultiplier)
         const defenseBonus = Math.round(item.baseDefense * enhancementMultiplier)
         const hpBonus = Math.round(item.baseHp * enhancementMultiplier)
+        const strengthBonus = Math.round(item.baseStrength * enhancementMultiplier)
+        const agilityBonus = Math.round(item.baseAgility * enhancementMultiplier)
+        const constitutionBonus = Math.round(item.baseConstitution * enhancementMultiplier)
 
         item.attack += attackBonus
         item.defense += defenseBonus
         item.hp += hpBonus
+        item.strength = (item.strength || 0) + strengthBonus
+        item.agility = (item.agility || 0) + agilityBonus
+        item.constitution = (item.constitution || 0) + constitutionBonus
         item.enhancementLevel++
 
         this.logBattle(`强化成功！${item.name} 强化至 +${item.enhancementLevel}。`)
         if (attackBonus > 0) this.logBattle(`攻击力 +${attackBonus}`)
         if (defenseBonus > 0) this.logBattle(`防御力 +${defenseBonus}`)
         if (hpBonus > 0) this.logBattle(`生命值 +${hpBonus}`)
+        if (strengthBonus > 0) this.logBattle(`力量 +${strengthBonus}`)
+        if (agilityBonus > 0) this.logBattle(`敏捷 +${agilityBonus}`)
+        if (constitutionBonus > 0) this.logBattle(`体质 +${constitutionBonus}`)
 
         // --- Re-apply new stats if item is equipped ---
         if (location === 'equipped') {
-          this.player.attack += item.attack || 0
-          this.player.defense += item.defense || 0
-          this.player.maxHp += item.hp || 0
-          this.player.hp = Math.min(this.player.hp, this.player.maxHp)
+          characterService.updatePlayerStats(this.player, this.activePet)
         }
         // After successful enhancement, if the tooltip is visible for this item, refresh it
         if (this.tooltip.visible) {
@@ -427,33 +358,59 @@ export default {
       }
       this.saveGame() // Save progress on victory
     },
-    getSkillType (skillItem) {
-      if (!skillItem || skillItem.type !== 'skill') return null
-      const skillData = this.skillsData.find(s => s.id === skillItem.skillId)
-      return skillData ? skillData.type : null
-    },
-    sellItem (item, index) {
-      let sellPrice = 0
-      if (item.slot) { // It's an equipment
-        sellPrice = (item.level || 1) * 5
-      } else if (item.type === 'skill') { // It's a skill book
-        sellPrice = 20
-      } else if (item.type === 'consumable') {
-        sellPrice = 5
+    startTowerBattle () {
+      if (this.battleEndTimer) {
+        clearTimeout(this.battleEndTimer)
+        this.battleEndTimer = null
+      }
+      if (this.turnTimer) {
+        clearTimeout(this.turnTimer)
+        this.turnTimer = null
       }
 
-      if (sellPrice > 0) {
-        this.player.gold += sellPrice
-        this.logBattle(`你出售了 ${item.name}，获得了 ${sellPrice} 金币。`)
-        this.player.inventory.splice(index, 1)
-      } else {
-        this.logBattle(`${item.name} 无法出售。`)
+      const towerMonster = this.towerMonsters.find(m => m.level === this.currentTowerLevel)
+      if (!towerMonster) {
+        this.logBattle('你已经通关了锁妖塔！')
+        return
       }
+
+      this.enemy = { ...towerMonster }
+      this.enemy.maxHp = this.enemy.hp
+      this.inBattle = true
+      this.battleLog = [`你开始挑战锁妖塔第 ${this.currentTowerLevel} 层！`]
+      this.logBattle(`你遇到了一个 ${this.enemy.name}！`)
+      this.logBattle(`你的生命值: ${this.player.hp}/${this.player.maxHp}`)
+      this.logBattle(`${this.enemy.name} 的生命值: ${this.enemy.hp}/${this.enemy.maxHp}`)
+
+      if (this.player.moveSpeed >= this.enemy.moveSpeed) {
+        this.currentTurn = 'player'
+        this.logBattle('你获得了先手！')
+        this.processTurn()
+      } else {
+        this.currentTurn = 'enemy'
+        this.logBattle(`${this.enemy.name} 获得了先手！`)
+        this.processTurn()
+      }
+    },
+    getSkillType (skillItem) {
+      return skillService.getSkillType(skillItem, this.skillsData)
+    },
+    sellAllItems () {
+      inventoryService.sellAll(this.player, this.logBattle)
+      this.saveGame()
+    },
+    sellItem (item, index) {
+      inventoryService.sellItem(this.player, item, index, this.logBattle)
+      this.saveGame()
     },
     startBattle () {
       if (this.battleEndTimer) {
         clearTimeout(this.battleEndTimer)
         this.battleEndTimer = null
+      }
+      if (this.turnTimer) {
+        clearTimeout(this.turnTimer)
+        this.turnTimer = null
       }
       if (!this.selectedMonsterLevel) {
         this.logBattle('请选择一个怪物等级开始战斗！')
@@ -482,38 +439,75 @@ export default {
       if (!this.inBattle || !this.enemy || this.currentTurn !== 'player') return
       this.processTurn()
     },
+    updatePlayerStats () {
+      characterService.updatePlayerStats(this.player, this.activePet)
+    },
     processTurn () {
       if (!this.inBattle || this.player.hp <= 0 || this.enemy.hp <= 0) {
         this.endBattle(this.enemy.hp <= 0)
         return
       }
 
+      if (this.activePet && this.activePet.hp <= 0) {
+        this.logBattle(`你的宠物 ${this.activePet.name} 被击败了！`)
+        // We don't end the battle here, just log it.
+      }
+
       if (this.currentTurn === 'player') {
         this.logBattle('你的回合：')
+        // Pet action at the start of the turn
+        if (this.activePet) {
+          petService.performPetAction(this.activePet, this.player, this.enemy, this.logBattle, this.calculateDamage, 'player-turn-start')
+        }
+
         this.performAttack(this.player, this.enemy)
+
+        // Pet action after the turn
+        if (this.enemy && this.enemy.hp > 0 && this.activePet) {
+          petService.performPetAction(this.activePet, this.player, this.enemy, this.logBattle, this.calculateDamage, 'player-turn-end')
+        }
+
         if (this.enemy.hp <= 0) {
           this.endBattle(true)
           return
         }
         this.currentTurn = 'enemy'
         // Enemy turn after a short delay for readability
-        setTimeout(() => this.processTurn(), 1000)
+        this.turnTimer = setTimeout(() => this.processTurn(), 1000)
       } else if (this.currentTurn === 'enemy') {
         this.logBattle(`${this.enemy.name} 的回合：`)
-        this.performAttack(this.enemy, this.player)
+
+        // Target selection for enemy
+        let target = this.player
+        if (this.activePet && this.activePet.hp > 0 && Math.random() < 0.3) { // 30% chance to target pet
+          target = this.activePet
+          this.logBattle(`${this.enemy.name} 的目标是你的宠物 ${target.name}！`)
+        } else {
+          this.logBattle(`${this.enemy.name} 的目标是你！`)
+        }
+
+        this.performAttack(this.enemy, target)
+
         if (this.player.hp <= 0) {
           this.endBattle(false)
           return
         }
         this.currentTurn = 'player'
         // Player turn after a short delay for readability
-        setTimeout(() => this.processTurn(), 1000)
+        this.turnTimer = setTimeout(() => this.processTurn(), 1000)
       }
 
       this.logBattle(`你的生命值: ${this.player.hp}/${this.player.maxHp}`)
       this.logBattle(`${this.enemy.name} 的生命值: ${this.enemy.hp}/${this.enemy.maxHp}`)
     },
     performAttack (attacker, defender) {
+      const defenderName = defender === this.player ? '你' : defender.name
+      // --- Evasion Check ---
+      if (Math.random() < defender.evasion) {
+        this.logBattle(`${attacker.name} 的攻击被 ${defenderName} 闪避了！`)
+        return // Attack misses
+      }
+
       let damageDealt = 0
       let attackType = 'normal'
       let skillUsed = null
@@ -551,7 +545,7 @@ export default {
           const skillAttack = attacker.attack * skillUsed.damageMultiplier
           damageDealt = this.calculateDamage(skillAttack, defender.defense, attacker.critChance, defender.critResist, attacker.ignoreDefense)
           defender.hp -= damageDealt
-          this.logBattle(`对 ${defender.name} 造成了 ${damageDealt} 点技能伤害。`)
+          this.logBattle(`对 ${defenderName} 造成了 ${damageDealt} 点技能伤害。`)
         } else if (skillUsed.heal) {
           attacker.hp = Math.min(attacker.maxHp, attacker.hp + skillUsed.heal)
           this.logBattle(`${attacker.name} 恢复了 ${skillUsed.heal} 点生命值。`)
@@ -561,13 +555,13 @@ export default {
         // Normal attack
         damageDealt = this.calculateDamage(attacker.attack, defender.defense, attacker.critChance, defender.critResist, attacker.ignoreDefense)
         defender.hp -= damageDealt
-        this.logBattle(`${attacker.name} 对 ${defender.name} 造成了 ${damageDealt} 点伤害。`)
+        this.logBattle(`${attacker.name} 对 ${defenderName} 造成了 ${damageDealt} 点伤害。`)
 
         // Check for combo
         if (Math.random() < attacker.comboChance) {
           const comboDamage = this.calculateDamage(attacker.attack * 0.5, defender.defense, attacker.critChance, defender.critResist, attacker.ignoreDefense)
           defender.hp -= comboDamage
-          this.logBattle(`${attacker.name} 发动了连击，对 ${defender.name} 额外造成了 ${comboDamage} 点伤害！`)
+          this.logBattle(`${attacker.name} 发动了连击，对 ${defenderName} 额外造成了 ${comboDamage} 点伤害！`)
         }
       }
 
@@ -576,6 +570,11 @@ export default {
         const counterDamage = this.calculateDamage(defender.attack * 0.7, attacker.defense, defender.critChance, attacker.critResist, defender.ignoreDefense)
         attacker.hp -= counterDamage
         this.logBattle(`${defender.name} 发动了反击，对你造成了 ${counterDamage} 点伤害！`)
+      } else if (defender.hp > 0 && defender === this.player && Math.random() < defender.counterChance) {
+        // Player can also counter-attack
+        const counterDamage = this.calculateDamage(defender.attack * 0.7, attacker.defense, defender.critChance, attacker.critResist, defender.ignoreDefense)
+        attacker.hp -= counterDamage
+        this.logBattle(`你发动了反击，对 ${attacker.name} 造成了 ${counterDamage} 点伤害！`)
       }
     },
     fleeBattle () {
@@ -584,22 +583,40 @@ export default {
       this.endBattle(false) // Player fled, no victory
     },
     endBattle (isVictory) {
+      if (this.turnTimer) {
+        clearTimeout(this.turnTimer)
+        this.turnTimer = null
+      }
       const wasFlee = !isVictory && this.player.hp > 0
+      const isTowerBattle = this.towerMonsters.some(m => m.name === this.enemy.name)
 
       if (isVictory) {
         this.logBattle(`你击败了 ${this.enemy.name}！`)
         this.handleMonsterDefeated()
         this.saveGame() // Save progress on victory
+        if (isTowerBattle) {
+          this.battleEndTimer = setTimeout(() => {
+            this.startTowerBattle()
+          }, 3000)
+          return // Important to return here to not start a normal battle
+        }
       } else if (this.player.hp <= 0) {
         this.logBattle('你被击败了...')
+        if (isTowerBattle) {
+          this.currentTowerLevel = this.player.highestTowerLevel
+        }
       }
 
       this.inBattle = false
       this.enemy = null
       this.player.hp = this.player.maxHp // Restore to full health
+      if (this.activePet) {
+        this.activePet.hp = this.activePet.maxHp // Restore pet's health
+      }
       this.logBattle('你的生命值已完全恢复。')
 
-      if (!wasFlee) {
+      // Only start a new normal battle if it wasn't a tower battle
+      if (!wasFlee && !isTowerBattle) {
         this.logBattle('3秒后将开始新的战斗...')
         this.battleEndTimer = setTimeout(() => {
           this.startBattle()
@@ -610,10 +627,26 @@ export default {
       const monster = this.enemy
       if (!monster || !monster.drops) return
 
-      // Grant Gold
-      const goldGained = monster.level * 5 // Example: 5 gold per level
+      if (this.towerMonsters.some(m => m.name === monster.name)) {
+        if (this.currentTowerLevel === this.player.highestTowerLevel) {
+          this.player.highestTowerLevel++
+        }
+        this.currentTowerLevel++
+        this.logBattle(`恭喜你通过锁妖塔第 ${this.currentTowerLevel - 1} 层！`)
+      }
+
+      // Grant Gold & XP
+      const goldGained = monster.level * 5
+      const xpGained = monster.level * 10
       this.player.gold += goldGained
-      this.logBattle(`你获得了 ${goldGained} 金币。`)
+      this.player.xp += xpGained
+      this.logBattle(`你获得了 ${goldGained} 金币和 ${xpGained} 经验值。`)
+      this.checkLevelUp()
+      if (this.activePet) {
+        this.activePet.xp += xpGained
+        this.logBattle(`你的宠物获得了 ${xpGained} 经验值。`)
+        petService.checkPetLevelUp(this.activePet, this.logBattle)
+      }
 
       // Handle Drops
       monster.drops.forEach(drop => {
@@ -627,7 +660,10 @@ export default {
                 enhancementLevel: 0,
                 baseAttack: equipmentData.attack || 0,
                 baseDefense: equipmentData.defense || 0,
-                baseHp: equipmentData.hp || 0
+                baseHp: equipmentData.hp || 0,
+                baseStrength: equipmentData.strength || 0,
+                baseAgility: equipmentData.agility || 0,
+                baseConstitution: equipmentData.constitution || 0
               }
               this.player.inventory.push(newEquipment)
               this.logBattle(`掉落了装备：${newEquipment.name}！`)
@@ -642,136 +678,42 @@ export default {
                 this.logBattle(`掉落了技能书：${skill.name}！`)
               }
             }
+          } else if (drop.type === 'pet') {
+            if (this.player.pets.length < 5) {
+              const petData = this.pets.find(p => p.id === drop.petId)
+              if (petData) {
+                const newPet = petService.createPet(petData)
+                this.player.pets.push(newPet)
+                this.logBattle(`你获得了新的宠物：${petData.name}！`)
+                if (!this.player.activePetId) {
+                  this.setPetStatus(newPet.instanceId, true)
+                }
+              }
+            } else {
+              this.logBattle('你找到了一个宠物，但你的宠物栏已满。')
+            }
           }
         }
       })
     },
     equipItem (item, index) {
-      if (!item.slot) return // Equipment must have a slot
-
-      // Unequip current item in slot if any
-      const currentEquipped = this.player.equipment[item.slot]
-      if (currentEquipped) {
-        this.player.inventory.push(currentEquipped) // Move to inventory
-        this.player.attack -= currentEquipped.attack || 0
-        this.player.defense -= currentEquipped.defense || 0
-        this.player.maxHp -= currentEquipped.hp || 0
-        this.player.hp = Math.min(this.player.hp, this.player.maxHp) // Adjust current HP if max HP drops
-        this.player.critChance -= currentEquipped.critChance || 0
-        this.player.critResist -= currentEquipped.critResist || 0
-        this.player.moveSpeed -= currentEquipped.moveSpeed || 0
-        this.player.comboChance -= currentEquipped.comboChance || 0
-        this.player.counterChance -= currentEquipped.counterChance || 0
-        this.player.ignoreDefense -= currentEquipped.ignoreDefense || 0
-      }
-
-      // Equip new item
-      this.player.equipment[item.slot] = item
-      this.player.attack += item.attack || 0
-      this.player.defense += item.defense || 0
-      this.player.maxHp += item.hp || 0
-      this.player.hp = Math.min(this.player.hp, this.player.maxHp) // Ensure current HP doesn't exceed new max HP
-      this.player.critChance += item.critChance || 0
-      this.player.critResist += item.critResist || 0
-      this.player.moveSpeed += item.moveSpeed || 0
-      this.player.comboChance += item.comboChance || 0
-      this.player.counterChance += item.counterChance || 0
-      this.player.ignoreDefense += item.ignoreDefense || 0
-
-      // Remove from inventory
-      this.player.inventory.splice(index, 1)
-      this.logBattle(`你装备了 ${item.name}。`)
+      inventoryService.equipItem(this.player, item, index, this.logBattle)
+      characterService.updatePlayerStats(this.player, this.activePet)
     },
     unequipItem (slot) {
-      const item = this.player.equipment[slot]
-      if (!item) return
-
-      this.player.inventory.push(item) // Move to inventory
-      this.player.attack -= item.attack || 0
-      this.player.defense -= item.defense || 0
-      this.player.maxHp -= item.hp || 0
-      this.player.hp = Math.min(this.player.hp, this.player.maxHp) // Adjust current HP if max HP drops
-      this.player.critChance -= item.critChance || 0
-      this.player.critResist -= item.critResist || 0
-      this.player.moveSpeed -= item.moveSpeed || 0
-      this.player.comboChance -= item.comboChance || 0
-      this.player.counterChance -= item.counterChance || 0
-      this.player.ignoreDefense -= item.ignoreDefense || 0
-      this.player.equipment[slot] = null
-      this.logBattle(`你卸下了 ${item.name}。`)
+      inventoryService.unequipItem(this.player, slot, this.logBattle)
+      characterService.updatePlayerStats(this.player, this.activePet)
     },
     useItem (item, index) {
-      if (item.type !== 'consumable') return
-
-      if (item.heal) {
-        this.player.hp = Math.min(this.player.maxHp, this.player.hp + item.heal)
-        this.logBattle(`你使用了 ${item.name}，恢复了 ${item.heal} 点生命值。`)
-      }
-      // Remove from inventory
-      this.player.inventory.splice(index, 1)
+      inventoryService.useItem(this.player, item, index, this.logBattle)
     },
     equipSkill (skillItem, slotIndex, slotType) {
-      const skillBaseData = this.skillsData.find(s => s.id === skillItem.skillId)
-      if (!skillBaseData) return
-
-      // --- Type Check ---
-      if (skillBaseData.type !== slotType) {
-        this.logBattle(`不能将 ${skillBaseData.type === 'active' ? '主动' : '被动'} 技能装备到 ${slotType === 'active' ? '主动' : '被动'} 槽位。`)
-        return
-      }
-
-      const currentLevel = this.player.skillLevels[skillItem.skillId] || 1
-      const skill = { ...skillBaseData, ...skillBaseData.levels[currentLevel - 1] } // Get skill data for current level
-
-      let targetSlots = null
-      let slotName = ''
-      if (slotType === 'active') {
-        targetSlots = this.player.activeSkillSlots
-        slotName = '主动技能槽位'
-      } else if (slotType === 'passive') {
-        targetSlots = this.player.passiveSkillSlots
-        slotName = '被动技能槽位'
-      } else {
-        return
-      }
-
-      if (targetSlots[slotIndex] !== null) {
-        this.logBattle(`${slotName} ${slotIndex + 1} 已经有技能了，请先卸下。`)
-        return
-      }
-
-      targetSlots.splice(slotIndex, 1, skill)
-      this.player.inventory.splice(this.player.inventory.indexOf(skillItem), 1)
-      this.logBattle(`你将 ${skill.name} (等级 ${currentLevel}) 装备到了 ${slotName} ${slotIndex + 1}。`)
-
-      // Apply passive effects
-      if (skill.type === 'passive') {
-        this.applyPassiveSkillEffects(skill)
-      }
+      skillService.equipSkill(this.player, skillItem, slotIndex, slotType, this.skillsData, this.logBattle)
+      characterService.updatePlayerStats(this.player, this.activePet)
     },
     unequipSkill (skill, slotIndex, slotType) {
-      let targetSlots = null
-      let slotName = ''
-      if (slotType === 'active') {
-        targetSlots = this.player.activeSkillSlots
-        slotName = '主动技能槽位'
-      } else if (slotType === 'passive') {
-        targetSlots = this.player.passiveSkillSlots
-        slotName = '被动技能槽位'
-      } else {
-        return
-      }
-
-      if (targetSlots[slotIndex] === null) return
-
-      this.player.inventory.push({ name: `${skill.name} 技能书`, type: 'skill', skillId: skill.id })
-      targetSlots.splice(slotIndex, 1, null)
-      this.logBattle(`你从 ${slotName} ${slotIndex + 1} 卸下了 ${skill.name}。`)
-
-      // Remove passive effects
-      if (skill.type === 'passive') {
-        this.removePassiveSkillEffects(skill)
-      }
+      skillService.unequipSkill(this.player, skill, slotIndex, slotType, this.logBattle)
+      characterService.updatePlayerStats(this.player, this.activePet)
     },
     applyPassiveSkillEffects (skill) {
       // Apply effects based on the skill's current level data
@@ -822,52 +764,9 @@ export default {
       }
     },
     removePassiveSkillEffects (skill) {
-      // Remove effects based on the skill's current level data
-      if (skill.attack) {
-        this.player.attack -= skill.attack
-        this.logBattle(`你的攻击力减少了 ${skill.attack} 点。`)
-      }
-      if (skill.defense) {
-        this.player.defense -= skill.defense
-        this.logBattle(`你的防御力减少了 ${skill.defense} 点。`)
-      }
-      if (skill.maxHp) {
-        this.player.maxHp -= skill.maxHp
-        this.player.hp = Math.min(this.player.hp, this.player.maxHp) // Adjust current HP if max HP drops
-        this.logBattle(`你的最大生命值减少了 ${skill.maxHp} 点。`)
-      }
-      if (skill.critChance) {
-        this.player.critChance -= skill.critChance
-        this.logBattle(`你的暴击率减少了 ${Math.round(skill.critChance * 100)}%。`)
-      }
-      if (skill.critResist) {
-        this.player.critResist -= skill.critResist
-        this.logBattle(`你的抗暴击率减少了 ${Math.round(skill.critResist * 100)}%。`)
-      }
-      if (skill.moveSpeed) {
-        this.player.moveSpeed -= skill.moveSpeed
-        this.logBattle(`你的移动速度减少了 ${skill.moveSpeed} 点。`)
-      }
-      if (skill.comboChance) {
-        this.player.comboChance -= skill.comboChance
-        this.logBattle(`你的连击几率减少了 ${Math.round(skill.comboChance * 100)}%。`)
-      }
-      if (skill.counterChance) {
-        this.player.counterChance -= skill.counterChance
-        this.logBattle(`你的反击几率减少了 ${Math.round(skill.counterChance * 100)}%。`)
-      }
-      if (skill.ignoreDefense) {
-        this.player.ignoreDefense -= skill.ignoreDefense
-        this.logBattle(`你的忽视防御力减少了 ${Math.round(skill.ignoreDefense * 100)}%。`)
-      }
-      if (skill.goldBonus) {
-        this.player.goldBonus = (this.player.goldBonus || 0) - skill.goldBonus
-        this.logBattle(`你获得的金币减少了 ${Math.round(skill.goldBonus * 100)}%。`)
-      }
-      if (skill.hpRegen) {
-        this.player.hpRegen = (this.player.hpRegen || 0) - skill.hpRegen
-        this.logBattle(`你每回合生命恢复减少了 ${skill.hpRegen} 点。`)
-      }
+      // This method is now obsolete as stats are calculated in updatePlayerStats.
+      // Kept for reference, but can be removed.
+      console.warn('removePassiveSkillEffects is deprecated.')
     },
     // The original useSkill method is now internal to performAttack, but we keep it for direct use if needed
     useSkill (skill) {
@@ -924,21 +823,57 @@ export default {
       const selectedMonster = { ...relevantMonsters[randomIndex] } // Return a copy to avoid modifying original data
       selectedMonster.maxHp = selectedMonster.hp // Set maxHp for enemy
       return selectedMonster
+    },
+    createPet (petData) {
+      return petService.createPet(petData)
+    },
+    updatePetStats (petObject) {
+      petService.updatePetStats(petObject || this.activePet)
+    },
+    assignPetPoint (petInstanceId, attribute) {
+      const pet = this.player.pets.find(p => p.instanceId === petInstanceId)
+      petService.assignPetPoint(pet, attribute)
+    },
+    checkPetLevelUp () {
+      petService.checkPetLevelUp(this.activePet, this.logBattle)
+    },
+    setPetStatus (petInstanceId, isActive) {
+      if (isActive) {
+        this.player.activePetId = petInstanceId
+        const pet = this.player.pets.find(p => p.instanceId === petInstanceId)
+        if (pet) {
+          this.logBattle(`${pet.name} 已设置为出战状态。`)
+        }
+      } else {
+        const pet = this.activePet
+        if (pet) {
+          this.logBattle(`${pet.name} 已设置为休息状态。`)
+        }
+        this.player.activePetId = null
+      }
+      this.updatePlayerStats()
+    },
+    releasePet (petInstanceId) {
+      const petIndex = this.player.pets.findIndex(p => p.instanceId === petInstanceId)
+      if (petIndex > -1) {
+        const petName = this.player.pets[petIndex].name
+        if (this.player.activePetId === petInstanceId) {
+          this.player.activePetId = null
+        }
+        this.player.pets.splice(petIndex, 1)
+        this.logBattle(`你放生了 ${petName}。`)
+        characterService.updatePlayerStats(this.player, this.activePet)
+      }
+    },
+    assignPoint (attribute) {
+      characterService.assignPoint(this.player, attribute, this.activePet)
+    },
+    checkLevelUp () {
+      characterService.checkLevelUp(this.player, this.logBattle, this.activePet)
     }
   }
 }
 </script>
 
 <style scoped>
-.tooltip {
-  position: absolute;
-  background-color: #333;
-  color: #fff;
-  border: 1px solid #fff;
-  padding: 10px;
-  border-radius: 5px;
-  pointer-events: none; /* Prevents the tooltip from interfering with mouse events */
-  z-index: 100;
-  white-space: pre-wrap; /* Ensures line breaks are respected */
-}
 </style>
