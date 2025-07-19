@@ -1,6 +1,6 @@
 export function initializeSkills (player, skillsData) {
-  const initialActiveSkills = ['strike', 'heal', 'fireball']
-  const initialPassiveSkills = ['berserk', 'toughskin', 'critmastery']
+  const initialActiveSkills = []
+  const initialPassiveSkills = []
 
   initialActiveSkills.forEach((skillId, index) => {
     const skillData = skillsData.find(s => s.id === skillId)

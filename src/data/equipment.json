@@ -563,5 +563,15 @@
     "constitution": 12,
     "critChance": 0.25,
     "ignoreDefense": 0.12
+  },
+  {
+    "id": "simple_necklace",
+    "level": 1,
+    "name": "简易项链",
+    "type": "necklace",
+    "slot": "necklace",
+    "hp": 15,
+    "defense": 1,
+    "attack": 1
   }
 ]

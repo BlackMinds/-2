@@ -38,7 +38,8 @@ export function initializePlayer (skillsData) {
       weapon: null,
       armor: null,
       boots: null,
-      ring: null
+      ring: null,
+      necklace: null
     },
     activeSkillSlots: [null, null, null],
     passiveSkillSlots: [null, null, null],
@@ -246,6 +247,10 @@ export function loadPlayer (skillsData) {
     if (player.pets === undefined) player.pets = []
     if (player.activePetId === undefined) player.activePetId = null
     if (player.highestTowerLevel === undefined) player.highestTowerLevel = 1
+    // Add necklace slot if it doesn't exist in saved data
+    if (player.equipment.necklace === undefined) {
+      player.equipment.necklace = null
+    }
   } else {
     player = initializePlayer(skillsData)
   }
