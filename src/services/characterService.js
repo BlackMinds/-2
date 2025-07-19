@@ -1,5 +1,6 @@
 import equipmentData from '../data/equipment.json'
 import * as skillService from './skillService.js'
+import { storageService } from './storageService.js'
 
 /**
  * Initializes a new player object with default attributes and state.
@@ -228,10 +229,10 @@ export function checkLevelUp (player, logCallback, activePet) {
  * @returns {object} The loaded player object.
  */
 export function loadPlayer (skillsData) {
-  const savedData = localStorage.getItem('playerData')
+  const savedData = storageService.getItem('playerData')
   let player
   if (savedData) {
-    player = JSON.parse(savedData)
+    player = savedData
     // Compatibility for old save files
     if (player.baseStrength === undefined) player.baseStrength = 10
     if (player.baseAgility === undefined) player.baseAgility = 10
@@ -263,5 +264,5 @@ export function loadPlayer (skillsData) {
  * @param {object} player - The player object.
  */
 export function savePlayer (player) {
-  localStorage.setItem('playerData', JSON.stringify(player))
+  storageService.setItem('playerData', player)
 }
