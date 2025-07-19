@@ -1,6 +1,7 @@
 <template>
-  <div id="game-container">
-    <div class="left-panel">
+  <div id="game-container" style="padding-top: 100px">
+    <app-header :player="player" @forge-item="handleForgeItem"></app-header>
+    <div class="left-panel" >
       <div class="section character-attributes">
         <h2 @click="toggleSection('character')">
           角色属性界面 (Character Attributes)
@@ -21,13 +22,13 @@
           </div>
           <div class="special-attributes">
             <h3>特殊属性</h3>
-            <p>闪避率: {{ (player.evasion * 100).toFixed(1) }}%</p>
-            <p>暴击率: {{ (player.critChance * 100).toFixed(1) }}%</p>
-            <p>抗暴击率: {{ (player.critResist * 100).toFixed(1) }}%</p>
+            <p>闪避率: {{ ((player.evasion || 0) * 100).toFixed(1) }}%</p>
+            <p>暴击率: {{ ((player.critChance || 0) * 100).toFixed(1) }}%</p>
+            <p>抗暴击率: {{ ((player.critResist || 0) * 100).toFixed(1) }}%</p>
             <p>移动速度: {{ player.moveSpeed }}</p>
-            <p>连击几率: {{ (player.comboChance * 100).toFixed(1) }}%</p>
-            <p>反击几率: {{ (player.counterChance * 100).toFixed(1) }}%</p>
-            <p>忽视防御力: {{ (player.ignoreDefense * 100).toFixed(1) }}%</p>
+            <p>连击几率: {{ ((player.comboChance || 0) * 100).toFixed(1) }}%</p>
+            <p>反击几率: {{ ((player.counterChance || 0) * 100).toFixed(1) }}%</p>
+            <p>忽视防御力: {{ ((player.ignoreDefense || 0) * 100).toFixed(1) }}%</p>
             <p>金币: {{ player.gold }}</p>
           </div>
         </div>
@@ -52,8 +53,8 @@
                 <p>体质: {{ pet.constitution }} <button v-if="pet.attributePoints > 0" @click="assignPetPoint(pet.instanceId, 'baseConstitution')" :disabled="inBattle">+</button></p>
                 <p>攻击力: {{ pet.attack }}</p>
                 <p>防御力: {{ pet.defense }}</p>
-                <p>闪避率: {{ (pet.evasion * 100).toFixed(1) }}%</p>
-                <p>暴击率: {{ (pet.critChance * 100).toFixed(1) }}%</p>
+                <p>闪避率: {{ ((pet.evasion || 0) * 100).toFixed(1) }}%</p>
+                <p>暴击率: {{ ((pet.critChance || 0) * 100).toFixed(1) }}%</p>
               </div>
               <button v-if="player.activePetId !== pet.instanceId" @click="setPetStatus(pet.instanceId, true)" :disabled="inBattle">出战</button>
               <button v-if="player.activePetId === pet.instanceId" @click="setPetStatus(pet.instanceId, false)" :disabled="inBattle">休息</button>
@@ -71,7 +72,7 @@
         <ul v-if="!sections.equipment.collapsed">
           <li v-for="(item, slot) in player.equipment" :key="slot" @mouseover="showTooltip($event, item)" @mouseout="hideTooltip">
             {{ slot }}: {{ item ? `${item.name} ${item.enhancementLevel > 0 ? '+' + item.enhancementLevel : ''}` : '无' }}
-            <button v-if="item" @click="enhanceItem(item, 'equipped', slot)" :disabled="inBattle">强化</button>
+            <button v-if="item && item.type !== 'necklace'" @click="enhanceItem(item, 'equipped', slot)" :disabled="inBattle">强化</button>
             <button v-if="item" @click="unequipItem(slot)" :disabled="inBattle">卸下</button>
           </li>
         </ul>
@@ -157,11 +158,16 @@
           <span class="toggle-arrow">{{ sections.backpack.collapsed ? '▼' : '▲' }}</span>
         </h2>
         <div v-if="!sections.backpack.collapsed">
-          <button @click="sellAllItems">一键出售装备</button>
+          <div class="backpack-controls">
+            <button @click="backpackCategory = 'equipment'" :class="{ 'active-category': backpackCategory === 'equipment' }">装备</button>
+            <button @click="backpackCategory = 'skills'" :class="{ 'active-category': backpackCategory === 'skills' }">技能</button>
+            <button @click="backpackCategory = 'materials'" :class="{ 'active-category': backpackCategory === 'materials' }">材料</button>
+            <button @click="sellAllItems">一键出售装备</button>
+          </div>
           <ul>
-            <li v-for="(item, index) in player.inventory" :key="index" @mouseover="showTooltip($event, item)" @mouseout="hideTooltip">
-            {{ item.name }} {{ item.enhancementLevel > 0 ? '+' + item.enhancementLevel : '' }} ({{ item.type }})
-            <button v-if="item.slot" @click="enhanceItem(item, 'inventory', index)" :disabled="inBattle">强化</button>
+            <li v-for="(item, index) in filteredInventory" :key="index" @mouseover="showTooltip($event, item)" @mouseout="hideTooltip">
+            {{ item.name }} <span v-if="item.quantity">x{{ item.quantity }}</span> {{ item.enhancementLevel > 0 ? '+' + item.enhancementLevel : '' }} ({{ item.type }})
+            <button v-if="item.slot && item.type !== 'necklace'" @click="enhanceItem(item, 'inventory', index)" :disabled="inBattle">强化</button>
             <button v-if="item.slot" @click="equipItem(item, index)" :disabled="inBattle">装备</button>
             <button v-if="item.type === 'consumable'" @click="useItem(item, index)" :disabled="inBattle">使用</button>
             <span v-if="item.type === 'skill'">
@@ -198,9 +204,13 @@ import * as skillService from '../services/skillService.js'
 import * as inventoryService from '../services/inventoryService.js'
 import * as characterService from '../services/characterService.js'
 import * as petService from '../services/petService.js'
+import AppHeader from './Header.vue'
 
 export default {
   name: 'TextGame',
+  components: {
+    AppHeader
+  },
   data () {
     return {
       player: characterService.initializePlayer(skillsData),
@@ -229,7 +239,8 @@ export default {
         equipment: { collapsed: false },
         skill: { collapsed: false },
         backpack: { collapsed: false }
-      }
+      },
+      backpackCategory: 'equipment'
     }
   },
   created () {
@@ -282,9 +293,25 @@ export default {
         return { flex: '0 0 auto' }
       }
       return {} // Fallback to CSS
+    },
+    filteredInventory () {
+      switch (this.backpackCategory) {
+        case 'equipment':
+          return this.player.inventory.filter(item => item.slot)
+        case 'skills':
+          return this.player.inventory.filter(item => item.type === 'skill')
+        case 'materials':
+          return this.player.inventory.filter(item => item.type === 'material' || item.type === 'consumable')
+        default:
+          return this.player.inventory
+      }
     }
   },
   methods: {
+    handleForgeItem (materialsToUse) {
+      inventoryService.forgeItem(this.player, this.logBattle, materialsToUse)
+      this.saveGame()
+    },
     saveGame () {
       characterService.savePlayer(this.player)
       this.logBattle('游戏进度已保存。')
@@ -301,6 +328,9 @@ export default {
     showTooltip (event, item) {
       if (!item) return
       let content = `<strong>${item.name} ${item.enhancementLevel > 0 ? '+' + item.enhancementLevel : ''}</strong><br>`
+      if (item.quantity) {
+        content += `数量: ${item.quantity}<br>`
+      }
 
       // Check if it's an equipment item (they have a 'slot' property)
       if (item.slot) {
@@ -314,13 +344,16 @@ export default {
         if (item.strength) content += `力量: ${item.baseStrength} (${item.strength})<br>`
         if (item.agility) content += `敏捷: ${item.baseAgility} (${item.agility})<br>`
         if (item.constitution) content += `体质: ${item.baseConstitution} (${item.constitution})<br>`
-        if (item.evasion) content += `闪避率: ${(item.evasion * 100).toFixed(1)}%<br>`
-        if (item.critChance) content += `暴击率: ${(item.critChance * 100).toFixed(1)}%<br>`
-        if (item.critResist) content += `抗暴击率: ${(item.critResist * 100).toFixed(1)}%<br>`
+        if (item.evasion) content += `闪避率: ${((item.evasion || 0) * 100).toFixed(1)}%<br>`
+        if (item.critChance) content += `暴击率: ${((item.critChance || 0) * 100).toFixed(1)}%<br>`
+        if (item.critResist) content += `抗暴击率: ${((item.critResist || 0) * 100).toFixed(1)}%<br>`
         if (item.moveSpeed) content += `移动速度: ${item.moveSpeed}<br>`
-        if (item.comboChance) content += `连击几率: ${(item.comboChance * 100).toFixed(1)}%<br>`
-        if (item.counterChance) content += `反击几率: ${(item.counterChance * 100).toFixed(1)}%<br>`
-        if (item.ignoreDefense) content += `忽视防御力: ${(item.ignoreDefense * 100).toFixed(1)}%<br>`
+        if (item.comboChance) content += `连击几率: ${((item.comboChance || 0) * 100).toFixed(1)}%<br>`
+        if (item.counterChance) content += `反击几率: ${((item.counterChance || 0) * 100).toFixed(1)}%<br>`
+        if (item.ignoreDefense) content += `忽视防御力: ${((item.ignoreDefense || 0) * 100).toFixed(1)}%<br>`
+        if (item.percentAttack) content += `攻击力: +${(item.percentAttack * 100).toFixed(0)}%<br>`
+        if (item.percentDefense) content += `防御力: +${(item.percentDefense * 100).toFixed(0)}%<br>`
+        if (item.percentHp) content += `生命值: +${(item.percentHp * 100).toFixed(0)}%<br>`
       } else if (item.type === 'active' || item.type === 'passive' || item.skillId) {
         let skillData
         let skillLevelData
@@ -734,6 +767,14 @@ export default {
               this.player.inventory.push(newEquipment)
               this.logBattle(`掉落了装备：${newEquipment.name}！`)
             }
+          } else if (drop.type === 'material') {
+            const existingMaterial = this.player.inventory.find(item => item.name === drop.name)
+            if (existingMaterial) {
+              existingMaterial.quantity = (existingMaterial.quantity || 1) + 1
+            } else {
+              this.player.inventory.push({ name: drop.name, type: 'material', quantity: 1 })
+            }
+            this.logBattle(`掉落了材料：${drop.name}！`)
           } else if (drop.type === 'skill') {
             const skill = this.skillsData.find(s => s.id === drop.skillId)
             if (skill) {
@@ -982,7 +1023,7 @@ export default {
             if (petData) itemName = petData.name
           }
           if (itemName) {
-            content += `${itemName} (${(drop.chance * 100).toFixed(1)}%)<br>`
+            content += `${itemName} (${((drop.chance || 0) * 100).toFixed(1)}%)<br>`
           }
         })
       }
@@ -997,4 +1038,18 @@ export default {
 </script>
 
 <style scoped>
+.backpack-controls {
+  margin-bottom: 10px;
+}
+
+.backpack-controls button {
+  margin-right: 10px;
+}
+
+.backpack-controls button.active-category {
+  background-color: #4299E1; /* Brighter blue */
+  border: 2px solid #90CDF4; /* Light blue border */
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
+  transform: translateY(1px);
+}
 </style>

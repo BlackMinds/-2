@@ -70,3 +70,75 @@ export function sellAll (player, logBattle) {
     logBattle('背包中没有可出售的装备。')
   }
 }
+
+export function forgeItem (player, logBattle, materialsToUse) {
+  const baseCost = 100
+  const materialCost = Object.values(materialsToUse).reduce((a, b) => a + b, 0) * 500
+  const totalCost = baseCost + materialCost
+
+  if (player.gold < totalCost) {
+    logBattle(`金币不足，无法打造。需要 ${totalCost} 金币。`)
+    return
+  }
+
+  const materials = [
+    { name: '灵魂精粹', count: materialsToUse.soulEssence },
+    { name: '敏捷水晶', count: materialsToUse.agilityCrystal },
+    { name: '狂怒之石', count: materialsToUse.rageStone },
+    { name: '穿透之眼', count: materialsToUse.penetratingEye }
+  ]
+
+  for (const material of materials) {
+    const item = player.inventory.find(i => i.name === material.name)
+    const itemCount = item ? item.quantity : 0
+    if (itemCount < material.count) {
+      logBattle(`${material.name}不足。`)
+      return
+    }
+  }
+
+  player.gold -= totalCost
+  for (const material of materials) {
+    if (material.count > 0) {
+      const item = player.inventory.find(i => i.name === material.name)
+      item.quantity -= material.count
+      if (item.quantity === 0) {
+        player.inventory.splice(player.inventory.indexOf(item), 1)
+      }
+    }
+  }
+
+  const bonusPerMaterial = 0.005
+  const totalBonus = 1 + (materialsToUse.soulEssence * bonusPerMaterial)
+
+  const necklace = {
+    name: '新手项链',
+    slot: 'necklace',
+    type: 'necklace',
+    level: 1,
+    enhancementLevel: 0,
+    evasion: 0.01 + materialsToUse.agilityCrystal * 0.001,
+    critChance: 0.01 + materialsToUse.rageStone * 0.001,
+    critResist: 0.01 + materialsToUse.penetratingEye * 0.001,
+    comboChance: 0.01 + materialsToUse.agilityCrystal * 0.001,
+    counterChance: 0.01 + materialsToUse.rageStone * 0.001,
+    ignoreDefense: 0.01 + materialsToUse.penetratingEye * 0.001,
+    percentAttack: 0.05 * totalBonus,
+    percentDefense: 0.05 * totalBonus,
+    percentHp: 0.05 * totalBonus,
+    attack: 0,
+    defense: 0,
+    hp: 0,
+    strength: 0,
+    agility: 0,
+    constitution: 0,
+    baseAttack: 0,
+    baseDefense: 0,
+    baseHp: 0,
+    baseStrength: 0,
+    baseAgility: 0,
+    baseConstitution: 0
+  }
+  player.inventory.push(necklace)
+  logBattle(`你花费了 ${totalCost} 金币和 ${materialsToUse.soulEssence} 个灵魂精粹，成功打造了 ${necklace.name}。`)
+}

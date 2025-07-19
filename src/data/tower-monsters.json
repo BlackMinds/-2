@@ -23,6 +23,11 @@
         "type": "gold",
         "amount": 15,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -52,6 +57,11 @@
         "type": "gold",
         "amount": 30,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -79,6 +89,11 @@
         "type": "gold",
         "amount": 45,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -106,6 +121,11 @@
         "type": "gold",
         "amount": 60,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -133,6 +153,11 @@
         "type": "gold",
         "amount": 75,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -160,6 +185,11 @@
         "type": "gold",
         "amount": 90,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -189,6 +219,11 @@
         "type": "gold",
         "amount": 105,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -218,6 +253,11 @@
         "type": "gold",
         "amount": 120,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -245,6 +285,11 @@
         "type": "gold",
         "amount": 135,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -288,6 +333,16 @@
         "type": "gold",
         "amount": 150,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
+      },
+      {
+        "type": "material",
+        "name": "敏捷水晶",
+        "chance": 0.3
       }
     ]
   },
@@ -315,6 +370,11 @@
         "type": "gold",
         "amount": 165,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -344,6 +404,11 @@
         "type": "gold",
         "amount": 180,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -371,6 +436,11 @@
         "type": "gold",
         "amount": 195,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -399,6 +469,11 @@
         "type": "gold",
         "amount": 210,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -426,6 +501,11 @@
         "type": "gold",
         "amount": 225,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -455,6 +535,11 @@
         "type": "gold",
         "amount": 240,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -484,6 +569,11 @@
         "type": "gold",
         "amount": 255,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -511,6 +601,11 @@
         "type": "gold",
         "amount": 270,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -539,6 +634,11 @@
         "type": "gold",
         "amount": 285,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -583,6 +683,11 @@
         "type": "gold",
         "amount": 300,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -610,6 +715,11 @@
         "type": "gold",
         "amount": 315,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -637,6 +747,11 @@
         "type": "gold",
         "amount": 330,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -666,6 +781,11 @@
         "type": "gold",
         "amount": 345,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -695,6 +815,11 @@
         "type": "gold",
         "amount": 360,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -730,6 +855,11 @@
         "type": "gold",
         "amount": 375,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -757,6 +887,11 @@
         "type": "gold",
         "amount": 390,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -785,6 +920,11 @@
         "type": "gold",
         "amount": 405,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -813,6 +953,11 @@
         "type": "gold",
         "amount": 420,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -840,6 +985,11 @@
         "type": "gold",
         "amount": 435,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -881,6 +1031,16 @@
         "type": "gold",
         "amount": 450,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
+      },
+      {
+        "type": "material",
+        "name": "狂怒之石",
+        "chance": 0.3
       }
     ]
   },
@@ -910,6 +1070,11 @@
         "type": "gold",
         "amount": 465,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -937,6 +1102,11 @@
         "type": "gold",
         "amount": 480,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -964,6 +1134,11 @@
         "type": "gold",
         "amount": 495,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -993,6 +1168,11 @@
         "type": "gold",
         "amount": 510,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -1020,6 +1200,11 @@
         "type": "gold",
         "amount": 525,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -1047,6 +1232,11 @@
         "type": "gold",
         "amount": 540,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -1075,6 +1265,11 @@
         "type": "gold",
         "amount": 555,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -1103,6 +1298,11 @@
         "type": "gold",
         "amount": 570,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -1132,6 +1332,11 @@
         "type": "gold",
         "amount": 585,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -1173,6 +1378,11 @@
         "type": "gold",
         "amount": 600,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -1200,6 +1410,11 @@
         "type": "gold",
         "amount": 615,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -1229,6 +1444,11 @@
         "type": "gold",
         "amount": 630,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -1256,6 +1476,11 @@
         "type": "gold",
         "amount": 645,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -1285,6 +1510,11 @@
         "type": "gold",
         "amount": 660,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -1313,6 +1543,11 @@
         "type": "gold",
         "amount": 675,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -1342,6 +1577,11 @@
         "type": "gold",
         "amount": 690,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -1369,6 +1609,11 @@
         "type": "gold",
         "amount": 705,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -1397,6 +1642,11 @@
         "type": "gold",
         "amount": 720,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -1430,6 +1680,11 @@
         "type": "gold",
         "amount": 735,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -1470,6 +1725,11 @@
         "type": "gold",
         "amount": 750,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -1499,6 +1759,11 @@
         "type": "gold",
         "amount": 765,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -1526,6 +1791,11 @@
         "type": "gold",
         "amount": 780,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -1553,6 +1823,11 @@
         "type": "gold",
         "amount": 795,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -1582,6 +1857,11 @@
         "type": "gold",
         "amount": 810,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -1611,6 +1891,11 @@
         "type": "gold",
         "amount": 825,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -1638,6 +1923,11 @@
         "type": "gold",
         "amount": 840,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -1666,6 +1956,11 @@
         "type": "gold",
         "amount": 855,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -1694,6 +1989,11 @@
         "type": "gold",
         "amount": 870,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -1721,6 +2021,11 @@
         "type": "gold",
         "amount": 885,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -1762,6 +2067,16 @@
         "type": "gold",
         "amount": 900,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
+      },
+      {
+        "type": "material",
+        "name": "穿透之眼",
+        "chance": 0.3
       }
     ]
   },
@@ -1789,6 +2104,11 @@
         "type": "gold",
         "amount": 915,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -1818,6 +2138,11 @@
         "type": "gold",
         "amount": 930,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -1845,6 +2170,11 @@
         "type": "gold",
         "amount": 945,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -1874,6 +2204,11 @@
         "type": "gold",
         "amount": 960,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -1902,6 +2237,11 @@
         "type": "gold",
         "amount": 975,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -1931,6 +2271,11 @@
         "type": "gold",
         "amount": 990,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -1958,6 +2303,11 @@
         "type": "gold",
         "amount": 1005,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -1986,6 +2336,11 @@
         "type": "gold",
         "amount": 1020,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -2019,6 +2374,11 @@
         "type": "gold",
         "amount": 1035,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -2059,6 +2419,11 @@
         "type": "gold",
         "amount": 1050,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -2088,6 +2453,11 @@
         "type": "gold",
         "amount": 1065,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -2115,6 +2485,11 @@
         "type": "gold",
         "amount": 1080,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -2142,6 +2517,11 @@
         "type": "gold",
         "amount": 1095,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -2171,6 +2551,11 @@
         "type": "gold",
         "amount": 1110,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -2206,6 +2591,11 @@
         "type": "gold",
         "amount": 1125,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -2234,6 +2624,11 @@
         "type": "gold",
         "amount": 1140,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -2262,6 +2657,11 @@
         "type": "gold",
         "amount": 1155,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -2289,6 +2689,11 @@
         "type": "gold",
         "amount": 1170,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -2316,6 +2721,11 @@
         "type": "gold",
         "amount": 1185,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -2357,6 +2767,11 @@
         "type": "gold",
         "amount": 1200,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -2386,6 +2801,11 @@
         "type": "gold",
         "amount": 1215,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -2413,6 +2833,11 @@
         "type": "gold",
         "amount": 1230,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -2442,6 +2867,11 @@
         "type": "gold",
         "amount": 1245,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -2470,6 +2900,11 @@
         "type": "gold",
         "amount": 1260,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -2499,6 +2934,11 @@
         "type": "gold",
         "amount": 1275,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -2526,6 +2966,11 @@
         "type": "gold",
         "amount": 1290,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -2554,6 +2999,11 @@
         "type": "gold",
         "amount": 1305,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -2581,6 +3031,11 @@
         "type": "gold",
         "amount": 1320,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -2608,6 +3063,11 @@
         "type": "gold",
         "amount": 1335,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -2656,6 +3116,11 @@
         "type": "gold",
         "amount": 1350,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -2685,6 +3150,11 @@
         "type": "gold",
         "amount": 1365,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -2712,6 +3182,11 @@
         "type": "gold",
         "amount": 1380,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -2741,6 +3216,11 @@
         "type": "gold",
         "amount": 1395,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -2769,6 +3249,11 @@
         "type": "gold",
         "amount": 1410,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -2798,6 +3283,11 @@
         "type": "gold",
         "amount": 1425,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -2825,6 +3315,11 @@
         "type": "gold",
         "amount": 1440,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -2853,6 +3348,11 @@
         "type": "gold",
         "amount": 1455,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -2880,6 +3380,11 @@
         "type": "gold",
         "amount": 1470,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -2913,6 +3418,11 @@
         "type": "gold",
         "amount": 1485,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   },
@@ -2967,6 +3477,11 @@
         "type": "gold",
         "amount": 1500,
         "chance": 1
+      },
+      {
+        "type": "material",
+        "name": "灵魂精粹",
+        "chance": 0.5
       }
     ]
   }

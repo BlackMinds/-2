@@ -31,7 +31,7 @@ export function initializePlayer (skillsData) {
     comboChance: 0.05,
     counterChance: 0.03,
     ignoreDefense: 0.0,
-    gold: 1,
+    gold: 100000,
     pets: [],
     activePetId: null,
     highestTowerLevel: 1,
@@ -101,6 +101,9 @@ export function updatePlayerStats (player, activePet) {
   let flatComboChance = 0.05
   let flatCounterChance = 0.03
   let flatIgnoreDefense = 0.0
+  let percentAttack = 0
+  let percentDefense = 0
+  let percentHp = 0
 
   // Add stats from equipment
   for (const slot in player.equipment) {
@@ -119,6 +122,9 @@ export function updatePlayerStats (player, activePet) {
       flatComboChance += item.comboChance || 0
       flatCounterChance += item.counterChance || 0
       flatIgnoreDefense += item.ignoreDefense || 0
+      percentAttack += item.percentAttack || 0
+      percentDefense += item.percentDefense || 0
+      percentHp += item.percentHp || 0
     }
   }
 
@@ -148,10 +154,21 @@ export function updatePlayerStats (player, activePet) {
   player.agility = agi
   player.constitution = con
 
-  // Calculate derived stats
-  const totalAttack = player.strength * 2 + flatAttack
-  const totalMaxHp = player.constitution * 10 + player.strength * 2 + flatHp
-  let totalDefense = player.constitution * 1 + player.agility * 0.5 + flatDefense
+  // Calculate derived stats from base attributes
+  let totalAttack = player.strength * 2
+  let totalMaxHp = player.constitution * 10 + player.strength * 2
+  let totalDefense = player.constitution * 1 + player.agility * 0.5
+
+  // Apply percentage bonuses to the base values
+  totalAttack *= (1 + percentAttack)
+  totalDefense *= (1 + percentDefense)
+  totalMaxHp *= (1 + percentHp)
+
+  // Add flat bonuses from all sources
+  totalAttack += flatAttack
+  totalMaxHp += flatHp
+  totalDefense += flatDefense
+
   const totalEvasion = player.agility * 0.001 + flatEvasion
 
   // Add bonuses from active pet
