@@ -117,11 +117,11 @@ export function sellItem (player, item, logBattle) {
 
   let sellPrice = 0
   if (item.type === 'equipment' || item.type === 'necklace') {
-    sellPrice = (item.level || 1) * 5
+    sellPrice = (item.level || 1) * 2
   } else if (item.type === 'skill') {
-    sellPrice = 20
+    sellPrice = 10
   } else if (item.type === 'consumable') {
-    sellPrice = 5
+    sellPrice = 2
   }
 
   if (sellPrice > 0) {
