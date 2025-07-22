@@ -69,6 +69,11 @@ function performAttack (attacker, defender, battleLog, activePet, player) {
       damageDealt = calculateDamage(skillAttack, defender.defense, attacker.critChance, defender.critResist, attacker.ignoreDefense, battleLog)
       defender.hp -= damageDealt
       logBattle(battleLog, `对 ${defenderName} 造成了 ${damageDealt} 点技能伤害。`)
+      if (skillUsed.lifesteal) {
+        const lifestealAmount = Math.round(damageDealt * skillUsed.lifesteal)
+        attacker.hp = Math.min(attacker.maxHp, attacker.hp + lifestealAmount)
+        logBattle(battleLog, `${attacker.name} 汲取了 ${lifestealAmount} 点生命值。`)
+      }
     } else if (skillUsed.heal) {
       attacker.hp = Math.min(attacker.maxHp, attacker.hp + skillUsed.heal)
       logBattle(battleLog, `${attacker.name} 恢复了 ${skillUsed.heal} 点生命值。`)
