@@ -83,8 +83,8 @@ export function checkPetLevelUp (pet, logCallback) {
     leveledUp = true
     pet.xp -= pet.xpToNextLevel
     pet.level++
-    pet.attributePoints += 3
-    logCallback(`你的宠物 ${pet.name} 升到了 ${pet.level} 级！获得了3个属性点！`)
+    pet.attributePoints += 2
+    logCallback(`你的宠物 ${pet.name} 升到了 ${pet.level} 级！获得了2个属性点！`)
     pet.xpToNextLevel = Math.round(100 * Math.pow(1.2, pet.level - 1))
   }
 
@@ -130,5 +130,35 @@ export function performPetAction (pet, player, enemy, logCallback, calculateDama
     case 'golem':
       // Golem's effect is passive and handled in `updatePlayerStats`, so it does nothing here.
       break
+  }
+}
+
+export function setPetStatus (player, petInstanceId, isActive, logBattle, updatePlayerStats) {
+  if (isActive) {
+    player.activePetId = petInstanceId
+    const pet = player.pets.find(p => p.instanceId === petInstanceId)
+    if (pet) {
+      logBattle(`${pet.name} 已设置为出战状态。`)
+    }
+  } else {
+    const pet = player.pets.find(p => p.instanceId === player.activePetId)
+    if (pet) {
+      logBattle(`${pet.name} 已设置为休息状态。`)
+    }
+    player.activePetId = null
+  }
+  updatePlayerStats()
+}
+
+export function releasePet (player, petInstanceId, logBattle, updatePlayerStats) {
+  const petIndex = player.pets.findIndex(p => p.instanceId === petInstanceId)
+  if (petIndex > -1) {
+    const petName = player.pets[petIndex].name
+    if (player.activePetId === petInstanceId) {
+      player.activePetId = null
+    }
+    player.pets.splice(petIndex, 1)
+    logBattle(`你放生了 ${petName}。`)
+    updatePlayerStats()
   }
 }

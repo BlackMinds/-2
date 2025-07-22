@@ -207,6 +207,9 @@ import * as skillService from '../services/skillService.js'
 import * as inventoryService from '../services/inventoryService.js'
 import * as characterService from '../services/characterService.js'
 import * as petService from '../services/petService.js'
+import * as battleService from '../services/battleService.js'
+import * as uiService from '../services/uiService.js'
+import * as shopService from '../services/shopService.js'
 import AppHeader from './Header.vue'
 
 export default {
@@ -317,111 +320,12 @@ export default {
     }
   },
   methods: {
-    getItemStatsHtml (item) {
-      if (!item) return '无'
-      let statsHtml = `<strong>${item.name} ${item.enhancementLevel > 0 ? '+' + item.enhancementLevel : ''}</strong><br>`
-      statsHtml += `类型: 装备 (${item.type})<br>`
-      if (item.attack) statsHtml += `攻击力: ${item.attack}<br>`
-      if (item.defense) statsHtml += `防御力: ${item.defense}<br>`
-      if (item.hp) statsHtml += `生命值: ${item.hp}<br>`
-      if (item.strength) statsHtml += `力量: ${item.strength}<br>`
-      if (item.agility) statsHtml += `敏捷: ${item.agility}<br>`
-      if (item.constitution) statsHtml += `体质: ${item.constitution}<br>`
-      if (item.evasion) statsHtml += `闪避率: ${(item.evasion * 100).toFixed(1)}%<br>`
-      if (item.critChance) statsHtml += `暴击率: ${(item.critChance * 100).toFixed(1)}%<br>`
-      if (item.critResist) statsHtml += `抗暴击率: ${(item.critResist * 100).toFixed(1)}%<br>`
-      if (item.moveSpeed) statsHtml += `移动速度: ${item.moveSpeed}<br>`
-      if (item.comboChance) statsHtml += `连击几率: ${(item.comboChance * 100).toFixed(1)}%<br>`
-      if (item.counterChance) statsHtml += `反击几率: ${(item.counterChance * 100).toFixed(1)}%<br>`
-      if (item.ignoreDefense) statsHtml += `忽视防御力: ${(item.ignoreDefense * 100).toFixed(1)}%<br>`
-      if (item.percentAttack) statsHtml += `攻击力: +${(item.percentAttack * 100).toFixed(0)}%<br>`
-      if (item.percentDefense) statsHtml += `防御力: +${(item.percentDefense * 100).toFixed(0)}%<br>`
-      if (item.percentHp) statsHtml += `生命值: +${(item.percentHp * 100).toFixed(0)}%<br>`
-      return statsHtml
-    },
     saveName () {
       this.isEditingName = false
       this.saveGame()
     },
     handleOpenBlindBox ({ cost, times }, callback) {
-      if (this.player.gold < cost) {
-        this.logBattle(`金币不足，需要 ${cost} 金币。`)
-        return
-      }
-
-      this.player.gold -= cost
-      this.logBattle(`花费 ${cost} 金币，进行了 ${times} 次盲盒抽取。`)
-
-      const rewards = []
-      const results = []
-      for (let i = 0; i < times; i++) {
-        const rand = Math.random()
-        if (cost === 1000) {
-          if (rand < 0.01) { // 1% chance for 10000 gold
-            const reward = { type: 'gold', amount: 10000, name: '10000 金币' }
-            rewards.push(reward)
-            results.push(reward)
-          } else if (rand < 0.05) { // 4% chance for crafting materials
-            const materials = ['灵魂精粹', '敏捷水晶', '狂怒之石', '穿透之眼', '力量之源', '敏捷之风', '体质之岩']
-            const materialName = materials[Math.floor(Math.random() * materials.length)]
-            const reward = { type: 'material', name: materialName, quantity: 1 }
-            rewards.push(reward)
-            results.push(reward)
-          } else if (rand < 0.5) { // 45% chance for small amount of gold
-            const amount = Math.floor(Math.random() * 100) + 1
-            const reward = { type: 'gold', amount, name: `${amount} 金币` }
-            rewards.push(reward)
-            results.push(reward)
-          } else { // 50% chance for nothing
-            const reward = { type: 'nothing', name: '谢谢惠顾' }
-            rewards.push(reward)
-            results.push(reward)
-          }
-        } else if (cost === 10000) {
-          if (rand < 0.05) { // 5% chance for 10000 gold
-            const reward = { type: 'gold', amount: 10000, name: '10000 金币' }
-            rewards.push(reward)
-            results.push(reward)
-          } else if (rand < 0.15) { // 10% chance for crafting materials
-            const materials = ['灵魂精粹', '敏捷水晶', '狂怒之石', '穿透之眼', '力量之源', '敏捷之风', '体质之岩']
-            const materialName = materials[Math.floor(Math.random() * materials.length)]
-            const reward = { type: 'material', name: materialName, quantity: 3 }
-            rewards.push(reward)
-            results.push(reward)
-          } else if (rand < 0.55) { // 40% chance for small amount of gold
-            const amount = Math.floor(Math.random() * 1000) + 100
-            const reward = { type: 'gold', amount, name: `${amount} 金币` }
-            rewards.push(reward)
-            results.push(reward)
-          } else { // 45% chance for nothing
-            const reward = { type: 'nothing', name: '谢谢惠顾' }
-            rewards.push(reward)
-            results.push(reward)
-          }
-        }
-      }
-
-      rewards.forEach(reward => {
-        if (reward.type === 'gold') {
-          this.player.gold += reward.amount
-          this.logBattle(`恭喜你！获得了 ${reward.name}！`)
-        } else if (reward.type === 'material') {
-          const existingMaterial = this.player.inventory.find(item => item.name === reward.name)
-          if (existingMaterial) {
-            existingMaterial.quantity += reward.quantity
-          } else {
-            this.player.inventory.push({ name: reward.name, type: 'material', quantity: reward.quantity })
-          }
-          this.logBattle(`恭喜你！获得了 ${reward.name} x${reward.quantity}！`)
-        } else if (reward.type === 'nothing') {
-          this.logBattle('谢谢惠顾！')
-        }
-      })
-
-      if (callback) {
-        callback(results)
-      }
-
+      shopService.handleOpenBlindBox(this.player, { cost, times }, this.logBattle, callback)
       this.saveGame()
     },
     handleForgeItem (materialsToUse) {
@@ -440,137 +344,32 @@ export default {
       this.currentTowerLevel = this.player.highestTowerLevel || 1
       this.logBattle('游戏进度已加载。')
     },
-    initializePlayerState () {
-      this.player = characterService.initializePlayer(this.skillsData)
-      this.updatePlayerStats() // Recalculate all stats
-    },
     showTooltip (event, item) {
-      if (!item) return
-      let content = ''
-
-      if (item.slot) { // It's an equipment item
-        const equippedItem = this.player.equipment[item.slot]
-        content = '<div class="tooltip-comparison">'
-        content += `<div class="tooltip-panel"><h4>当前装备</h4>${this.getItemStatsHtml(equippedItem)}</div>`
-        content += `<div class="tooltip-panel"><h4>选中装备</h4>${this.getItemStatsHtml(item)}</div>`
-        content += '</div>'
-      } else { // For other item types
-        content = `<strong>${item.name} ${item.enhancementLevel > 0 ? '+' + item.enhancementLevel : ''}</strong><br>`
-        if (item.quantity) {
-          content += `数量: ${item.quantity}<br>`
-        }
-        if (item.type === 'active' || item.type === 'passive' || item.skillId) {
-          let skillData
-          let skillLevelData
-
-          if (item.skillId) { // It's a skill book from inventory
-            skillData = this.skillsData.find(s => s.id === item.skillId)
-            if (skillData) {
-              const currentLevel = this.player.skillLevels[item.skillId] || 1
-              skillLevelData = skillData.levels[currentLevel - 1]
-            }
-          } else { // It's an equipped skill
-            skillData = item
-            skillLevelData = item
-          }
-
-          if (skillData && skillLevelData) {
-            content += `类型: ${skillData.type === 'active' ? '主动技能' : '被动技能'} (等级 ${skillLevelData.level})<br>`
-            if (skillLevelData.description) content += `描述: ${skillLevelData.description}<br>`
-            const nextLevelData = skillData.levels[skillLevelData.level]
-            if (nextLevelData) {
-              content += `<hr>下一级 (L${nextLevelData.level}):<br>${nextLevelData.description}`
-            }
-          }
-        }
+      const tooltipData = uiService.showTooltip(event, item, this.player, this.skillsData)
+      if (tooltipData) {
+        this.tooltip = tooltipData
       }
-
-      this.tooltip.content = content
-      this.tooltip.visible = true
-      this.tooltip.top = event.pageY + 10
-      this.tooltip.left = event.pageX + 10
     },
     hideTooltip () {
-      this.tooltip.visible = false
+      this.tooltip = uiService.hideTooltip()
+    },
+    showEnemyTooltip (event, enemy) {
+      const tooltipData = uiService.showEnemyTooltip(event, enemy, this.equipment, this.skillsData, this.pets)
+      if (tooltipData) {
+        this.tooltip = tooltipData
+      }
     },
     upgradeSkill (skill, slotIndex, slotType) {
       skillService.upgradeSkill(this.player, skill, slotIndex, slotType, this.skillsData, this.logBattle, this.saveGame)
       characterService.updatePlayerStats(this.player, this.activePet)
     },
     enhanceItem (item, location, identifier) {
-      if (!item || item.enhancementLevel >= 10) {
-        this.logBattle('该装备已达到最高强化等级。')
-        return
-      }
-
-      const cost = (item.enhancementLevel + 1) * 100
-      if (this.player.gold < cost) {
-        this.logBattle(`金币不足，需要 ${cost} 金币。`)
-        return
-      }
-
-      this.player.gold -= cost
-      this.logBattle(`花费了 ${cost} 金币尝试强化 ${item.name}。`)
-
-      let success = true
-      if (item.enhancementLevel >= 5) {
-        const successChance = 1.0 - (item.enhancementLevel - 4) * 0.1 // 90% for +6, 80% for +7, etc.
-        if (Math.random() > successChance) {
-          success = false
-        }
-      }
-
-      if (success) {
-        // --- Calculate and apply enhancement ---
-        const enhancementMultiplier = 0.1 + Math.random() * 0.2 // 10% to 30%
-        const attackBonus = Math.round(item.baseAttack * enhancementMultiplier)
-        const defenseBonus = Math.round(item.baseDefense * enhancementMultiplier)
-        const hpBonus = Math.round(item.baseHp * enhancementMultiplier)
-        const strengthBonus = Math.round(item.baseStrength * enhancementMultiplier)
-        const agilityBonus = Math.round(item.baseAgility * enhancementMultiplier)
-        const constitutionBonus = Math.round(item.baseConstitution * enhancementMultiplier)
-
-        item.attack += attackBonus
-        item.defense += defenseBonus
-        item.hp += hpBonus
-        item.strength = (item.strength || 0) + strengthBonus
-        item.agility = (item.agility || 0) + agilityBonus
-        item.constitution = (item.constitution || 0) + constitutionBonus
-        item.enhancementLevel++
-
-        this.logBattle(`强化成功！${item.name} 强化至 +${item.enhancementLevel}。`)
-        if (attackBonus > 0) this.logBattle(`攻击力 +${attackBonus}`)
-        if (defenseBonus > 0) this.logBattle(`防御力 +${defenseBonus}`)
-        if (hpBonus > 0) this.logBattle(`生命值 +${hpBonus}`)
-        if (strengthBonus > 0) this.logBattle(`力量 +${strengthBonus}`)
-        if (agilityBonus > 0) this.logBattle(`敏捷 +${agilityBonus}`)
-        if (constitutionBonus > 0) this.logBattle(`体质 +${constitutionBonus}`)
-
-        // --- Re-apply new stats if item is equipped ---
-        if (location === 'equipped') {
-          characterService.updatePlayerStats(this.player, this.activePet)
-        }
-        // After successful enhancement, if the tooltip is visible for this item, refresh it
-        if (this.tooltip.visible) {
-          // We need a way to check if the tooltip is for the item being enhanced.
-          // A simple approach is to just hide it, forcing the user to mouseover again.
-          // A better approach would require passing the event to showTooltip, which we don't have here.
-          this.hideTooltip()
-        }
-      } else {
-        this.logBattle('强化失败...')
-      }
-      this.saveGame() // Save progress on victory
+      inventoryService.enhanceItem(this.player, item, location, this.logBattle, this.activePet, this.hideTooltip)
+      this.saveGame()
     },
     startTowerBattle () {
-      if (this.battleEndTimer) {
-        clearTimeout(this.battleEndTimer)
-        this.battleEndTimer = null
-      }
-      if (this.turnTimer) {
-        clearTimeout(this.turnTimer)
-        this.turnTimer = null
-      }
+      if (this.battleEndTimer) clearTimeout(this.battleEndTimer)
+      if (this.turnTimer) clearTimeout(this.turnTimer)
 
       const towerMonster = this.towerMonsters.find(m => m.level === this.currentTowerLevel)
       if (!towerMonster) {
@@ -578,23 +377,19 @@ export default {
         return
       }
 
-      this.enemy = { ...towerMonster }
-      this.enemy.maxHp = this.enemy.hp
+      this.enemy = { ...towerMonster, maxHp: towerMonster.hp }
       this.inBattle = true
       this.battleLog = [`你开始挑战锁妖塔第 ${this.currentTowerLevel} 层！`]
       this.logBattle(`你遇到了一个 ${this.enemy.name}！`)
-      this.logBattle(`你的生命值: ${this.player.hp}/${this.player.maxHp}`)
-      this.logBattle(`${this.enemy.name} 的生命值: ${this.enemy.hp}/${this.enemy.maxHp}`)
 
       if (this.player.moveSpeed >= this.enemy.moveSpeed) {
         this.currentTurn = 'player'
         this.logBattle('你获得了先手！')
-        this.processTurn()
       } else {
         this.currentTurn = 'enemy'
         this.logBattle(`${this.enemy.name} 获得了先手！`)
-        this.processTurn()
       }
+      this.processTurn()
     },
     getSkillType (skillItem) {
       return skillService.getSkillType(skillItem, this.skillsData)
@@ -608,224 +403,83 @@ export default {
       this.saveGame()
     },
     startBattle () {
-      if (this.battleEndTimer) {
-        clearTimeout(this.battleEndTimer)
-        this.battleEndTimer = null
-      }
-      if (this.turnTimer) {
-        clearTimeout(this.turnTimer)
-        this.turnTimer = null
-      }
+      if (this.battleEndTimer) clearTimeout(this.battleEndTimer)
+      if (this.turnTimer) clearTimeout(this.turnTimer)
+
       if (!this.selectedMonsterLevel) {
         this.logBattle('请选择一个怪物等级开始战斗！')
         return
       }
-      this.enemy = this.getRandomMonster(this.selectedMonsterLevel)
+      this.enemy = battleService.getRandomMonster(this.monsters, this.selectedMonsterLevel)
+      if (!this.enemy) {
+        this.logBattle('错误：没有可用的怪物数据！')
+        return
+      }
       this.inBattle = true
       this.battleLog = [`你遇到了一个 ${this.enemy.name}！`]
-      this.logBattle(`你的生命值: ${this.player.hp}/${this.player.maxHp}`)
-      this.logBattle(`${this.enemy.name} 的生命值: ${this.enemy.hp}/${this.enemy.maxHp}`)
 
-      // Determine initiative
       if (this.player.moveSpeed >= this.enemy.moveSpeed) {
         this.currentTurn = 'player'
         this.logBattle('你获得了先手！')
-        this.processTurn() // Start player's turn immediately
       } else {
         this.currentTurn = 'enemy'
         this.logBattle(`${this.enemy.name} 获得了先手！`)
-        this.processTurn() // Enemy takes first turn immediately
       }
-    },
-    playerAttackAction () {
-      // This method is no longer directly called by a button, but kept for clarity if needed
-      // The battle now progresses automatically via processTurn
-      if (!this.inBattle || !this.enemy || this.currentTurn !== 'player') return
       this.processTurn()
     },
     updatePlayerStats () {
       characterService.updatePlayerStats(this.player, this.activePet)
     },
     processTurn () {
-      if (!this.inBattle || this.player.hp <= 0 || this.enemy.hp <= 0) {
-        this.endBattle(this.enemy.hp <= 0)
-        return
-      }
-
-      if (this.activePet && this.activePet.hp <= 0) {
-        this.logBattle(`你的宠物 ${this.activePet.name} 被击败了！`)
-        // We don't end the battle here, just log it.
-      }
-
-      if (this.currentTurn === 'player') {
-        this.logBattle('你的回合：')
-        // Pet action at the start of the turn
-        if (this.activePet) {
-          petService.performPetAction(this.activePet, this.player, this.enemy, this.logBattle, this.calculateDamage, 'player-turn-start')
-        }
-
-        this.performAttack(this.player, this.enemy)
-
-        // Pet action after the turn
-        if (this.enemy && this.enemy.hp > 0 && this.activePet) {
-          petService.performPetAction(this.activePet, this.player, this.enemy, this.logBattle, this.calculateDamage, 'player-turn-end')
-        }
-
-        if (this.enemy.hp <= 0) {
-          this.endBattle(true)
-          return
-        }
-        this.currentTurn = 'enemy'
-        // Enemy turn after a short delay for readability
-        this.turnTimer = setTimeout(() => this.processTurn(), 1000)
-      } else if (this.currentTurn === 'enemy') {
-        this.logBattle(`${this.enemy.name} 的回合：`)
-
-        // Target selection for enemy
-        let target = this.player
-        if (this.activePet && this.activePet.hp > 0 && Math.random() < 0.3) { // 30% chance to target pet
-          target = this.activePet
-          this.logBattle(`${this.enemy.name} 的目标是你的宠物 ${target.name}！`)
-        } else {
-          this.logBattle(`${this.enemy.name} 的目标是你！`)
-        }
-
-        this.performAttack(this.enemy, target)
-
-        if (this.player.hp <= 0) {
-          this.endBattle(false)
-          return
-        }
-        this.currentTurn = 'player'
-        // Player turn after a short delay for readability
-        this.turnTimer = setTimeout(() => this.processTurn(), 1000)
-      }
-
-      this.logBattle(`你的生命值: ${this.player.hp}/${this.player.maxHp}`)
-      this.logBattle(`${this.enemy.name} 的生命值: ${this.enemy.hp}/${this.enemy.maxHp}`)
-    },
-    performAttack (attacker, defender) {
-      const defenderName = defender === this.player ? '你' : defender.name
-      // --- Evasion Check ---
-      if (Math.random() < defender.evasion) {
-        this.logBattle(`${attacker.name} 的攻击被 ${defenderName} 闪避了！`)
-        return // Attack misses
-      }
-
-      let damageDealt = 0
-      let attackType = 'normal'
-      let skillUsed = null
-
-      // Determine if a skill is used
-      const skillRoll = Math.random()
-      if (attacker.skills && attacker.skills.length > 0 && skillRoll < 0.5) { // 50% chance for enemy to use a skill
-        skillUsed = attacker.skills[Math.floor(Math.random() * attacker.skills.length)]
-        attackType = 'skill'
-      } else if (attacker === this.player) {
-        const skillProbabilities = [0.45, 0.35, 0.25] // Slot 1, 2, 3 probabilities
-        const rand = Math.random()
-        let cumulativeProb = 0
-
-        for (let i = 0; i < this.player.activeSkillSlots.length; i++) {
-          const skill = this.player.activeSkillSlots[i]
-          if (skill && skill.type === 'active' && this.player.hp >= skill.cost) {
-            cumulativeProb += skillProbabilities[i]
-            if (rand < cumulativeProb) {
-              skillUsed = skill
-              attackType = 'skill'
-              break
-            }
+      const gameContext = {
+        player: this.player,
+        enemy: this.enemy,
+        battleLog: this.battleLog,
+        activePet: this.activePet,
+        inBattle: this.inBattle,
+        currentTurn: this.currentTurn,
+        endBattle: this.endBattle,
+        updateState: (newState) => {
+          for (const key in newState) {
+            this[key] = newState[key]
           }
         }
       }
-
-      if (attackType === 'skill' && skillUsed) {
-        this.logBattle(`${attacker.name} 使用了技能：${skillUsed.name}！`)
-        if (attacker === this.player) {
-          this.player.hp -= skillUsed.cost // Consume cost only for player
-        }
-
-        if (skillUsed.damageMultiplier) {
-          const skillAttack = attacker.attack * skillUsed.damageMultiplier
-          damageDealt = this.calculateDamage(skillAttack, defender.defense, attacker.critChance, defender.critResist, attacker.ignoreDefense)
-          defender.hp -= damageDealt
-          this.logBattle(`对 ${defenderName} 造成了 ${damageDealt} 点技能伤害。`)
-        } else if (skillUsed.heal) {
-          attacker.hp = Math.min(attacker.maxHp, attacker.hp + skillUsed.heal)
-          this.logBattle(`${attacker.name} 恢复了 ${skillUsed.heal} 点生命值。`)
-          return // Skip damage calculation for healing skills
-        }
-        // Handle other skill types like dot, debuff etc. for monsters if needed
-      } else {
-        // Normal attack
-        damageDealt = this.calculateDamage(attacker.attack, defender.defense, attacker.critChance, defender.critResist, attacker.ignoreDefense)
-        defender.hp -= damageDealt
-        this.logBattle(`${attacker.name} 对 ${defenderName} 造成了 ${damageDealt} 点伤害。`)
-
-        // Check for combo
-        if (Math.random() < attacker.comboChance) {
-          const comboDamage = this.calculateDamage(attacker.attack * 0.5, defender.defense, attacker.critChance, defender.critResist, attacker.ignoreDefense)
-          defender.hp -= comboDamage
-          this.logBattle(`${attacker.name} 发动了连击，对 ${defenderName} 额外造成了 ${comboDamage} 点伤害！`)
-        }
-      }
-
-      // Check for counter-attack (only if defender is still alive and attacker is player)
-      if (defender.hp > 0 && attacker === this.player && Math.random() < defender.counterChance) {
-        const counterDamage = this.calculateDamage(defender.attack * 0.7, attacker.defense, defender.critChance, attacker.critResist, defender.ignoreDefense)
-        attacker.hp -= counterDamage
-        this.logBattle(`${defender.name} 发动了反击，对你造成了 ${counterDamage} 点伤害！`)
-      } else if (defender.hp > 0 && defender === this.player && Math.random() < defender.counterChance) {
-        // Player can also counter-attack
-        const counterDamage = this.calculateDamage(defender.attack * 0.7, attacker.defense, defender.critChance, attacker.critResist, defender.ignoreDefense)
-        attacker.hp -= counterDamage
-        this.logBattle(`你发动了反击，对 ${attacker.name} 造成了 ${counterDamage} 点伤害！`)
-      }
+      battleService.processTurn(gameContext)
     },
     fleeBattle () {
       if (!this.inBattle) return
       this.logBattle('你成功逃跑了！')
-      this.endBattle(false) // Player fled, no victory
+      this.endBattle(false)
     },
     endBattle (isVictory) {
-      if (this.turnTimer) {
-        clearTimeout(this.turnTimer)
-        this.turnTimer = null
-      }
-      const wasFlee = !isVictory && this.player.hp > 0
-      const isTowerBattle = this.towerMonsters.some(m => m.name === this.enemy.name)
+      if (this.turnTimer) clearTimeout(this.turnTimer)
+      const isTowerBattle = this.enemy && this.towerMonsters.some(m => m.name === this.enemy.name)
 
       if (isVictory) {
         this.logBattle(`你击败了 ${this.enemy.name}！`)
         this.handleMonsterDefeated()
-        this.saveGame() // Save progress on victory
+        this.saveGame()
         if (isTowerBattle) {
-          this.battleEndTimer = setTimeout(() => {
-            this.startTowerBattle()
-          }, 3000)
-          return // Important to return here to not start a normal battle
+          this.battleEndTimer = setTimeout(() => this.startTowerBattle(), 3000)
+          return
         }
       } else if (this.player.hp <= 0) {
         this.logBattle('你被击败了...')
-        if (isTowerBattle) {
-          this.currentTowerLevel = this.player.highestTowerLevel
-        }
+        if (isTowerBattle) this.currentTowerLevel = this.player.highestTowerLevel
       }
 
       this.inBattle = false
       this.enemy = null
-      this.player.hp = this.player.maxHp // Restore to full health
-      if (this.activePet) {
-        this.activePet.hp = this.activePet.maxHp // Restore pet's health
-      }
+      this.player.hp = this.player.maxHp
+      if (this.activePet) this.activePet.hp = this.activePet.maxHp
       this.logBattle('你的生命值已完全恢复。')
 
-      // Only start a new normal battle if it wasn't a tower battle
-      if (!wasFlee && !isTowerBattle) {
+      if (!isVictory && this.player.hp > 0 && !isTowerBattle) {
+        // Fled, not a tower battle
+      } else if (!isTowerBattle) {
         this.logBattle('3秒后将开始新的战斗...')
-        this.battleEndTimer = setTimeout(() => {
-          this.startBattle()
-        }, 3000)
+        this.battleEndTimer = setTimeout(() => this.startBattle(), 3000)
       }
     },
     handleMonsterDefeated () {
@@ -840,7 +494,6 @@ export default {
         this.logBattle(`恭喜你通过锁妖塔第 ${this.currentTowerLevel - 1} 层！`)
       }
 
-      // Grant Gold & XP
       const goldGained = monster.level * 5
       const xpGained = monster.level * 10
       this.player.gold += goldGained
@@ -853,43 +506,25 @@ export default {
         petService.checkPetLevelUp(this.activePet, this.logBattle)
       }
 
-      // Handle Drops
       monster.drops.forEach(drop => {
         if (Math.random() < drop.chance) {
           if (drop.type === 'equipment') {
             const equipmentData = this.equipment.find(e => e.id === drop.itemId)
             if (equipmentData) {
-              const newEquipment = {
-                ...equipmentData,
-                type: 'equipment',
-                enhancementLevel: 0,
-                baseAttack: equipmentData.attack || 0,
-                baseDefense: equipmentData.defense || 0,
-                baseHp: equipmentData.hp || 0,
-                baseStrength: equipmentData.strength || 0,
-                baseAgility: equipmentData.agility || 0,
-                baseConstitution: equipmentData.constitution || 0
-              }
+              const newEquipment = { ...equipmentData, type: 'equipment', enhancementLevel: 0, baseAttack: equipmentData.attack || 0, baseDefense: equipmentData.defense || 0, baseHp: equipmentData.hp || 0, baseStrength: equipmentData.strength || 0, baseAgility: equipmentData.agility || 0, baseConstitution: equipmentData.constitution || 0 }
               this.player.inventory.push(newEquipment)
               this.logBattle(`掉落了装备：${newEquipment.name}！`)
             }
           } else if (drop.type === 'material') {
             const existingMaterial = this.player.inventory.find(item => item.name === drop.name)
-            if (existingMaterial) {
-              existingMaterial.quantity = (existingMaterial.quantity || 1) + 1
-            } else {
-              this.player.inventory.push({ name: drop.name, type: 'material', quantity: 1 })
-            }
+            if (existingMaterial) existingMaterial.quantity = (existingMaterial.quantity || 1) + 1
+            else this.player.inventory.push({ name: drop.name, type: 'material', quantity: 1 })
             this.logBattle(`掉落了材料：${drop.name}！`)
           } else if (drop.type === 'skill') {
             const skill = this.skillsData.find(s => s.id === drop.skillId)
-            if (skill) {
-              // Check if player already has this skill book
-              const hasSkillBook = this.player.inventory.some(item => item.type === 'skill' && item.skillId === skill.id)
-              if (!hasSkillBook) {
-                this.player.inventory.push({ name: `${skill.name} 技能书`, type: 'skill', skillId: skill.id })
-                this.logBattle(`掉落了技能书：${skill.name}！`)
-              }
+            if (skill && !this.player.inventory.some(item => item.type === 'skill' && item.skillId === skill.id)) {
+              this.player.inventory.push({ name: `${skill.name} 技能书`, type: 'skill', skillId: skill.id })
+              this.logBattle(`掉落了技能书：${skill.name}！`)
             }
           } else if (drop.type === 'pet') {
             if (this.player.pets.length < 5) {
@@ -898,9 +533,7 @@ export default {
                 const newPet = petService.createPet(petData)
                 this.player.pets.push(newPet)
                 this.logBattle(`你获得了新的宠物：${petData.name}！`)
-                if (!this.player.activePetId) {
-                  this.setPetStatus(newPet.instanceId, true)
-                }
+                if (!this.player.activePetId) this.setPetStatus(newPet.instanceId, true)
               }
             } else {
               this.logBattle('你找到了一个宠物，但你的宠物栏已满。')
@@ -928,167 +561,18 @@ export default {
       skillService.unequipSkill(this.player, skill, slotIndex, slotType, this.logBattle)
       characterService.updatePlayerStats(this.player, this.activePet)
     },
-    applyPassiveSkillEffects (skill) {
-      // Apply effects based on the skill's current level data
-      if (skill.attack) {
-        this.player.attack += skill.attack
-        this.logBattle(`你的攻击力增加了 ${skill.attack} 点。`)
-      }
-      if (skill.defense) {
-        this.player.defense += skill.defense
-        this.logBattle(`你的防御力增加了 ${skill.defense} 点。`)
-      }
-      if (skill.maxHp) {
-        this.player.maxHp += skill.maxHp
-        this.player.hp += skill.maxHp // Also increase current HP
-        this.logBattle(`你的最大生命值增加了 ${skill.maxHp} 点。`)
-      }
-      if (skill.critChance) {
-        this.player.critChance += skill.critChance
-        this.logBattle(`你的暴击率增加了 ${Math.round(skill.critChance * 100)}%。`)
-      }
-      if (skill.critResist) {
-        this.player.critResist += skill.critResist
-        this.logBattle(`你的抗暴击率增加了 ${Math.round(skill.critResist * 100)}%。`)
-      }
-      if (skill.moveSpeed) {
-        this.player.moveSpeed += skill.moveSpeed
-        this.logBattle(`你的移动速度增加了 ${skill.moveSpeed} 点。`)
-      }
-      if (skill.comboChance) {
-        this.player.comboChance += skill.comboChance
-        this.logBattle(`你的连击几率增加了 ${Math.round(skill.comboChance * 100)}%。`)
-      }
-      if (skill.counterChance) {
-        this.player.counterChance += skill.counterChance
-        this.logBattle(`你的反击几率增加了 ${Math.round(skill.counterChance * 100)}%。`)
-      }
-      if (skill.ignoreDefense) {
-        this.player.ignoreDefense += skill.ignoreDefense
-        this.logBattle(`你的忽视防御力增加了 ${Math.round(skill.ignoreDefense * 100)}%。`)
-      }
-      if (skill.goldBonus) {
-        this.player.goldBonus = (this.player.goldBonus || 0) + skill.goldBonus
-        this.logBattle(`你获得的金币增加了 ${Math.round(skill.goldBonus * 100)}%。`)
-      }
-      if (skill.hpRegen) {
-        this.player.hpRegen = (this.player.hpRegen || 0) + skill.hpRegen
-        this.logBattle(`你每回合生命恢复增加了 ${skill.hpRegen} 点。`)
-      }
-    },
-    removePassiveSkillEffects (skill) {
-      // This method is now obsolete as stats are calculated in updatePlayerStats.
-      // Kept for reference, but can be removed.
-      console.warn('removePassiveSkillEffects is deprecated.')
-    },
-    // The original useSkill method is now internal to performAttack, but we keep it for direct use if needed
-    useSkill (skill) {
-      // This method might be called directly from UI for non-battle skills or for testing
-      // For battle skills, performAttack handles the cost and effects
-      if (this.player.hp < skill.cost) {
-        this.logBattle(`生命值不足以使用 ${skill.name}。`)
-        return
-      }
-      this.player.hp -= skill.cost
-      this.logBattle(`你使用了 ${skill.name}，消耗了 ${skill.cost} 点生命值。`)
-      // Apply skill effects here if it's a non-battle skill or for direct use
-      if (skill.heal) {
-        this.player.hp = Math.min(this.player.maxHp, this.player.hp + skill.heal)
-        this.logBattle(`恢复了 ${skill.heal} 点生命值。`)
-      }
-      // For damage skills, they are handled in performAttack
-    },
     logBattle (message) {
-      this.battleLog.push(message)
-      // Keep log concise, remove oldest if too long
-      if (this.battleLog.length > 500) {
-        this.battleLog.shift()
-      }
-    },
-    calculateDamage (attackerAttack, defenderDefense, attackerCritChance, defenderCritResist, attackerIgnoreDefense = 0) {
-      // New percentage-based damage formula
-      const ignoredDefense = defenderDefense * attackerIgnoreDefense
-      const effectiveDefense = Math.max(0, defenderDefense - ignoredDefense)
-
-      const damageReductionPercentage = (effectiveDefense / 20) / 100
-      const actualReduction = Math.min(0.75, damageReductionPercentage) // Capped at 75%
-
-      let damage = attackerAttack * (1 - actualReduction)
-
-      // Ensure at least some damage is done if attack is positive
-      if (damage < 1 && attackerAttack > 0) {
-        damage = 1
-      }
-
-      const actualCritChance = Math.max(0, attackerCritChance - defenderCritResist)
-      if (Math.random() < actualCritChance) {
-        damage *= 1.5 // 1.5x critical damage
-        this.logBattle('暴击！')
-      }
-      return Math.round(damage)
-    },
-    getRandomMonster (playerLevel) {
-      if (!this.monsters || this.monsters.length === 0) {
-        this.logBattle('错误：没有可用的怪物数据！')
-        return null // Or a default fallback monster
-      }
-
-      // For simplicity, get monsters around player's level
-      const relevantMonsters = this.monsters.filter(
-        (monster) => monster.level >= playerLevel - 2 && monster.level <= playerLevel + 2
-      )
-      if (relevantMonsters.length === 0) {
-        this.logBattle('警告：没有找到与玩家等级相近的怪物，将随机选择一个怪物。')
-        // Fallback to any monster if no relevant ones found
-        const randomMonster = { ...this.monsters[Math.floor(Math.random() * this.monsters.length)] }
-        randomMonster.maxHp = randomMonster.hp // Set maxHp for enemy
-        return randomMonster
-      }
-      const randomIndex = Math.floor(Math.random() * relevantMonsters.length)
-      const selectedMonster = { ...relevantMonsters[randomIndex] } // Return a copy to avoid modifying original data
-      selectedMonster.maxHp = selectedMonster.hp // Set maxHp for enemy
-      return selectedMonster
-    },
-    createPet (petData) {
-      return petService.createPet(petData)
-    },
-    updatePetStats (petObject) {
-      petService.updatePetStats(petObject || this.activePet)
+      battleService.logBattle(this.battleLog, message)
     },
     assignPetPoint (petInstanceId, attribute) {
       const pet = this.player.pets.find(p => p.instanceId === petInstanceId)
       petService.assignPetPoint(pet, attribute)
     },
-    checkPetLevelUp () {
-      petService.checkPetLevelUp(this.activePet, this.logBattle)
-    },
     setPetStatus (petInstanceId, isActive) {
-      if (isActive) {
-        this.player.activePetId = petInstanceId
-        const pet = this.player.pets.find(p => p.instanceId === petInstanceId)
-        if (pet) {
-          this.logBattle(`${pet.name} 已设置为出战状态。`)
-        }
-      } else {
-        const pet = this.activePet
-        if (pet) {
-          this.logBattle(`${pet.name} 已设置为休息状态。`)
-        }
-        this.player.activePetId = null
-      }
-      this.updatePlayerStats()
+      petService.setPetStatus(this.player, petInstanceId, isActive, this.logBattle, this.updatePlayerStats)
     },
     releasePet (petInstanceId) {
-      const petIndex = this.player.pets.findIndex(p => p.instanceId === petInstanceId)
-      if (petIndex > -1) {
-        const petName = this.player.pets[petIndex].name
-        if (this.player.activePetId === petInstanceId) {
-          this.player.activePetId = null
-        }
-        this.player.pets.splice(petIndex, 1)
-        this.logBattle(`你放生了 ${petName}。`)
-        characterService.updatePlayerStats(this.player, this.activePet)
-      }
+      petService.releasePet(this.player, petInstanceId, this.logBattle, this.updatePlayerStats)
     },
     assignPoint (attribute) {
       characterService.assignPoint(this.player, attribute, this.activePet)
@@ -1100,44 +584,6 @@ export default {
       if (this.sections[sectionName]) {
         this.sections[sectionName].collapsed = !this.sections[sectionName].collapsed
       }
-    },
-    showEnemyTooltip (event, enemy) {
-      if (!enemy) return
-      let content = `<strong>${enemy.name}</strong><br>`
-      content += `等级: ${enemy.level}<br>`
-      content += `生命值: ${enemy.hp}/${enemy.maxHp}<br>`
-      content += `攻击力: ${enemy.attack}<br>`
-      content += `防御力: ${enemy.defense}<br>`
-      if (enemy.skills && enemy.skills.length > 0) {
-        content += '<hr><strong>技能:</strong><br>'
-        enemy.skills.forEach(skill => {
-          content += `${skill.name}<br>`
-        })
-      }
-      if (enemy.drops && enemy.drops.length > 0) {
-        content += '<hr><strong>掉落物:</strong><br>'
-        enemy.drops.forEach(drop => {
-          let itemName = ''
-          if (drop.type === 'equipment') {
-            const itemData = this.equipment.find(e => e.id === drop.itemId)
-            if (itemData) itemName = itemData.name
-          } else if (drop.type === 'skill') {
-            const skillData = this.skillsData.find(s => s.id === drop.skillId)
-            if (skillData) itemName = `${skillData.name} 技能书`
-          } else if (drop.type === 'pet') {
-            const petData = this.pets.find(p => p.id === drop.petId)
-            if (petData) itemName = petData.name
-          }
-          if (itemName) {
-            content += `${itemName} (${((drop.chance || 0) * 100).toFixed(1)}%)<br>`
-          }
-        })
-      }
-
-      this.tooltip.content = content
-      this.tooltip.visible = true
-      this.tooltip.top = event.pageY + 10
-      this.tooltip.left = event.pageX + 10
     }
   }
 }

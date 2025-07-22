@@ -1,3 +1,67 @@
+import * as characterService from './characterService.js'
+
+export function enhanceItem (player, item, location, logBattle, activePet, hideTooltip) {
+  if (!item || item.enhancementLevel >= 10) {
+    logBattle('该装备已达到最高强化等级。')
+    return
+  }
+
+  const cost = (item.enhancementLevel + 1) * 100
+  if (player.gold < cost) {
+    logBattle(`金币不足，需要 ${cost} 金币。`)
+    return
+  }
+
+  player.gold -= cost
+  logBattle(`花费了 ${cost} 金币尝试强化 ${item.name}。`)
+
+  let success = true
+  if (item.enhancementLevel >= 5) {
+    const successChance = 1.0 - (item.enhancementLevel - 4) * 0.1 // 90% for +6, 80% for +7, etc.
+    if (Math.random() > successChance) {
+      success = false
+    }
+  }
+
+  if (success) {
+    // --- Calculate and apply enhancement ---
+    const enhancementMultiplier = 0.1 + Math.random() * 0.2 // 10% to 30%
+    const attackBonus = Math.round(item.baseAttack * enhancementMultiplier)
+    const defenseBonus = Math.round(item.baseDefense * enhancementMultiplier)
+    const hpBonus = Math.round(item.baseHp * enhancementMultiplier)
+    const strengthBonus = Math.round(item.baseStrength * enhancementMultiplier)
+    const agilityBonus = Math.round(item.baseAgility * enhancementMultiplier)
+    const constitutionBonus = Math.round(item.baseConstitution * enhancementMultiplier)
+
+    item.attack += attackBonus
+    item.defense += defenseBonus
+    item.hp += hpBonus
+    item.strength = (item.strength || 0) + strengthBonus
+    item.agility = (item.agility || 0) + agilityBonus
+    item.constitution = (item.constitution || 0) + constitutionBonus
+    item.enhancementLevel++
+
+    logBattle(`强化成功！${item.name} 强化至 +${item.enhancementLevel}。`)
+    if (attackBonus > 0) logBattle(`攻击力 +${attackBonus}`)
+    if (defenseBonus > 0) logBattle(`防御力 +${defenseBonus}`)
+    if (hpBonus > 0) logBattle(`生命值 +${hpBonus}`)
+    if (strengthBonus > 0) logBattle(`力量 +${strengthBonus}`)
+    if (agilityBonus > 0) logBattle(`敏捷 +${agilityBonus}`)
+    if (constitutionBonus > 0) logBattle(`体质 +${constitutionBonus}`)
+
+    // --- Re-apply new stats if item is equipped ---
+    if (location === 'equipped') {
+      characterService.updatePlayerStats(player, activePet)
+    }
+    // After successful enhancement, if the tooltip is visible for this item, refresh it
+    if (hideTooltip) {
+      hideTooltip()
+    }
+  } else {
+    logBattle('强化失败...')
+  }
+}
+
 export function equipItem (player, item, index, logBattle) {
   if (!item.slot) return
 

@@ -224,8 +224,8 @@ export function checkLevelUp (player, logCallback, activePet) {
     leveledUp = true
     player.xp -= player.xpToNextLevel
     player.level++
-    player.attributePoints += 3
-    logCallback(`恭喜！你升到了 ${player.level} 级！获得了3个属性点！`)
+    player.attributePoints += 2
+    logCallback(`恭喜！你升到了 ${player.level} 级！获得了2个属性点！`)
 
     player.xpToNextLevel = Math.round(100 * Math.pow(1.15, player.level - 1))
   }
