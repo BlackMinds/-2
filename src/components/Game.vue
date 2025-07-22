@@ -9,7 +9,10 @@
         </h2>
         <div v-if="!sections.character.collapsed" class="attributes-grid">
           <div class="primary-attributes">
-            <p>姓名: {{ player.name }}</p>
+            <p>姓名:
+              <span v-if="!isEditingName" @click="isEditingName = true">{{ player.name }}</span>
+              <input v-else type="text" v-model="player.name" @blur="saveName" @keyup.enter="saveName" ref="nameInput">
+            </p>
             <p>等级: {{ player.level }}</p>
             <p>经验: {{ player.xp }} / {{ player.xpToNextLevel }}</p>
             <p v-if="player.attributePoints > 0">可用属性点: {{ player.attributePoints }}</p>
@@ -213,6 +216,7 @@ export default {
   },
   data () {
     return {
+      isEditingName: false,
       player: characterService.initializePlayer(skillsData),
       enemy: null,
       inBattle: false,
@@ -259,6 +263,11 @@ export default {
         characterService.updatePlayerStats(this.player, this.activePet)
       },
       deep: true
+    },
+    isEditingName (newValue) {
+      if (newValue) {
+        this.$nextTick(() => this.$refs.nameInput.focus())
+      }
     },
     battleLog () {
       this.$nextTick(() => {
@@ -308,6 +317,10 @@ export default {
     }
   },
   methods: {
+    saveName () {
+      this.isEditingName = false
+      this.saveGame()
+    },
     handleOpenBlindBox ({ cost, times }, callback) {
       if (this.player.gold < cost) {
         this.logBattle(`金币不足，需要 ${cost} 金币。`)

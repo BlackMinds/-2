@@ -350,14 +350,14 @@
       { "name": "黑暗契约", "type": "buff", "attribute": "attack", "value": 30, "duration": 3, "cost": 0 }
     ],
     "drops": [
-      { "type": "equipment", "itemId": "genesis_sword", "chance": 0.1 },
-      { "type": "equipment", "itemId": "genesis_armor", "chance": 0.08 },
-      { "type": "equipment", "itemId": "genesis_boots", "chance": 0.06 },
-      { "type": "equipment", "itemId": "cosmic_heart", "chance": 0.04 },
+      { "type": "equipment", "itemId": "genesis_sword", "chance": 0.005 },
+      { "type": "equipment", "itemId": "genesis_armor", "chance": 0.005 },
+      { "type": "equipment", "itemId": "genesis_boots", "chance": 0.005 },
+      { "type": "equipment", "itemId": "cosmic_heart", "chance": 0.005 },
       { "type": "skill", "skillId": "defignore", "chance": 0.02 },
       { "type": "skill", "skillId": "cleave", "chance": 0.01 },
       { "type": "skill", "skillId": "stunstrike", "chance": 0.01 },
-      { "type": "pet", "petId": "fairy", "chance": 1 }
+      { "type": "pet", "petId": "fairy", "chance": 0.01 }
     ]
   }
 ]

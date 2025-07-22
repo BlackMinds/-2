@@ -2,6 +2,7 @@
   <div class="header">
     <button @click="showForgeModal = true">打造</button>
     <button @click="showBlindBoxModal = true" style="margin-left: 10px;">盲盒</button>
+    <button @click="showHelpModal = true" style="margin-left: 10px;">帮助文档</button>
 
     <div v-if="showForgeModal" class="modal">
       <div class="modal-content">
@@ -86,10 +87,32 @@
         </div>
       </div>
     </div>
+
+    <div v-if="showHelpModal" class="modal">
+      <div class="modal-content">
+        <span class="close" @click="showHelpModal = false">&times;</span>
+        <h2>怪物掉落表</h2>
+        <div class="monster-drops-list">
+          <div v-for="monster in monsterDrops" :key="monster.name" class="monster-drop-item">
+            <h4>{{ monster.name }}</h4>
+            <ul>
+              <li v-for="drop in monster.drops" :key="drop.name">
+                {{ drop.name }} - 掉落几率: {{ (drop.chance * 100).toFixed(2) }}%
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import monstersData from '@/data/monsters.json'
+import equipmentData from '@/data/equipment.json'
+import skillsData from '@/data/skills.json'
+import petsData from '@/data/pets.json'
+
 export default {
   name: 'AppHeader',
   props: {
@@ -102,6 +125,8 @@ export default {
     return {
       showForgeModal: false,
       showBlindBoxModal: false,
+      showHelpModal: false,
+      monsters: monstersData,
       blindBoxResults: [],
       lastBlindBoxDraw: { cost: 0, times: 0 },
       materialsToUse: {
@@ -116,6 +141,31 @@ export default {
     }
   },
   computed: {
+    monsterDrops () {
+      return this.monsters.map(monster => {
+        const drops = monster.drops.map(drop => {
+          let name = '未知物品'
+          if (drop.type === 'equipment') {
+            const equipment = equipmentData.find(e => e.id === drop.itemId)
+            if (equipment) {
+              name = equipment.name
+            }
+          } else if (drop.type === 'skill') {
+            const skill = skillsData.find(s => s.id === drop.skillId)
+            if (skill) {
+              name = skill.name
+            }
+          } else if (drop.type === 'pet') {
+            const pet = petsData.find(p => p.id === drop.petId)
+            if (pet) {
+              name = pet.name
+            }
+          }
+          return { ...drop, name }
+        })
+        return { ...monster, drops }
+      })
+    },
     soulEssenceCount () {
       const soulEssence = this.player.inventory.find(item => item.name === '灵魂精粹')
       return soulEssence ? soulEssence.quantity : 0
@@ -217,6 +267,9 @@ export default {
         if (this.showBlindBoxModal) {
           this.closeBlindBoxModal()
         }
+        if (this.showHelpModal) {
+          this.showHelpModal = false
+        }
       }
     }
   },
@@ -230,6 +283,14 @@ export default {
 </script>
 
 <style scoped>
+.monster-drops-list {
+  text-align: left;
+  max-height: 400px;
+  overflow-y: auto;
+}
+.monster-drop-item {
+  margin-bottom: 15px;
+}
 .header {
   position: fixed;
   top: 0;

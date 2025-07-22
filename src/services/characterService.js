@@ -9,7 +9,7 @@ import { storageService } from './storageService.js'
  */
 export function initializePlayer (skillsData) {
   let player = {
-    name: '英雄',
+    name: '自定义角色',
     level: 1,
     xp: 0,
     xpToNextLevel: 100,
@@ -31,7 +31,7 @@ export function initializePlayer (skillsData) {
     comboChance: 0.05,
     counterChance: 0.03,
     ignoreDefense: 0.0,
-    gold: 100000,
+    gold: 1000,
     pets: [],
     activePetId: null,
     highestTowerLevel: 1,
