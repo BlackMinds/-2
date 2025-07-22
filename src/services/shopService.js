@@ -11,19 +11,19 @@ function handleOpenBlindBox (player, { cost, times }, logBattle, callback) {
   const results = []
   for (let i = 0; i < times; i++) {
     const rand = Math.random()
-    if (cost === 1000) {
-      if (rand < 0.01) { // 1% chance for 10000 gold
-        const reward = { type: 'gold', amount: 10000, name: '10000 金币' }
+    if (cost === 10000) {
+      if (rand < 0.01) { // 1% chance for 100000 gold
+        const reward = { type: 'gold', amount: 100000, name: '100000 金币' }
         rewards.push(reward)
         results.push(reward)
       } else if (rand < 0.05) { // 4% chance for crafting materials
-        const materials = ['灵魂精粹', '敏捷水晶', '狂怒之石', '穿透之眼', '力量之源', '敏捷之风', '体质之岩']
+        const materials = ['灵魂精粹', '敏捷水晶', '狂怒之石', '穿透之眼', '力量之源', '敏捷之风', '体质之岩', '祝福宝石']
         const materialName = materials[Math.floor(Math.random() * materials.length)]
         const reward = { type: 'material', name: materialName, quantity: 1 }
         rewards.push(reward)
         results.push(reward)
       } else if (rand < 0.5) { // 45% chance for small amount of gold
-        const amount = Math.floor(Math.random() * 100) + 1
+        const amount = Math.floor(Math.random() * 1000) + 10
         const reward = { type: 'gold', amount, name: `${amount} 金币` }
         rewards.push(reward)
         results.push(reward)
@@ -32,19 +32,19 @@ function handleOpenBlindBox (player, { cost, times }, logBattle, callback) {
         rewards.push(reward)
         results.push(reward)
       }
-    } else if (cost === 10000) {
-      if (rand < 0.05) { // 5% chance for 10000 gold
-        const reward = { type: 'gold', amount: 10000, name: '10000 金币' }
+    } else if (cost === 100000) {
+      if (rand < 0.05) { // 5% chance for 100000 gold
+        const reward = { type: 'gold', amount: 100000, name: '100000 金币' }
         rewards.push(reward)
         results.push(reward)
       } else if (rand < 0.15) { // 10% chance for crafting materials
-        const materials = ['灵魂精粹', '敏捷水晶', '狂怒之石', '穿透之眼', '力量之源', '敏捷之风', '体质之岩']
+        const materials = ['灵魂精粹', '敏捷水晶', '狂怒之石', '穿透之眼', '力量之源', '敏捷之风', '体质之岩', '祝福宝石']
         const materialName = materials[Math.floor(Math.random() * materials.length)]
         const reward = { type: 'material', name: materialName, quantity: 3 }
         rewards.push(reward)
         results.push(reward)
       } else if (rand < 0.55) { // 40% chance for small amount of gold
-        const amount = Math.floor(Math.random() * 1000) + 100
+        const amount = Math.floor(Math.random() * 10000) + 1000
         const reward = { type: 'gold', amount, name: `${amount} 金币` }
         rewards.push(reward)
         results.push(reward)

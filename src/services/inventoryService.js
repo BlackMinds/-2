@@ -15,6 +15,20 @@ export function enhanceItem (player, item, location, logBattle, activePet, hideT
   player.gold -= cost
   logBattle(`花费了 ${cost} 金币尝试强化 ${item.name}。`)
 
+  if (item.enhancementLevel >= 5) {
+    const materialCost = item.enhancementLevel - 4
+    const material = player.inventory.find(i => i.name === '祝福宝石')
+    if (!material || material.quantity < materialCost) {
+      logBattle(`祝福宝石不足，需要 ${materialCost} 个。`)
+      return
+    }
+    material.quantity -= materialCost
+    if (material.quantity === 0) {
+      player.inventory.splice(player.inventory.indexOf(material), 1)
+    }
+    logBattle(`消耗了 ${materialCost} 个祝福宝石。`)
+  }
+
   let success = true
   if (item.enhancementLevel >= 5) {
     const successChance = 1.0 - (item.enhancementLevel - 4) * 0.1 // 90% for +6, 80% for +7, etc.
@@ -119,7 +133,7 @@ export function sellAll (player, logBattle) {
   const itemsToSell = []
 
   player.inventory.forEach(item => {
-    if (item.slot || item.type === 'necklace') {
+    if ((item.slot || item.type === 'necklace') && item.type !== 'material' && item.type !== 'consumable' && item.type !== 'skill') {
       itemsToSell.push(item)
     } else {
       itemsToKeep.push(item)

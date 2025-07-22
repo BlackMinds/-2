@@ -122,7 +122,7 @@ function processTurn (gameContext) {
       return
     }
     updateState({ currentTurn: 'enemy' })
-    gameContext.turnTimer = setTimeout(() => processTurn(gameContext), 1000)
+    updateState({ turnTimer: setTimeout(() => processTurn(gameContext), 1000) })
   } else if (gameContext.currentTurn === 'enemy') {
     logBattle(battleLog, `${enemy.name} 的回合：`)
     let target = player
@@ -138,7 +138,7 @@ function processTurn (gameContext) {
       return
     }
     updateState({ currentTurn: 'player' })
-    gameContext.turnTimer = setTimeout(() => processTurn(gameContext), 1000)
+    updateState({ turnTimer: setTimeout(() => processTurn(gameContext), 1000) })
   }
   logBattle(battleLog, `你的生命值: ${player.hp}/${player.maxHp}`)
   logBattle(battleLog, `${enemy.name} 的生命值: ${enemy.hp}/${enemy.maxHp}`)

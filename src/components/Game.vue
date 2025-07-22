@@ -185,7 +185,7 @@
                 <button @click="equipSkill(item, 2, 'passive')" :disabled="inBattle">装备被动3</button>
               </span>
             </span>
-            <button @click="sellItem(item, index)" :disabled="inBattle">出售</button>
+            <button @click="sellItem(item)" :disabled="inBattle">出售</button>
           </li>
         </ul>
         </div>
@@ -398,9 +398,12 @@ export default {
       inventoryService.sellAll(this.player, this.logBattle)
       this.saveGame()
     },
-    sellItem (item, index) {
-      inventoryService.sellItem(this.player, item, index, this.logBattle)
-      this.saveGame()
+    sellItem (item) {
+      const index = this.player.inventory.indexOf(item)
+      if (index > -1) {
+        inventoryService.sellItem(this.player, item, index, this.logBattle)
+        this.saveGame()
+      }
     },
     startBattle () {
       if (this.battleEndTimer) clearTimeout(this.battleEndTimer)
@@ -449,6 +452,7 @@ export default {
     },
     fleeBattle () {
       if (!this.inBattle) return
+      if (this.turnTimer) clearTimeout(this.turnTimer)
       this.logBattle('你成功逃跑了！')
       this.endBattle(false)
     },

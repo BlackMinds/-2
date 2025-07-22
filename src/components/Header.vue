@@ -71,8 +71,8 @@
         <div v-if="blindBoxResults.length === 0">
           <p>你当前的金币: {{ player.gold }}</p>
           <div class="blind-box-options">
-            <button @click="openBlindBox(1000, 10)">1000金币抽10次</button>
             <button @click="openBlindBox(10000, 10)">10000金币抽10次</button>
+            <button @click="openBlindBox(100000, 10)">100000金币抽10次</button>
           </div>
         </div>
         <div v-else>
