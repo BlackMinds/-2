@@ -76,8 +76,11 @@ export function enhanceItem (player, item, location, logBattle, activePet, hideT
   }
 }
 
-export function equipItem (player, item, index, logBattle) {
+export function equipItem (player, item, logBattle) {
   if (!item.slot) return
+
+  const index = player.inventory.findIndex(i => i === item)
+  if (index === -1) return
 
   const currentEquipped = player.equipment[item.slot]
   if (currentEquipped) {
@@ -108,11 +111,14 @@ export function useItem (player, item, index, logBattle) {
   player.inventory.splice(index, 1)
 }
 
-export function sellItem (player, item, index, logBattle) {
+export function sellItem (player, item, logBattle) {
+  const index = player.inventory.findIndex(i => i === item)
+  if (index === -1) return
+
   let sellPrice = 0
-  if (item.slot || item.type === 'necklace') { // It's an equipment
+  if (item.type === 'equipment' || item.type === 'necklace') {
     sellPrice = (item.level || 1) * 5
-  } else if (item.type === 'skill') { // It's a skill book
+  } else if (item.type === 'skill') {
     sellPrice = 20
   } else if (item.type === 'consumable') {
     sellPrice = 5
@@ -133,7 +139,7 @@ export function sellAll (player, logBattle) {
   const itemsToSell = []
 
   player.inventory.forEach(item => {
-    if ((item.slot || item.type === 'necklace') && item.type !== 'material' && item.type !== 'consumable' && item.type !== 'skill') {
+    if (item.type === 'equipment' || item.type === 'necklace') {
       itemsToSell.push(item)
     } else {
       itemsToKeep.push(item)

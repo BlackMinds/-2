@@ -171,7 +171,7 @@
             <li v-for="(item, index) in filteredInventory" :key="index" @mouseover="showTooltip($event, item)" @mouseout="hideTooltip">
             {{ item.name }} <span v-if="item.quantity">x{{ item.quantity }}</span> {{ item.enhancementLevel > 0 ? '+' + item.enhancementLevel : '' }} ({{ item.type }})
             <button v-if="item.slot && item.type !== 'necklace'" @click="enhanceItem(item, 'inventory', index)" :disabled="inBattle">强化</button>
-            <button v-if="item.slot" @click="equipItem(item, index)" :disabled="inBattle">装备</button>
+            <button v-if="item.slot" @click="equipItem(item)" :disabled="inBattle">装备</button>
             <button v-if="item.type === 'consumable'" @click="useItem(item, index)" :disabled="inBattle">使用</button>
             <span v-if="item.type === 'skill'">
               <span v-if="getSkillType(item) === 'active'">
@@ -399,11 +399,8 @@ export default {
       this.saveGame()
     },
     sellItem (item) {
-      const index = this.player.inventory.indexOf(item)
-      if (index > -1) {
-        inventoryService.sellItem(this.player, item, index, this.logBattle)
-        this.saveGame()
-      }
+      inventoryService.sellItem(this.player, item, this.logBattle)
+      this.saveGame()
     },
     startBattle () {
       if (this.battleEndTimer) clearTimeout(this.battleEndTimer)
@@ -546,8 +543,8 @@ export default {
         }
       })
     },
-    equipItem (item, index) {
-      inventoryService.equipItem(this.player, item, index, this.logBattle)
+    equipItem (item) {
+      inventoryService.equipItem(this.player, item, this.logBattle)
       characterService.updatePlayerStats(this.player, this.activePet)
     },
     unequipItem (slot) {
