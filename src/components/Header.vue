@@ -1,6 +1,8 @@
 <template>
   <div class="header">
     <button @click="showForgeModal = true">打造</button>
+    <button @click="showBlindBoxModal = true" style="margin-left: 10px;">盲盒</button>
+
     <div v-if="showForgeModal" class="modal">
       <div class="modal-content">
         <span class="close" @click="showForgeModal = false">&times;</span>
@@ -27,11 +29,29 @@
           <input type="range" min="0" :max="maxPenetratingEye" v-model.number="materialsToUse.penetratingEye" />
           <span>使用: {{ materialsToUse.penetratingEye }}</span>
         </div>
+        <div class="materials-section">
+          <p>力量之源 (增幅力量): {{ strengthSourceCount }}</p>
+          <input type="range" min="0" :max="maxStrengthSource" v-model.number="materialsToUse.strengthSource" />
+          <span>使用: {{ materialsToUse.strengthSource }}</span>
+        </div>
+        <div class="materials-section">
+          <p>敏捷之风 (增幅敏捷): {{ agilityWindCount }}</p>
+          <input type="range" min="0" :max="maxAgilityWind" v-model.number="materialsToUse.agilityWind" />
+          <span>使用: {{ materialsToUse.agilityWind }}</span>
+        </div>
+        <div class="materials-section">
+          <p>体质之岩 (增幅体质): {{ constitutionRockCount }}</p>
+          <input type="range" min="0" :max="maxConstitutionRock" v-model.number="materialsToUse.constitutionRock" />
+          <span>使用: {{ materialsToUse.constitutionRock }}</span>
+        </div>
         <div class="item-preview">
           <h4>属性预览</h4>
           <p>攻击力: +{{ (previewStats.percentAttack * 100).toFixed(2) }}%</p>
           <p>防御力: +{{ (previewStats.percentDefense * 100).toFixed(2) }}%</p>
           <p>生命值: +{{ (previewStats.percentHp * 100).toFixed(2) }}%</p>
+          <p>力量: +{{ previewStats.strength }}</p>
+          <p>敏捷: +{{ previewStats.agility }}</p>
+          <p>体质: +{{ previewStats.constitution }}</p>
           <p>闪避率: +{{ (previewStats.evasion * 100).toFixed(2) }}%</p>
           <p>暴击率: +{{ (previewStats.critChance * 100).toFixed(2) }}%</p>
           <p>抗暴击率: +{{ (previewStats.critResist * 100).toFixed(2) }}%</p>
@@ -40,6 +60,30 @@
           <p>忽视防御力: +{{ (previewStats.ignoreDefense * 100).toFixed(2) }}%</p>
         </div>
         <button @click="forge">打造</button>
+      </div>
+    </div>
+
+    <div v-if="showBlindBoxModal" class="modal">
+      <div class="modal-content">
+        <span class="close" @click="closeBlindBoxModal">&times;</span>
+        <h2>神秘盲盒</h2>
+        <div v-if="blindBoxResults.length === 0">
+          <p>你当前的金币: {{ player.gold }}</p>
+          <div class="blind-box-options">
+            <button @click="openBlindBox(1000, 10)">1000金币抽10次</button>
+            <button @click="openBlindBox(10000, 10)">10000金币抽10次</button>
+          </div>
+        </div>
+        <div v-else>
+          <h3>抽奖结果</h3>
+          <ul>
+            <li v-for="(item, index) in blindBoxResults" :key="index">
+              {{ item.name }} <span v-if="item.quantity > 1">x{{ item.quantity }}</span>
+            </li>
+          </ul>
+          <button @click="drawAgain">下一次更好</button>
+          <button @click="closeBlindBoxModal" style="margin-left: 10px;">关闭</button>
+        </div>
       </div>
     </div>
   </div>
@@ -57,11 +101,17 @@ export default {
   data () {
     return {
       showForgeModal: false,
+      showBlindBoxModal: false,
+      blindBoxResults: [],
+      lastBlindBoxDraw: { cost: 0, times: 0 },
       materialsToUse: {
         soulEssence: 0,
         agilityCrystal: 0,
         rageStone: 0,
-        penetratingEye: 0
+        penetratingEye: 0,
+        strengthSource: 0,
+        agilityWind: 0,
+        constitutionRock: 0
       }
     }
   },
@@ -82,6 +132,18 @@ export default {
       const penetratingEye = this.player.inventory.find(item => item.name === '穿透之眼')
       return penetratingEye ? penetratingEye.quantity : 0
     },
+    strengthSourceCount () {
+      const item = this.player.inventory.find(item => item.name === '力量之源')
+      return item ? item.quantity : 0
+    },
+    agilityWindCount () {
+      const item = this.player.inventory.find(item => item.name === '敏捷之风')
+      return item ? item.quantity : 0
+    },
+    constitutionRockCount () {
+      const item = this.player.inventory.find(item => item.name === '体质之岩')
+      return item ? item.quantity : 0
+    },
     maxSoulEssence () {
       return Math.min(10, this.soulEssenceCount)
     },
@@ -94,9 +156,18 @@ export default {
     maxPenetratingEye () {
       return Math.min(10, this.penetratingEyeCount)
     },
+    maxStrengthSource () {
+      return Math.min(10, this.strengthSourceCount)
+    },
+    maxAgilityWind () {
+      return Math.min(10, this.agilityWindCount)
+    },
+    maxConstitutionRock () {
+      return Math.min(10, this.constitutionRockCount)
+    },
     totalCost () {
       const baseCost = 100
-      const materialCost = Object.values(this.materialsToUse).reduce((a, b) => a + b, 0) * 500
+      const materialCost = Object.values(this.materialsToUse).reduce((a, b) => Number(a) + Number(b), 0) * 500
       return baseCost + materialCost
     },
     previewStats () {
@@ -106,6 +177,9 @@ export default {
         percentAttack: 0.05 * totalBonus,
         percentDefense: 0.05 * totalBonus,
         percentHp: 0.05 * totalBonus,
+        strength: this.materialsToUse.strengthSource * 5,
+        agility: this.materialsToUse.agilityWind * 5,
+        constitution: this.materialsToUse.constitutionRock * 5,
         evasion: 0.01 + this.materialsToUse.agilityCrystal * 0.001,
         critChance: 0.01 + this.materialsToUse.rageStone * 0.001,
         critResist: 0.01 + this.materialsToUse.penetratingEye * 0.001,
@@ -119,9 +193,30 @@ export default {
     forge () {
       this.$emit('forge-item', this.materialsToUse)
     },
+    closeForgeModal () {
+      this.showForgeModal = false
+    },
+    openBlindBox (cost, times) {
+      this.lastBlindBoxDraw = { cost, times }
+      this.$emit('open-blind-box', { cost, times }, (results) => {
+        this.blindBoxResults = results
+      })
+    },
+    drawAgain () {
+      this.openBlindBox(this.lastBlindBoxDraw.cost, this.lastBlindBoxDraw.times)
+    },
+    closeBlindBoxModal () {
+      this.showBlindBoxModal = false
+      this.blindBoxResults = []
+    },
     closeModalOnEscape (event) {
-      if (event.key === 'Escape' && this.showForgeModal) {
-        this.showForgeModal = false
+      if (event.key === 'Escape') {
+        if (this.showForgeModal) {
+          this.showForgeModal = false
+        }
+        if (this.showBlindBoxModal) {
+          this.closeBlindBoxModal()
+        }
       }
     }
   },
@@ -265,5 +360,12 @@ input[type="range"]::-moz-range-thumb {
   background: #4299E1;
   border-radius: 50%;
   cursor: pointer;
+}
+
+.blind-box-options {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
 }
 </style>

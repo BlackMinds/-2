@@ -32,7 +32,7 @@ export function useItem (player, item, index, logBattle) {
 
 export function sellItem (player, item, index, logBattle) {
   let sellPrice = 0
-  if (item.slot) { // It's an equipment
+  if (item.slot || item.type === 'necklace') { // It's an equipment
     sellPrice = (item.level || 1) * 5
   } else if (item.type === 'skill') { // It's a skill book
     sellPrice = 20
@@ -52,40 +52,54 @@ export function sellItem (player, item, index, logBattle) {
 export function sellAll (player, logBattle) {
   let totalSellPrice = 0
   const itemsToKeep = []
+  const itemsToSell = []
 
   player.inventory.forEach(item => {
-    if (item.type === 'skill' || item.type === 'consumable') {
-      itemsToKeep.push(item)
+    if (item.slot || item.type === 'necklace') {
+      itemsToSell.push(item)
     } else {
-      const sellPrice = (item.level || 1) * 5
-      totalSellPrice += sellPrice
+      itemsToKeep.push(item)
     }
   })
 
-  if (totalSellPrice > 0) {
+  if (itemsToSell.length > 0) {
+    itemsToSell.forEach(item => {
+      const sellPrice = (item.level || 1) * 5
+      totalSellPrice += sellPrice
+    })
     player.inventory = itemsToKeep
     player.gold += totalSellPrice
-    logBattle(`一键出售了所有装备，获得了 ${totalSellPrice} 金币。`)
+    logBattle(`一键出售了 ${itemsToSell.length} 件装备，获得了 ${totalSellPrice} 金币。`)
   } else {
     logBattle('背包中没有可出售的装备。')
   }
 }
 
 export function forgeItem (player, logBattle, materialsToUse) {
+  for (const material in materialsToUse) {
+    if (materialsToUse[material] > 10) {
+      logBattle('每种材料最多只能使用10个。')
+      return false
+    }
+  }
+
   const baseCost = 100
   const materialCost = Object.values(materialsToUse).reduce((a, b) => a + b, 0) * 500
   const totalCost = baseCost + materialCost
 
   if (player.gold < totalCost) {
     logBattle(`金币不足，无法打造。需要 ${totalCost} 金币。`)
-    return
+    return false
   }
 
   const materials = [
     { name: '灵魂精粹', count: materialsToUse.soulEssence },
     { name: '敏捷水晶', count: materialsToUse.agilityCrystal },
     { name: '狂怒之石', count: materialsToUse.rageStone },
-    { name: '穿透之眼', count: materialsToUse.penetratingEye }
+    { name: '穿透之眼', count: materialsToUse.penetratingEye },
+    { name: '力量之源', count: materialsToUse.strengthSource },
+    { name: '敏捷之风', count: materialsToUse.agilityWind },
+    { name: '体质之岩', count: materialsToUse.constitutionRock }
   ]
 
   for (const material of materials) {
@@ -93,7 +107,7 @@ export function forgeItem (player, logBattle, materialsToUse) {
     const itemCount = item ? item.quantity : 0
     if (itemCount < material.count) {
       logBattle(`${material.name}不足。`)
-      return
+      return false
     }
   }
 
@@ -129,9 +143,9 @@ export function forgeItem (player, logBattle, materialsToUse) {
     attack: 0,
     defense: 0,
     hp: 0,
-    strength: 0,
-    agility: 0,
-    constitution: 0,
+    strength: materialsToUse.strengthSource * 5,
+    agility: materialsToUse.agilityWind * 5,
+    constitution: materialsToUse.constitutionRock * 5,
     baseAttack: 0,
     baseDefense: 0,
     baseHp: 0,
@@ -141,4 +155,5 @@ export function forgeItem (player, logBattle, materialsToUse) {
   }
   player.inventory.push(necklace)
   logBattle(`你花费了 ${totalCost} 金币和 ${materialsToUse.soulEssence} 个灵魂精粹，成功打造了 ${necklace.name}。`)
+  return true
 }
