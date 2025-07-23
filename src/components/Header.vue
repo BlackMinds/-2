@@ -89,6 +89,11 @@
     </div>
 
     <div v-if="showHelpModal" class="modal">
+      <div>
+        <p>
+          50-100级装备 金币获取下调 怪物生成1-5个
+        </p>
+      </div>
       <div class="modal-content">
         <span class="close" @click="showHelpModal = false">&times;</span>
         <h2>怪物掉落表</h2>

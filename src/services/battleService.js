@@ -106,9 +106,9 @@ function performAttack (attacker, defender, battleLog, activePet, player) {
 }
 
 function processTurn (gameContext) {
-  const { player, enemy, battleLog, activePet, endBattle, updateState } = gameContext
-  if (!gameContext.inBattle || player.hp <= 0 || enemy.hp <= 0) {
-    endBattle(enemy.hp <= 0)
+  const { player, enemies, battleLog, activePet, endBattle, updateState } = gameContext
+  if (!gameContext.inBattle || player.hp <= 0 || enemies.every(e => e.hp <= 0)) {
+    endBattle(enemies.every(e => e.hp <= 0))
     return
   }
 
@@ -118,38 +118,62 @@ function processTurn (gameContext) {
 
   if (gameContext.currentTurn === 'player') {
     logBattle(battleLog, '你的回合：')
+    const livingEnemies = enemies.filter(e => e.hp > 0)
+    if (livingEnemies.length === 0) {
+      endBattle(true)
+      return
+    }
+    const targetEnemy = livingEnemies[Math.floor(Math.random() * livingEnemies.length)]
+
     if (activePet) {
-      petService.performPetAction(activePet, player, enemy, (msg) => logBattle(battleLog, msg), calculateDamage, 'player-turn-start')
+      petService.performPetAction(activePet, player, targetEnemy, (msg) => logBattle(battleLog, msg), calculateDamage, 'player-turn-start')
     }
-    performAttack(player, enemy, battleLog, activePet, player)
-    if (enemy && enemy.hp > 0 && activePet) {
-      petService.performPetAction(activePet, player, enemy, (msg) => logBattle(battleLog, msg), calculateDamage, 'player-turn-end')
+    performAttack(player, targetEnemy, battleLog, activePet, player)
+    if (targetEnemy.hp > 0 && activePet) {
+      petService.performPetAction(activePet, player, targetEnemy, (msg) => logBattle(battleLog, msg), calculateDamage, 'player-turn-end')
     }
-    if (enemy.hp <= 0) {
+    if (enemies.every(e => e.hp <= 0)) {
       endBattle(true)
       return
     }
     updateState({ currentTurn: 'enemy' })
-    updateState({ turnTimer: setTimeout(() => processTurn(gameContext), 1000) })
+    gameContext.turnTimer = setTimeout(() => gameContext.nextTurn(), 1000)
   } else if (gameContext.currentTurn === 'enemy') {
-    logBattle(battleLog, `${enemy.name} 的回合：`)
-    let target = player
-    if (activePet && activePet.hp > 0 && Math.random() < 0.3) {
-      target = activePet
-      logBattle(battleLog, `${enemy.name} 的目标是你的宠物 ${target.name}！`)
-    } else {
-      logBattle(battleLog, `${enemy.name} 的目标是你！`)
-    }
-    performAttack(enemy, target, battleLog, activePet, player)
-    if (player.hp <= 0 || (activePet && activePet.hp <= 0 && target === activePet)) {
-      endBattle(false)
-      return
-    }
+    enemies.forEach(enemy => {
+      if (enemy.hp > 0) {
+        logBattle(battleLog, `${enemy.name} 的回合：`)
+        let target = player
+        if (activePet && activePet.hp > 0 && Math.random() < 0.3) {
+          target = activePet
+          logBattle(battleLog, `${enemy.name} 的目标是你的宠物 ${target.name}！`)
+        } else {
+          logBattle(battleLog, `${enemy.name} 的目标是你！`)
+        }
+        performAttack(enemy, target, battleLog, activePet, player)
+        // Explicitly update player and activePet state to ensure reactivity
+        updateState({ player: player })
+        if (activePet) {
+          updateState({ activePet: activePet })
+        }
+
+        if (player.hp <= 0 || (activePet && activePet.hp <= 0 && target === activePet)) {
+          endBattle(false)
+        }
+      }
+    })
+    // Filter out defeated enemies
+    updateState({ enemies: enemies.filter(e => e.hp > 0) })
+
+    if (player.hp <= 0) return
     updateState({ currentTurn: 'player' })
-    updateState({ turnTimer: setTimeout(() => processTurn(gameContext), 1000) })
+    gameContext.turnTimer = setTimeout(() => gameContext.nextTurn(), 1000)
   }
   logBattle(battleLog, `你的生命值: ${player.hp}/${player.maxHp}`)
-  logBattle(battleLog, `${enemy.name} 的生命值: ${enemy.hp}/${enemy.maxHp}`)
+  enemies.forEach(enemy => {
+    if (enemy.hp > 0) {
+      logBattle(battleLog, `${enemy.name} 的生命值: ${enemy.hp}/${enemy.maxHp}`)
+    }
+  })
 }
 
 function getRandomMonster (monsters, playerLevel) {

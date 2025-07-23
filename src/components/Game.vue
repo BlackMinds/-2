@@ -143,7 +143,7 @@
             </div>
             <span>{{ activePet.hp }} / {{ activePet.maxHp }}</span>
           </div>
-            <div v-if="enemy" class="character-status" @mouseover="showEnemyTooltip($event, enemy)" @mouseout="hideTooltip">
+            <div v-for="(enemy, index) in enemies" :key="index" class="character-status" @mouseover="showEnemyTooltip($event, enemy)" @mouseout="hideTooltip">
               <span>{{ enemy.name }}</span>
               <div class="health-bar-container">
               <div class="health-bar enemy" :style="{ width: (enemy.hp / enemy.maxHp) * 100 + '%' }"></div>
@@ -221,7 +221,7 @@ export default {
     return {
       isEditingName: false,
       player: characterService.initializePlayer(skillsData),
-      enemy: null,
+      enemies: [],
       inBattle: false,
       battleLog: [],
       monsters: monstersData,
@@ -377,17 +377,21 @@ export default {
         return
       }
 
-      this.enemy = { ...towerMonster, maxHp: towerMonster.hp }
+      this.enemies = []
+      const enemyCount = Math.floor(Math.random() * 5) + 1
+      for (let i = 0; i < enemyCount; i++) {
+        this.enemies.push({ ...towerMonster, maxHp: towerMonster.hp })
+      }
       this.inBattle = true
       this.battleLog = [`你开始挑战锁妖塔第 ${this.currentTowerLevel} 层！`]
-      this.logBattle(`你遇到了一个 ${this.enemy.name}！`)
+      this.logBattle(`你遇到了 ${this.enemies.length} 个 ${this.enemies[0].name}！`)
 
-      if (this.player.moveSpeed >= this.enemy.moveSpeed) {
+      if (this.player.moveSpeed >= this.enemies[0].moveSpeed) {
         this.currentTurn = 'player'
         this.logBattle('你获得了先手！')
       } else {
         this.currentTurn = 'enemy'
-        this.logBattle(`${this.enemy.name} 获得了先手！`)
+        this.logBattle(`${this.enemies[0].name} 获得了先手！`)
       }
       this.processTurn()
     },
@@ -411,20 +415,27 @@ export default {
         this.logBattle('请选择一个怪物等级开始战斗！')
         return
       }
-      this.enemy = battleService.getRandomMonster(this.monsters, this.selectedMonsterLevel)
-      if (!this.enemy) {
+      this.enemies = []
+      const enemyCount = Math.floor(Math.random() * 5) + 1
+      for (let i = 0; i < enemyCount; i++) {
+        const monster = battleService.getRandomMonster(this.monsters, this.selectedMonsterLevel)
+        if (monster) {
+          this.enemies.push(monster)
+        }
+      }
+      if (this.enemies.length === 0) {
         this.logBattle('错误：没有可用的怪物数据！')
         return
       }
       this.inBattle = true
-      this.battleLog = [`你遇到了一个 ${this.enemy.name}！`]
+      this.battleLog = [`你遇到了 ${this.enemies.length} 个 ${this.enemies[0].name}！`]
 
-      if (this.player.moveSpeed >= this.enemy.moveSpeed) {
+      if (this.player.moveSpeed >= this.enemies[0].moveSpeed) {
         this.currentTurn = 'player'
         this.logBattle('你获得了先手！')
       } else {
         this.currentTurn = 'enemy'
-        this.logBattle(`${this.enemy.name} 获得了先手！`)
+        this.logBattle(`${this.enemies[0].name} 获得了先手！`)
       }
       this.processTurn()
     },
@@ -434,7 +445,7 @@ export default {
     processTurn () {
       const gameContext = {
         player: this.player,
-        enemy: this.enemy,
+        enemies: this.enemies,
         battleLog: this.battleLog,
         activePet: this.activePet,
         inBattle: this.inBattle,
@@ -444,6 +455,9 @@ export default {
           for (const key in newState) {
             this[key] = newState[key]
           }
+        },
+        nextTurn: () => {
+          this.processTurn() // Call the component's processTurn to use updated state
         }
       }
       battleService.processTurn(gameContext)
@@ -456,11 +470,11 @@ export default {
     },
     endBattle (isVictory) {
       if (this.turnTimer) clearTimeout(this.turnTimer)
-      const isTowerBattle = this.enemy && this.towerMonsters.some(m => m.name === this.enemy.name)
+      const isTowerBattle = this.enemies.length > 0 && this.towerMonsters.some(m => m.name === this.enemies[0].name)
 
       if (isVictory) {
-        this.logBattle(`你击败了 ${this.enemy.name}！`)
-        this.handleMonsterDefeated()
+        this.logBattle('你击败了所有敌人！')
+        this.enemies.forEach(enemy => this.handleMonsterDefeated(enemy))
         this.saveGame()
         if (isTowerBattle) {
           this.battleEndTimer = setTimeout(() => this.startTowerBattle(), 3000)
@@ -472,7 +486,7 @@ export default {
       }
 
       this.inBattle = false
-      this.enemy = null
+      this.enemies = []
       this.player.hp = this.player.maxHp
       if (this.activePet) this.activePet.hp = this.activePet.maxHp
       this.logBattle('你的生命值已完全恢复。')
@@ -484,8 +498,7 @@ export default {
         this.battleEndTimer = setTimeout(() => this.startBattle(), 3000)
       }
     },
-    handleMonsterDefeated () {
-      const monster = this.enemy
+    handleMonsterDefeated (monster) {
       if (!monster || !monster.drops) return
 
       if (this.towerMonsters.some(m => m.name === monster.name)) {
@@ -494,6 +507,15 @@ export default {
         }
         this.currentTowerLevel++
         this.logBattle(`恭喜你通过锁妖塔第 ${this.currentTowerLevel - 1} 层！`)
+
+        // New: Tower monsters on floors 50-100 drop pet skill books
+        if (this.currentTowerLevel >= 50 && this.currentTowerLevel <= 100) {
+          if (Math.random() < 0.15) { // 15% chance to drop a pet skill book
+            const petSkillBook = { name: '宠物技能书', type: 'skill', skillId: 'generic_pet_skill_book' } // Placeholder skillId
+            this.player.inventory.push(petSkillBook)
+            this.logBattle('掉落了宠物技能书！')
+          }
+        }
       }
 
       const goldGained = Math.round(monster.level * 5 * (1 + (this.player.goldBonus || 0)))
