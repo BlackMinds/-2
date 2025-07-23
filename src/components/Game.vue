@@ -192,7 +192,8 @@ export default {
       towerMonsters: towerMonstersData,
       currentTowerLevel: 1,
       selectedMonsterLevel: 1, // Default selected level
-      currentTurn: null, // 'player' or 'enemy'
+      combatants: [], // Array of all participants (player + enemies)
+      currentCombatantIndex: 0, // Index of the current combatant acting
       battleEndTimer: null,
       turnTimer: null,
       tooltip: {
@@ -328,20 +329,21 @@ export default {
       this.enemies = []
       const enemyCount = Math.floor(Math.random() * 5) + 1
       for (let i = 0; i < enemyCount; i++) {
-        this.enemies.push({ ...towerMonster, maxHp: towerMonster.hp })
+        this.enemies.push({ ...towerMonster, maxHp: towerMonster.hp, instanceId: `enemy-${Date.now()}-${i}` }) // Add unique instanceId
       }
       this.inBattle = true
       this.battleLog = [`你开始挑战锁妖塔第 ${this.currentTowerLevel} 层！`]
       this.logBattle(`你遇到了 ${this.enemies.length} 个 ${this.enemies[0].name}！`)
 
-      if (this.player.moveSpeed >= this.enemies[0].moveSpeed) {
-        this.currentTurn = 'player'
-        this.logBattle('你获得了先手！')
-      } else {
-        this.currentTurn = 'enemy'
-        this.logBattle(`${this.enemies[0].name} 获得了先手！`)
-      }
-      this.processTurn()
+      // Initialize combatants array and sort by moveSpeed
+      this.combatants = [
+        { ...this.player, isPlayer: true, instanceId: 'player' }, // Mark player and give unique ID
+        ...this.enemies.map(e => ({ ...e, isPlayer: false })) // Mark enemies
+      ]
+      this.combatants.sort((a, b) => b.moveSpeed - a.moveSpeed) // Higher moveSpeed acts first
+      this.currentCombatantIndex = 0
+      this.logBattle('战斗开始！')
+      this.nextCombatantTurn() // Start the first combatant's turn
     },
     sellAllItems () {
       inventoryService.sellAll(this.player, this.logBattle)
@@ -365,7 +367,7 @@ export default {
       for (let i = 0; i < enemyCount; i++) {
         const monster = battleService.getRandomMonster(this.monsters, this.selectedMonsterLevel)
         if (monster) {
-          this.enemies.push(monster)
+          this.enemies.push({ ...monster, instanceId: `enemy-${Date.now()}-${i}` }) // Add unique instanceId
         }
       }
       if (this.enemies.length === 0) {
@@ -375,37 +377,82 @@ export default {
       this.inBattle = true
       this.battleLog = [`你遇到了 ${this.enemies.length} 个 ${this.enemies[0].name}！`]
 
-      if (this.player.moveSpeed >= this.enemies[0].moveSpeed) {
-        this.currentTurn = 'player'
-        this.logBattle('你获得了先手！')
-      } else {
-        this.currentTurn = 'enemy'
-        this.logBattle(`${this.enemies[0].name} 获得了先手！`)
-      }
-      this.processTurn()
+      // Initialize combatants array and sort by moveSpeed
+      this.combatants = [
+        { ...this.player, isPlayer: true, instanceId: 'player' }, // Mark player and give unique ID
+        ...this.enemies.map(e => ({ ...e, isPlayer: false })) // Mark enemies
+      ]
+      this.combatants.sort((a, b) => b.moveSpeed - a.moveSpeed) // Higher moveSpeed acts first
+      this.currentCombatantIndex = 0
+      this.logBattle('战斗开始！')
+      this.nextCombatantTurn() // Start the first combatant's turn
     },
     updatePlayerStats () {
       characterService.updatePlayerStats(this.player, this.activePet)
     },
-    processTurn () {
-      const gameContext = {
-        player: this.player,
-        enemies: this.enemies,
-        battleLog: this.battleLog,
-        activePet: this.activePet,
-        inBattle: this.inBattle,
-        currentTurn: this.currentTurn,
-        endBattle: this.endBattle,
-        updateState: (newState) => {
-          for (const key in newState) {
-            this[key] = newState[key]
-          }
-        },
-        nextTurn: () => {
-          this.processTurn() // Call the component's processTurn to use updated state
+    updateState (newState) { // Changed to regular function
+      for (const key in newState) {
+        this[key] = newState[key]
+      }
+    },
+    nextCombatantTurn () { // Renamed from processTurn
+      const { player, enemies, battleLog, activePet, endBattle } = this // Removed updateState from destructuring here
+      if (!this.inBattle || player.hp <= 0 || enemies.every(e => e.hp <= 0)) {
+        endBattle(enemies.every(e => e.hp <= 0), player, enemies)
+        return
+      }
+
+      // Find the next living combatant
+      let currentCombatant = null
+      const originalIndex = this.currentCombatantIndex
+      let foundNext = false
+
+      for (let i = 0; i < this.combatants.length; i++) {
+        const index = (originalIndex + i) % this.combatants.length
+        const combatant = this.combatants[index]
+
+        // Ensure we are using the latest player/enemy data from state
+        if (combatant.isPlayer) {
+          currentCombatant = player
+        } else {
+          currentCombatant = enemies.find(e => e.instanceId === combatant.instanceId) // Use instanceId for unique enemy tracking
+        }
+
+        if (currentCombatant && currentCombatant.hp > 0) {
+          this.currentCombatantIndex = index
+          foundNext = true
+          break
         }
       }
-      battleService.processTurn(gameContext)
+
+      if (!foundNext) {
+        // No living combatants left, battle should end
+        endBattle(enemies.every(e => e.hp <= 0), player, enemies)
+        return
+      }
+
+      // Prepare gameContext for battleService
+      const gameContext = {
+        player: player,
+        enemies: enemies,
+        battleLog: battleLog,
+        activePet: activePet,
+        endBattle: endBattle,
+        updateState: this.updateState, // Pass the component's method directly
+        nextTurn: () => {
+          // Schedule next combatant's turn after a delay
+          this.turnTimer = setTimeout(() => {
+            this.currentCombatantIndex = (this.currentCombatantIndex + 1) % this.combatants.length
+            this.nextCombatantTurn()
+          }, 1000)
+        }
+      }
+
+      if (currentCombatant.isPlayer) {
+        battleService.processPlayerTurn(gameContext)
+      } else {
+        battleService.processEnemyTurn(currentCombatant, gameContext)
+      }
     },
     fleeBattle () {
       if (!this.inBattle) return
@@ -419,6 +466,7 @@ export default {
 
       this.inBattle = false // Always exit battle state
       this.enemies = [] // Clear enemies
+      this.combatants = [] // Clear combatants
       player.hp = player.maxHp // Restore player HP
       if (this.activePet) this.activePet.hp = this.activePet.maxHp // Restore pet HP
       this.logBattle('你的生命值已完全恢复。')

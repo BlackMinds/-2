@@ -56,75 +56,79 @@ function performAttack (attacker, defender, battleLog, activePet, player) {
   }
 }
 
-function processTurn (gameContext) {
-  const { player, enemies, battleLog, activePet, endBattle, updateState } = gameContext
-  if (!gameContext.inBattle || player.hp <= 0 || enemies.every(e => e.hp <= 0)) {
-    endBattle(enemies.every(e => e.hp <= 0), player, enemies)
+function processPlayerTurn (gameContext) {
+  const { player, enemies, battleLog, activePet, endBattle, nextTurn } = gameContext // Removed updateState from destructuring
+
+  logBattle(battleLog, '--- 你的回合开始 ---')
+  const livingEnemies = enemies.filter(e => e.hp > 0)
+  if (livingEnemies.length === 0) {
+    endBattle(true, player, enemies)
+    return
+  }
+  const targetEnemy = livingEnemies[Math.floor(Math.random() * livingEnemies.length)]
+  logBattle(battleLog, `你选择攻击 ${targetEnemy.name}。`)
+
+  if (activePet) {
+    petService.performPetAction(activePet, player, targetEnemy, (msg) => logBattle(battleLog, msg), calculateDamage, 'player-turn-start')
+  }
+  performAttack(player, targetEnemy, battleLog, activePet, player)
+  if (targetEnemy.hp > 0 && activePet) {
+    petService.performPetAction(activePet, player, targetEnemy, (msg) => logBattle(battleLog, msg), calculateDamage, 'player-turn-end')
+  }
+
+  // Check if all enemies are defeated after player's action
+  if (enemies.every(e => e.hp <= 0)) {
+    endBattle(true, player, enemies)
     return
   }
 
-  if (activePet && activePet.hp <= 0) {
-    logBattle(battleLog, `你的宠物 ${activePet.name} 被击败了！`)
-  }
-
-  if (gameContext.currentTurn === 'player') {
-    logBattle(battleLog, '你的回合：')
-    const livingEnemies = enemies.filter(e => e.hp > 0)
-    if (livingEnemies.length === 0) {
-      endBattle(true, player, enemies)
-      return
-    }
-    const targetEnemy = livingEnemies[Math.floor(Math.random() * livingEnemies.length)]
-
-    if (activePet) {
-      petService.performPetAction(activePet, player, targetEnemy, (msg) => logBattle(battleLog, msg), calculateDamage, 'player-turn-start')
-    }
-    performAttack(player, targetEnemy, battleLog, activePet, player)
-    if (targetEnemy.hp > 0 && activePet) {
-      petService.performPetAction(activePet, player, targetEnemy, (msg) => logBattle(battleLog, msg), calculateDamage, 'player-turn-end')
-    }
-    if (enemies.every(e => e.hp <= 0)) {
-      endBattle(true, player, enemies)
-      return
-    }
-    updateState({ currentTurn: 'enemy' })
-    gameContext.turnTimer = setTimeout(() => gameContext.nextTurn(), 1000)
-  } else if (gameContext.currentTurn === 'enemy') {
-    enemies.forEach(enemy => {
-      if (enemy.hp > 0) {
-        logBattle(battleLog, `${enemy.name} 的回合：`)
-        let target = player
-        if (activePet && activePet.hp > 0 && Math.random() < 0.3) {
-          target = activePet
-          logBattle(battleLog, `${enemy.name} 的目标是你的宠物 ${target.name}！`)
-        } else {
-          logBattle(battleLog, `${enemy.name} 的目标是你！`)
-        }
-        performAttack(enemy, target, battleLog, activePet, player)
-        // Explicitly update player and activePet state to ensure reactivity
-        updateState({ player: player })
-        if (activePet) {
-          updateState({ activePet: activePet })
-        }
-
-        if (player.hp <= 0) {
-          endBattle(false, player, enemies)
-        }
-      }
-    })
-    // Filter out defeated enemies
-    updateState({ enemies: enemies.filter(e => e.hp > 0) })
-
-    if (player.hp <= 0) return
-    updateState({ currentTurn: 'player' })
-    gameContext.turnTimer = setTimeout(() => gameContext.nextTurn(), 1000)
-  }
   logBattle(battleLog, `你的生命值: ${player.hp}/${player.maxHp}`)
   enemies.forEach(enemy => {
     if (enemy.hp > 0) {
       logBattle(battleLog, `${enemy.name} 的生命值: ${enemy.hp}/${enemy.maxHp}`)
     }
   })
+  logBattle(battleLog, '--- 你的回合结束 ---')
+  nextTurn() // Pass control to the next combatant
+}
+
+function processEnemyTurn (enemy, gameContext) {
+  const { player, enemies, battleLog, activePet, endBattle, nextTurn } = gameContext // Removed updateState from destructuring
+
+  logBattle(battleLog, `--- ${enemy.name} 的行动 ---`)
+  let target = player
+  if (activePet && activePet.hp > 0 && Math.random() < 0.3) {
+    target = activePet
+    logBattle(battleLog, `${enemy.name} 的目标是你的宠物 ${target.name}！`)
+  } else {
+    logBattle(battleLog, `${enemy.name} 的目标是你！`)
+  }
+  performAttack(enemy, target, battleLog, activePet, player)
+
+  // Explicitly update player and activePet state to ensure reactivity
+  gameContext.updateState({ player: player }) // Access directly from gameContext
+  if (activePet) {
+    gameContext.updateState({ activePet: activePet }) // Access directly from gameContext
+  }
+
+  // Check if player was defeated
+  if (player.hp <= 0) {
+    endBattle(false, player, enemies)
+    return
+  }
+
+  // Unified HP logs after this enemy has acted
+  logBattle(battleLog, `你的生命值: ${player.hp}/${player.maxHp}`)
+  if (activePet) {
+    logBattle(battleLog, `宠物 ${activePet.name} 的生命值: ${activePet.hp}/${activePet.maxHp}`)
+  }
+  enemies.forEach(e => { // Use 'e' to avoid conflict with 'enemy' parameter
+    if (e.hp > 0) {
+      logBattle(battleLog, `${e.name} 的生命值: ${e.hp}/${e.maxHp}`)
+    }
+  })
+
+  nextTurn() // Pass control to the next combatant
 }
 
 function getRandomMonster (monsters, playerLevel) {
@@ -143,4 +147,4 @@ function getRandomMonster (monsters, playerLevel) {
   return selectedMonster
 }
 
-export { logBattle, calculateDamage, performAttack, processTurn, getRandomMonster }
+export { logBattle, calculateDamage, performAttack, processPlayerTurn, processEnemyTurn, getRandomMonster }
