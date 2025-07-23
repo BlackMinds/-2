@@ -120,7 +120,7 @@ export function sellItem (player, item, logBattle) {
   if (index === -1) return
 
   let sellPrice = 0
-  if (['weapon', 'armor', 'boots', 'ring', 'necklace'].includes(item.type)) {
+  if (['weapon', 'armor', 'boots', 'ring', 'necklace', 'equipment'].includes(item.type)) {
     sellPrice = (item.level || 1) * 3
   } else if (item.type === 'skill') {
     sellPrice = 20
@@ -147,7 +147,7 @@ export function sellAll (player, logBattle) {
   const itemsToSell = []
 
   player.inventory.forEach(item => {
-    if (['weapon', 'armor', 'boots', 'ring', 'necklace'].includes(item.type)) {
+    if (['weapon', 'armor', 'boots', 'ring', 'necklace', 'equipment'].includes(item.type)) {
       itemsToSell.push(item)
     } else {
       itemsToKeep.push(item)
