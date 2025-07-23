@@ -89,7 +89,9 @@ export function equipItem (player, item, logBattle) {
 
   player.equipment[item.slot] = item
   player.inventory.splice(index, 1)
-  logBattle(`你装备了 ${item.name}。`)
+  if (logBattle) {
+    logBattle(`你装备了 ${item.name}。`)
+  }
 }
 
 export function unequipItem (player, slot, logBattle) {
@@ -98,7 +100,9 @@ export function unequipItem (player, slot, logBattle) {
 
   player.inventory.push(item)
   player.equipment[slot] = null
-  logBattle(`你卸下了 ${item.name}。`)
+  if (logBattle) {
+    logBattle(`你卸下了 ${item.name}。`)
+  }
 }
 
 export function useItem (player, item, index, logBattle) {
@@ -116,7 +120,7 @@ export function sellItem (player, item, logBattle) {
   if (index === -1) return
 
   let sellPrice = 0
-  if (item.type === 'equipment' || item.type === 'necklace') {
+  if (['weapon', 'armor', 'boots', 'ring', 'necklace'].includes(item.type)) {
     sellPrice = (item.level || 1) * 3
   } else if (item.type === 'skill') {
     sellPrice = 20
@@ -126,10 +130,14 @@ export function sellItem (player, item, logBattle) {
 
   if (sellPrice > 0) {
     player.gold += sellPrice
-    logBattle(`你出售了 ${item.name}，获得了 ${sellPrice} 金币。`)
+    if (logBattle) {
+      logBattle(`你出售了 ${item.name}，获得了 ${sellPrice} 金币。`)
+    }
     player.inventory.splice(index, 1)
   } else {
-    logBattle(`${item.name} 无法出售。`)
+    if (logBattle) {
+      logBattle(`${item.name} 无法出售。`)
+    }
   }
 }
 
@@ -139,7 +147,7 @@ export function sellAll (player, logBattle) {
   const itemsToSell = []
 
   player.inventory.forEach(item => {
-    if (item.type === 'equipment' || item.type === 'necklace') {
+    if (['weapon', 'armor', 'boots', 'ring', 'necklace'].includes(item.type)) {
       itemsToSell.push(item)
     } else {
       itemsToKeep.push(item)
@@ -153,9 +161,13 @@ export function sellAll (player, logBattle) {
     })
     player.inventory = itemsToKeep
     player.gold += totalSellPrice
-    logBattle(`一键出售了 ${itemsToSell.length} 件装备，获得了 ${totalSellPrice} 金币。`)
+    if (logBattle) {
+      logBattle(`一键出售了 ${itemsToSell.length} 件装备，获得了 ${totalSellPrice} 金币。`)
+    }
   } else {
-    logBattle('背包中没有可出售的装备。')
+    if (logBattle) {
+      logBattle('背包中没有可出售的装备。')
+    }
   }
 }
 

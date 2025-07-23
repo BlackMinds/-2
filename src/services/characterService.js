@@ -1,6 +1,7 @@
 import equipmentData from '../data/equipment.json'
 import * as skillService from './skillService.js'
 import { storageService } from './storageService.js'
+import { equipItem } from './inventoryService.js'
 
 /**
  * Initializes a new player object with default attributes and state.
@@ -69,8 +70,8 @@ export function initializePlayer (skillsData) {
         baseAgility: itemData.agility || 0,
         baseConstitution: itemData.constitution || 0
       }
-      const slot = initialEquipment[itemId]
-      player.equipment[slot] = item
+      player.inventory.push(item) // Add to inventory first
+      equipItem(player, item) // Then equip it
     }
   })
 
