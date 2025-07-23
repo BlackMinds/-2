@@ -81,30 +81,6 @@
           </li>
         </ul>
       </div>
-      <div class="section skill-interface">
-        <h2 @click="toggleSection('skill')">
-          技能界面 (Skills)
-          <span class="toggle-arrow">{{ sections.skill.collapsed ? '▼' : '▲' }}</span>
-        </h2>
-        <div v-if="!sections.skill.collapsed">
-          <h3>主动技能槽位 (Active Skills)</h3>
-          <ul>
-            <li v-for="(skill, index) in player.activeSkillSlots" :key="'active-' + index" @mouseover="showTooltip($event, skill)" @mouseout="hideTooltip">
-            槽位 {{ index + 1 }}: {{ skill ? `L${skill.level} ${skill.description}` : '空' }}
-            <button v-if="skill" @click="upgradeSkill(skill, index, 'active')" :disabled="inBattle">升级</button>
-            <button v-if="skill" @click="unequipSkill(skill, index, 'active')" :disabled="inBattle">卸下</button>
-          </li>
-        </ul>
-        <h3>被动技能槽位 (Passive Skills)</h3>
-        <ul>
-          <li v-for="(skill, index) in player.passiveSkillSlots" :key="'passive-' + index" @mouseover="showTooltip($event, skill)" @mouseout="hideTooltip">
-            槽位 {{ index + 1 }}: {{ skill ? `L${skill.level} ${skill.description}` : '空' }}
-            <button v-if="skill" @click="upgradeSkill(skill, index, 'passive')" :disabled="inBattle">升级</button>
-            <button v-if="skill" @click="unequipSkill(skill, index, 'passive')" :disabled="inBattle">卸下</button>
-          </li>
-        </ul>
-        </div>
-      </div>
     </div>
     <div class="right-panel">
       <div class="section text-battle-interface">
@@ -164,7 +140,6 @@
         <div v-if="!sections.backpack.collapsed">
           <div class="backpack-controls">
             <button @click="backpackCategory = 'equipment'" :class="{ 'active-category': backpackCategory === 'equipment' }">装备</button>
-            <button @click="backpackCategory = 'skills'" :class="{ 'active-category': backpackCategory === 'skills' }">技能</button>
             <button @click="backpackCategory = 'materials'" :class="{ 'active-category': backpackCategory === 'materials' }">材料</button>
             <button @click="sellAllItems">一键出售装备</button>
           </div>
@@ -174,18 +149,6 @@
             <button v-if="item.slot && item.type !== 'necklace'" @click="enhanceItem(item, 'inventory', index)" :disabled="inBattle">强化</button>
             <button v-if="item.slot" @click="equipItem(item)" :disabled="inBattle">装备</button>
             <button v-if="item.type === 'consumable'" @click="useItem(item, index)" :disabled="inBattle">使用</button>
-            <span v-if="item.type === 'skill'">
-              <span v-if="getSkillType(item) === 'active'">
-                <button @click="equipSkill(item, 0, 'active')" :disabled="inBattle">装备主动1</button>
-                <button @click="equipSkill(item, 1, 'active')" :disabled="inBattle">装备主动2</button>
-                <button @click="equipSkill(item, 2, 'active')" :disabled="inBattle">装备主动3</button>
-              </span>
-              <span v-if="getSkillType(item) === 'passive'">
-                <button @click="equipSkill(item, 0, 'passive')" :disabled="inBattle">装备被动1</button>
-                <button @click="equipSkill(item, 1, 'passive')" :disabled="inBattle">装备被动2</button>
-                <button @click="equipSkill(item, 2, 'passive')" :disabled="inBattle">装备被动3</button>
-              </span>
-            </span>
             <button @click="sellItem(item)" :disabled="inBattle">出售</button>
           </li>
         </ul>
@@ -201,10 +164,8 @@
 <script>
 import monstersData from '../data/monsters.json'
 import equipmentData from '../data/equipment.json'
-import skillsData from '../data/skills.json'
 import petsData from '../data/pets.json'
 import towerMonstersData from '../data/tower-monsters.json'
-import * as skillService from '../services/skillService.js'
 import * as inventoryService from '../services/inventoryService.js'
 import * as characterService from '../services/characterService.js'
 import * as petService from '../services/petService.js'
@@ -221,13 +182,12 @@ export default {
   data () {
     return {
       isEditingName: false,
-      player: characterService.initializePlayer(skillsData),
+      player: characterService.initializePlayer(),
       enemies: [],
       inBattle: false,
       battleLog: [],
       monsters: monstersData,
       equipment: equipmentData,
-      skillsData: skillsData, // All skills data from JSON
       pets: petsData,
       towerMonsters: towerMonstersData,
       currentTowerLevel: 1,
@@ -245,7 +205,6 @@ export default {
         character: { collapsed: false },
         pet: { collapsed: false },
         equipment: { collapsed: false },
-        skill: { collapsed: false },
         backpack: { collapsed: false }
       },
       backpackCategory: 'equipment'
@@ -257,12 +216,6 @@ export default {
   watch: {
     // Watch for changes in equipment or passive skills and update stats
     'player.equipment': {
-      handler () {
-        characterService.updatePlayerStats(this.player, this.activePet)
-      },
-      deep: true
-    },
-    'player.passiveSkillSlots': {
       handler () {
         characterService.updatePlayerStats(this.player, this.activePet)
       },
@@ -311,8 +264,6 @@ export default {
       switch (this.backpackCategory) {
         case 'equipment':
           return this.player.inventory.filter(item => item.slot)
-        case 'skills':
-          return this.player.inventory.filter(item => item.type === 'skill')
         case 'materials':
           return this.player.inventory.filter(item => item.type === 'material' || item.type === 'consumable')
         default:
@@ -341,12 +292,12 @@ export default {
       this.logBattle('游戏进度已保存。')
     },
     loadGame () {
-      this.player = characterService.loadPlayer(this.skillsData)
+      this.player = characterService.loadPlayer()
       this.currentTowerLevel = this.player.highestTowerLevel || 1
       this.logBattle('游戏进度已加载。')
     },
     showTooltip (event, item) {
-      const tooltipData = uiService.showTooltip(event, item, this.player, this.skillsData)
+      const tooltipData = uiService.showTooltip(event, item, this.player)
       if (tooltipData) {
         this.tooltip = tooltipData
       }
@@ -355,14 +306,10 @@ export default {
       this.tooltip = uiService.hideTooltip()
     },
     showEnemyTooltip (event, enemy) {
-      const tooltipData = uiService.showEnemyTooltip(event, enemy, this.equipment, this.skillsData, this.pets)
+      const tooltipData = uiService.showEnemyTooltip(event, enemy, this.equipment, this.pets)
       if (tooltipData) {
         this.tooltip = tooltipData
       }
-    },
-    upgradeSkill (skill, slotIndex, slotType) {
-      skillService.upgradeSkill(this.player, skill, slotIndex, slotType, this.skillsData, this.logBattle, this.saveGame)
-      characterService.updatePlayerStats(this.player, this.activePet)
     },
     enhanceItem (item, location, identifier) {
       inventoryService.enhanceItem(this.player, item, location, this.logBattle, this.activePet, this.hideTooltip)
@@ -395,9 +342,6 @@ export default {
         this.logBattle(`${this.enemies[0].name} 获得了先手！`)
       }
       this.processTurn()
-    },
-    getSkillType (skillItem) {
-      return skillService.getSkillType(skillItem, this.skillsData)
     },
     sellAllItems () {
       inventoryService.sellAll(this.player, this.logBattle)
@@ -555,11 +499,7 @@ export default {
             else player.inventory.push({ name: drop.name, type: 'material', quantity: 1 })
             this.logBattle(`掉落了材料：${drop.name}！`)
           } else if (drop.type === 'skill') {
-            const skill = this.skillsData.find(s => s.id === drop.skillId)
-            if (skill && !player.inventory.some(item => item.type === 'skill' && item.skillId === skill.id)) {
-              player.inventory.push({ name: `${skill.name} 技能书`, type: 'skill', skillId: skill.id })
-              this.logBattle(`掉落了技能书：${skill.name}！`)
-            }
+            // Removed skill drop logic
           } else if (drop.type === 'pet') {
             if (player.pets.length < 5) {
               const petData = this.pets.find(p => p.id === drop.petId)
@@ -586,14 +526,6 @@ export default {
     },
     useItem (item, index) {
       inventoryService.useItem(this.player, item, index, this.logBattle)
-    },
-    equipSkill (skillItem, slotIndex, slotType) {
-      skillService.equipSkill(this.player, skillItem, slotIndex, slotType, this.skillsData, this.logBattle)
-      characterService.updatePlayerStats(this.player, this.activePet)
-    },
-    unequipSkill (skill, slotIndex, slotType) {
-      skillService.unequipSkill(this.player, skill, slotIndex, slotType, this.logBattle)
-      characterService.updatePlayerStats(this.player, this.activePet)
     },
     logBattle (message) {
       battleService.logBattle(this.battleLog, message)

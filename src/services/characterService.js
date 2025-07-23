@@ -1,5 +1,4 @@
 import equipmentData from '../data/equipment.json'
-import * as skillService from './skillService.js'
 import { storageService } from './storageService.js'
 import { equipItem } from './inventoryService.js'
 
@@ -9,7 +8,7 @@ import { equipItem } from './inventoryService.js'
  * @returns {object} The initialized player object.
  */
 export function initializePlayer (skillsData) {
-  let player = {
+  const player = {
     name: '自定义角色',
     level: 1,
     xp: 0,
@@ -43,8 +42,8 @@ export function initializePlayer (skillsData) {
       ring: null,
       necklace: null
     },
-    activeSkillSlots: [null, null, null],
-    passiveSkillSlots: [null, null, null],
+    activeSkillSlots: [],
+    passiveSkillSlots: [],
     skillLevels: {},
     inventory: []
   }
@@ -75,8 +74,6 @@ export function initializePlayer (skillsData) {
     }
   })
 
-  // Setup Initial Skills
-  player = skillService.initializeSkills(player, skillsData)
   updatePlayerStats(player) // Recalculate all stats
   return player
 }
@@ -132,27 +129,6 @@ export function updatePlayerStats (player, activePet) {
       percentHp += item.percentHp || 0
     }
   }
-
-  // Add stats from passive skills
-  player.passiveSkillSlots.forEach(skill => {
-    if (skill) {
-      str += skill.strength || 0
-      agi += skill.agility || 0
-      con += skill.constitution || 0
-      flatAttack += skill.attack || 0
-      flatDefense += skill.defense || 0
-      flatHp += skill.maxHp || 0
-      flatEvasion += skill.evasion || 0
-      flatCritChance += skill.critChance || 0
-      flatCritResist += skill.critResist || 0
-      flatMoveSpeed += skill.moveSpeed || 0
-      flatComboChance += skill.comboChance || 0
-      flatCounterChance += skill.counterChance || 0
-      flatIgnoreDefense += skill.ignoreDefense || 0
-      if (skill.goldBonus) player.goldBonus += skill.goldBonus
-      if (skill.hpRegen) player.hpRegen += skill.hpRegen
-    }
-  })
 
   // Assign final base attributes
   player.strength = str
@@ -299,6 +275,10 @@ export function loadPlayer (skillsData) {
     if (player.equipment.necklace === undefined) {
       player.equipment.necklace = null
     }
+    // Clear skill-related data from old saves
+    player.activeSkillSlots = []
+    player.passiveSkillSlots = []
+    player.skillLevels = {}
   } else {
     player = initializePlayer(skillsData)
   }

@@ -32,63 +32,14 @@ function performAttack (attacker, defender, battleLog, activePet, player) {
     return
   }
 
-  let damageDealt = 0
-  let attackType = 'normal'
-  let skillUsed = null
+  const damageDealt = calculateDamage(attacker.attack, defender.defense, attacker.critChance, defender.critResist, attacker.ignoreDefense, battleLog)
+  defender.hp -= damageDealt
+  logBattle(battleLog, `${attacker.name} 对 ${defenderName} 造成了 ${damageDealt} 点伤害。`)
 
-  const skillRoll = Math.random()
-  if (attacker.skills && attacker.skills.length > 0 && skillRoll < 0.5) {
-    skillUsed = attacker.skills[Math.floor(Math.random() * attacker.skills.length)]
-    attackType = 'skill'
-  } else if (attacker.name === player.name) {
-    const skillProbabilities = [0.45, 0.35, 0.25]
-    const rand = Math.random()
-    let cumulativeProb = 0
-
-    for (let i = 0; i < player.activeSkillSlots.length; i++) {
-      const skill = player.activeSkillSlots[i]
-      if (skill && skill.type === 'active' && player.hp >= skill.cost) {
-        cumulativeProb += skillProbabilities[i]
-        if (rand < cumulativeProb) {
-          skillUsed = skill
-          attackType = 'skill'
-          break
-        }
-      }
-    }
-  }
-
-  if (attackType === 'skill' && skillUsed) {
-    logBattle(battleLog, `${attacker.name} 使用了技能：${skillUsed.name}！`)
-    if (attacker.name === player.name) {
-      player.hp -= skillUsed.cost
-    }
-
-    if (skillUsed.damageMultiplier) {
-      const skillAttack = attacker.attack * skillUsed.damageMultiplier
-      damageDealt = calculateDamage(skillAttack, defender.defense, attacker.critChance, defender.critResist, attacker.ignoreDefense, battleLog)
-      defender.hp -= damageDealt
-      logBattle(battleLog, `对 ${defenderName} 造成了 ${damageDealt} 点技能伤害。`)
-      if (skillUsed.lifesteal) {
-        const lifestealAmount = Math.round(damageDealt * skillUsed.lifesteal)
-        attacker.hp = Math.min(attacker.maxHp, attacker.hp + lifestealAmount)
-        logBattle(battleLog, `${attacker.name} 汲取了 ${lifestealAmount} 点生命值。`)
-      }
-    } else if (skillUsed.heal) {
-      attacker.hp = Math.min(attacker.maxHp, attacker.hp + skillUsed.heal)
-      logBattle(battleLog, `${attacker.name} 恢复了 ${skillUsed.heal} 点生命值。`)
-      return
-    }
-  } else {
-    damageDealt = calculateDamage(attacker.attack, defender.defense, attacker.critChance, defender.critResist, attacker.ignoreDefense, battleLog)
-    defender.hp -= damageDealt
-    logBattle(battleLog, `${attacker.name} 对 ${defenderName} 造成了 ${damageDealt} 点伤害。`)
-
-    if (Math.random() < attacker.comboChance) {
-      const comboDamage = calculateDamage(attacker.attack * 0.5, defender.defense, attacker.critChance, defender.critResist, attacker.ignoreDefense, battleLog)
-      defender.hp -= comboDamage
-      logBattle(battleLog, `${attacker.name} 发动了连击，对 ${defenderName} 额外造成了 ${comboDamage} 点伤害！`)
-    }
+  if (Math.random() < attacker.comboChance) {
+    const comboDamage = calculateDamage(attacker.attack * 0.5, defender.defense, attacker.critChance, defender.critResist, attacker.ignoreDefense, battleLog)
+    defender.hp -= comboDamage
+    logBattle(battleLog, `${attacker.name} 发动了连击，对 ${defenderName} 额外造成了 ${comboDamage} 点伤害！`)
   }
 
   if (defender.hp > 0 && attacker.name === player.name && Math.random() < defender.counterChance) {
