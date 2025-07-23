@@ -31,7 +31,7 @@ export function initializePlayer (skillsData) {
     comboChance: 0.05,
     counterChance: 0.03,
     ignoreDefense: 0.0,
-    gold: 10000000,
+    gold: 1000,
     pets: [],
     activePetId: null,
     highestTowerLevel: 1,
