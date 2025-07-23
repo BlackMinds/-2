@@ -156,7 +156,7 @@ function processTurn (gameContext) {
           updateState({ activePet: activePet })
         }
 
-        if (player.hp <= 0 || (activePet && activePet.hp <= 0 && target === activePet)) {
+        if (player.hp <= 0) {
           endBattle(false)
         }
       }
