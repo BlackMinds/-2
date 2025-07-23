@@ -473,30 +473,39 @@ export default {
       if (this.turnTimer) clearTimeout(this.turnTimer)
       const isTowerBattle = this.enemies.length > 0 && this.towerMonsters.some(m => m.name === this.enemies[0].name)
 
+      this.inBattle = false // Always exit battle state
+      this.enemies = [] // Clear enemies
+      this.player.hp = this.player.maxHp // Restore player HP
+      if (this.activePet) this.activePet.hp = this.activePet.maxHp // Restore pet HP
+      this.logBattle('你的生命值已完全恢复。')
+
       if (isVictory) {
         this.logBattle('你击败了所有敌人！')
         this.enemies.forEach(enemy => this.handleMonsterDefeated(enemy))
         this.saveGame()
         if (isTowerBattle) {
+          this.logBattle('3秒后将继续挑战锁妖塔...')
           this.battleEndTimer = setTimeout(() => this.startTowerBattle(), 3000)
-          return
+        } else {
+          this.logBattle('3秒后将开始新的战斗...')
+          this.battleEndTimer = setTimeout(() => this.startBattle(), 3000)
         }
-      } else if (this.player.hp <= 0) {
+      } else if (this.player.hp <= 0) { // Player defeated
         this.logBattle('你被击败了...')
-        if (isTowerBattle) this.currentTowerLevel = this.player.highestTowerLevel
-      }
-
-      this.inBattle = false
-      this.enemies = []
-      this.player.hp = this.player.maxHp
-      if (this.activePet) this.activePet.hp = this.activePet.maxHp
-      this.logBattle('你的生命值已完全恢复。')
-
-      if (!isVictory && this.player.hp > 0 && !isTowerBattle) {
-        // Fled, not a tower battle
-      } else if (!isTowerBattle) {
-        this.logBattle('3秒后将开始新的战斗...')
-        this.battleEndTimer = setTimeout(() => this.startBattle(), 3000)
+        if (isTowerBattle) {
+          this.currentTowerLevel = this.player.highestTowerLevel // Reset tower level on defeat
+          this.logBattle('3秒后将重新挑战锁妖塔...')
+          this.battleEndTimer = setTimeout(() => this.startTowerBattle(), 3000)
+        } else {
+          this.logBattle('3秒后将开始新的战斗...')
+          this.battleEndTimer = setTimeout(() => this.startBattle(), 3000)
+        }
+      } else { // Player fled
+        this.logBattle('你成功逃跑了！')
+        if (!isTowerBattle) { // If fled from a non-tower battle, restart
+          this.logBattle('3秒后将开始新的战斗...')
+          this.battleEndTimer = setTimeout(() => this.startBattle(), 3000)
+        }
       }
     },
     handleMonsterDefeated (monster) {
