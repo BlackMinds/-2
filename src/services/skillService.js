@@ -42,7 +42,7 @@ export function upgradeSkill (player, skill, slotIndex, slotType, skillsData, lo
   }
 
   const nextLevelData = skillBaseData.levels[currentLevel]
-  const cost = nextLevelData.cost
+  const cost = nextLevelData.cost * 2
   if (player.gold < cost) {
     logBattle(`金币不足，需要 ${cost} 金币升级。`)
     return

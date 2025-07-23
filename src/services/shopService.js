@@ -13,7 +13,7 @@ function handleOpenBlindBox (player, { cost, times }, logBattle, callback) {
     const rand = Math.random()
     if (cost === 10000) {
       if (rand < 0.01) { // 1% chance for 100000 gold
-        const reward = { type: 'gold', amount: 100000, name: '100000 金币' }
+        const reward = { type: 'gold', amount: 100000, name: '10000 金币' }
         rewards.push(reward)
         results.push(reward)
       } else if (rand < 0.05) { // 4% chance for crafting materials
@@ -23,7 +23,7 @@ function handleOpenBlindBox (player, { cost, times }, logBattle, callback) {
         rewards.push(reward)
         results.push(reward)
       } else if (rand < 0.5) { // 45% chance for small amount of gold
-        const amount = Math.floor(Math.random() * 1000) + 10
+        const amount = Math.floor(Math.random() * 100) + 10
         const reward = { type: 'gold', amount, name: `${amount} 金币` }
         rewards.push(reward)
         results.push(reward)
@@ -34,7 +34,7 @@ function handleOpenBlindBox (player, { cost, times }, logBattle, callback) {
       }
     } else if (cost === 100000) {
       if (rand < 0.05) { // 5% chance for 100000 gold
-        const reward = { type: 'gold', amount: 100000, name: '100000 金币' }
+        const reward = { type: 'gold', amount: 100000, name: '10000 金币' }
         rewards.push(reward)
         results.push(reward)
       } else if (rand < 0.15) { // 10% chance for crafting materials
@@ -44,7 +44,7 @@ function handleOpenBlindBox (player, { cost, times }, logBattle, callback) {
         rewards.push(reward)
         results.push(reward)
       } else if (rand < 0.55) { // 40% chance for small amount of gold
-        const amount = Math.floor(Math.random() * 10000) + 1000
+        const amount = Math.floor(Math.random() * 1000) + 1000
         const reward = { type: 'gold', amount, name: `${amount} 金币` }
         rewards.push(reward)
         results.push(reward)

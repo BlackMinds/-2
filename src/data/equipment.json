@@ -7,7 +7,7 @@
     "slot": "weapon",
     "attack": 5,
     "strength": 1,
-    "critChance": 0.01,
+    "critChance": 0.005,
     "comboChance": 0.0
   },
   {
@@ -19,7 +19,7 @@
     "hp": 10,
     "defense": 2,
     "constitution": 1,
-    "critResist": 0.01,
+    "critResist": 0.005,
     "counterChance": 0.0
   },
   {
@@ -45,8 +45,8 @@
     "attack": 1,
     "strength": 1,
     "agility": 1,
-    "critChance": 0.01,
-    "ignoreDefense": 0.01
+    "critChance": 0.005,
+    "ignoreDefense": 0.005
   },
   {
     "id": "iron_sword",
@@ -56,8 +56,8 @@
     "slot": "weapon",
     "attack": 10,
     "strength": 2,
-    "critChance": 0.03,
-    "comboChance": 0.02
+    "critChance": 0.015,
+    "comboChance": 0.01
   },
   {
     "id": "leather_armor",
@@ -68,8 +68,8 @@
     "hp": 20,
     "defense": 5,
     "constitution": 2,
-    "critResist": 0.03,
-    "counterChance": 0.01
+    "critResist": 0.015,
+    "counterChance": 0.005
   },
   {
     "id": "leather_boots",
@@ -80,9 +80,9 @@
     "defense": 3,
     "moveSpeed": 2,
     "agility": 2,
-    "evasion": 0.01,
-    "counterChance": 0.01,
-    "comboChance": 0.01,
+    "evasion": 0.005,
+    "counterChance": 0.005,
+    "comboChance": 0.005,
     "hp": 10
   },
   {
@@ -95,8 +95,8 @@
     "attack": 3,
     "constitution": 1,
     "agility": 1,
-    "critChance": 0.03,
-    "ignoreDefense": 0.02
+    "critChance": 0.015,
+    "ignoreDefense": 0.01
   },
   {
     "id": "steel_sword",
@@ -106,8 +106,8 @@
     "slot": "weapon",
     "attack": 18,
     "strength": 4,
-    "critChance": 0.05,
-    "comboChance": 0.03,
+    "critChance": 0.025,
+    "comboChance": 0.015,
     "hp": 10
   },
   {
@@ -119,8 +119,8 @@
     "hp": 35,
     "defense": 8,
     "constitution": 4,
-    "critResist": 0.05,
-    "counterChance": 0.02
+    "critResist": 0.025,
+    "counterChance": 0.01
   },
   {
     "id": "iron_boots",
@@ -131,8 +131,8 @@
     "defense": 5,
     "moveSpeed": 3,
     "agility": 4,
-    "counterChance": 0.02,
-    "comboChance": 0.02,
+    "counterChance": 0.01,
+    "comboChance": 0.01,
     "hp": 15
   },
   {
@@ -145,8 +145,8 @@
     "attack": 5,
     "strength": 2,
     "constitution": 2,
-    "critChance": 0.05,
-    "ignoreDefense": 0.03
+    "critChance": 0.025,
+    "ignoreDefense": 0.015
   },
   {
     "id": "mithril_sword",
@@ -156,8 +156,8 @@
     "slot": "weapon",
     "attack": 25,
     "strength": 6,
-    "critChance": 0.08,
-    "comboChance": 0.05,
+    "critChance": 0.04,
+    "comboChance": 0.025,
     "hp": 20
   },
   {
@@ -169,8 +169,8 @@
     "hp": 50,
     "defense": 12,
     "constitution": 6,
-    "critResist": 0.08,
-    "counterChance": 0.03,
+    "critResist": 0.04,
+    "counterChance": 0.015,
     "attack": 5
   },
   {
@@ -182,8 +182,8 @@
     "defense": 8,
     "moveSpeed": 4,
     "agility": 6,
-    "counterChance": 0.03,
-    "comboChance": 0.03,
+    "counterChance": 0.015,
+    "comboChance": 0.015,
     "hp": 25
   },
   {
@@ -196,8 +196,8 @@
     "attack": 8,
     "agility": 4,
     "constitution": 4,
-    "critChance": 0.08,
-    "ignoreDefense": 0.04
+    "critChance": 0.04,
+    "ignoreDefense": 0.02
   },
   {
     "id": "rune_sword",
@@ -207,8 +207,8 @@
     "slot": "weapon",
     "attack": 35,
     "strength": 8,
-    "critChance": 0.1,
-    "comboChance": 0.07,
+    "critChance": 0.05,
+    "comboChance": 0.035,
     "hp": 30
   },
   {
@@ -220,8 +220,8 @@
     "hp": 70,
     "defense": 18,
     "constitution": 8,
-    "critResist": 0.1,
-    "counterChance": 0.05,
+    "critResist": 0.05,
+    "counterChance": 0.025,
     "attack": 8
   },
   {
@@ -233,8 +233,8 @@
     "defense": 12,
     "moveSpeed": 5,
     "agility": 8,
-    "counterChance": 0.05,
-    "comboChance": 0.05,
+    "counterChance": 0.025,
+    "comboChance": 0.025,
     "hp": 35,
     "attack": 3
   },
@@ -248,8 +248,8 @@
     "attack": 12,
     "strength": 5,
     "agility": 5,
-    "critChance": 0.1,
-    "ignoreDefense": 0.05
+    "critChance": 0.05,
+    "ignoreDefense": 0.025
   },
   {
     "id": "dragon_bone_sword",
@@ -259,8 +259,8 @@
     "slot": "weapon",
     "attack": 45,
     "strength": 10,
-    "critChance": 0.12,
-    "comboChance": 0.09,
+    "critChance": 0.06,
+    "comboChance": 0.045,
     "hp": 40
   },
   {
@@ -272,8 +272,8 @@
     "hp": 90,
     "defense": 25,
     "constitution": 10,
-    "critResist": 0.12,
-    "counterChance": 0.07,
+    "critResist": 0.06,
+    "counterChance": 0.035,
     "attack": 10
   },
   {
@@ -285,8 +285,8 @@
     "defense": 16,
     "moveSpeed": 6,
     "agility": 10,
-    "counterChance": 0.07,
-    "comboChance": 0.07,
+    "counterChance": 0.035,
+    "comboChance": 0.035,
     "hp": 45,
     "attack": 5
   },
@@ -300,8 +300,8 @@
     "attack": 15,
     "strength": 6,
     "constitution": 6,
-    "critChance": 0.12,
-    "ignoreDefense": 0.06
+    "critChance": 0.06,
+    "ignoreDefense": 0.03
   },
   {
     "id": "titan_sword",
@@ -311,8 +311,8 @@
     "slot": "weapon",
     "attack": 60,
     "strength": 12,
-    "critChance": 0.15,
-    "comboChance": 0.12,
+    "critChance": 0.075,
+    "comboChance": 0.06,
     "hp": 50
   },
   {
@@ -324,8 +324,8 @@
     "hp": 120,
     "defense": 35,
     "constitution": 12,
-    "critResist": 0.15,
-    "counterChance": 0.1,
+    "critResist": 0.075,
+    "counterChance": 0.05,
     "attack": 12
   },
   {
@@ -337,8 +337,8 @@
     "defense": 20,
     "moveSpeed": 7,
     "agility": 12,
-    "counterChance": 0.1,
-    "comboChance": 0.1,
+    "counterChance": 0.05,
+    "comboChance": 0.05,
     "hp": 55,
     "attack": 7
   },
@@ -352,8 +352,8 @@
     "attack": 20,
     "agility": 8,
     "constitution": 8,
-    "critChance": 0.15,
-    "ignoreDefense": 0.07
+    "critChance": 0.075,
+    "ignoreDefense": 0.035
   },
   {
     "id": "holy_sword",
@@ -363,8 +363,8 @@
     "slot": "weapon",
     "attack": 75,
     "strength": 14,
-    "critChance": 0.18,
-    "comboChance": 0.15,
+    "critChance": 0.09,
+    "comboChance": 0.075,
     "hp": 60
   },
   {
@@ -376,8 +376,8 @@
     "hp": 150,
     "defense": 45,
     "constitution": 14,
-    "critResist": 0.18,
-    "counterChance": 0.12,
+    "critResist": 0.09,
+    "counterChance": 0.06,
     "attack": 15
   },
   {
@@ -389,8 +389,8 @@
     "defense": 25,
     "moveSpeed": 8,
     "agility": 14,
-    "counterChance": 0.12,
-    "comboChance": 0.12,
+    "counterChance": 0.06,
+    "comboChance": 0.06,
     "hp": 65,
     "attack": 9
   },
@@ -404,8 +404,8 @@
     "attack": 25,
     "strength": 9,
     "agility": 9,
-    "critChance": 0.18,
-    "ignoreDefense": 0.08
+    "critChance": 0.09,
+    "ignoreDefense": 0.04
   },
   {
     "id": "chaos_blade",
@@ -415,8 +415,8 @@
     "slot": "weapon",
     "attack": 90,
     "strength": 16,
-    "critChance": 0.2,
-    "comboChance": 0.18,
+    "critChance": 0.1,
+    "comboChance": 0.09,
     "hp": 70
   },
   {
@@ -428,8 +428,8 @@
     "hp": 180,
     "defense": 55,
     "constitution": 16,
-    "critResist": 0.2,
-    "counterChance": 0.15,
+    "critResist": 0.1,
+    "counterChance": 0.075,
     "attack": 18
   },
   {
@@ -441,8 +441,8 @@
     "defense": 30,
     "moveSpeed": 9,
     "agility": 16,
-    "counterChance": 0.15,
-    "comboChance": 0.15,
+    "counterChance": 0.075,
+    "comboChance": 0.075,
     "hp": 75,
     "attack": 11
   },
@@ -456,8 +456,8 @@
     "attack": 30,
     "strength": 10,
     "constitution": 10,
-    "critChance": 0.2,
-    "ignoreDefense": 0.09
+    "critChance": 0.1,
+    "ignoreDefense": 0.045
   },
   {
     "id": "doom_blade",
@@ -467,8 +467,8 @@
     "slot": "weapon",
     "attack": 110,
     "strength": 18,
-    "critChance": 0.22,
-    "comboChance": 0.2,
+    "critChance": 0.11,
+    "comboChance": 0.1,
     "hp": 80
   },
   {
@@ -480,8 +480,8 @@
     "hp": 220,
     "defense": 65,
     "constitution": 18,
-    "critResist": 0.22,
-    "counterChance": 0.18,
+    "critResist": 0.11,
+    "counterChance": 0.09,
     "attack": 20
   },
   {
@@ -493,8 +493,8 @@
     "defense": 35,
     "moveSpeed": 10,
     "agility": 18,
-    "counterChance": 0.18,
-    "comboChance": 0.18,
+    "counterChance": 0.09,
+    "comboChance": 0.09,
     "hp": 85,
     "attack": 13
   },
@@ -508,8 +508,8 @@
     "attack": 35,
     "agility": 11,
     "constitution": 11,
-    "critChance": 0.22,
-    "ignoreDefense": 0.10
+    "critChance": 0.11,
+    "ignoreDefense": 0.05
   },
   {
     "id": "genesis_sword",
@@ -519,8 +519,8 @@
     "slot": "weapon",
     "attack": 130,
     "strength": 20,
-    "critChance": 0.25,
-    "comboChance": 0.22,
+    "critChance": 0.125,
+    "comboChance": 0.11,
     "hp": 100
   },
   {
@@ -532,8 +532,8 @@
     "hp": 250,
     "defense": 75,
     "constitution": 20,
-    "critResist": 0.25,
-    "counterChance": 0.2,
+    "critResist": 0.125,
+    "counterChance": 0.1,
     "attack": 25
   },
   {
@@ -545,8 +545,8 @@
     "defense": 40,
     "moveSpeed": 12,
     "agility": 20,
-    "counterChance": 0.2,
-    "comboChance": 0.2,
+    "counterChance": 0.1,
+    "comboChance": 0.1,
     "hp": 100,
     "attack": 15
   },
@@ -561,8 +561,8 @@
     "strength": 12,
     "agility": 12,
     "constitution": 12,
-    "critChance": 0.25,
-    "ignoreDefense": 0.12
+    "critChance": 0.125,
+    "ignoreDefense": 0.06
   },
   {
     "id": "simple_necklace",
@@ -573,5 +573,535 @@
     "hp": 15,
     "defense": 1,
     "attack": 1
+  },
+  {
+    "id": "abyssal_blade",
+    "level": 55,
+    "name": "深渊之刃",
+    "type": "weapon",
+    "slot": "weapon",
+    "attack": 150,
+    "strength": 22,
+    "critChance": 0.13,
+    "comboChance": 0.12,
+    "hp": 110
+  },
+  {
+    "id": "abyssal_plate",
+    "level": 55,
+    "name": "深渊板甲",
+    "type": "armor",
+    "slot": "armor",
+    "hp": 280,
+    "defense": 85,
+    "constitution": 22,
+    "critResist": 0.13,
+    "counterChance": 0.11,
+    "attack": 28
+  },
+  {
+    "id": "abyssal_boots",
+    "level": 55,
+    "name": "深渊之靴",
+    "type": "boots",
+    "slot": "boots",
+    "defense": 45,
+    "moveSpeed": 13,
+    "agility": 22,
+    "counterChance": 0.11,
+    "comboChance": 0.11,
+    "hp": 110,
+    "attack": 17
+  },
+  {
+    "id": "abyssal_ring",
+    "level": 55,
+    "name": "深渊戒指",
+    "type": "ring",
+    "slot": "ring",
+    "hp": 110,
+    "attack": 45,
+    "strength": 13,
+    "agility": 13,
+    "constitution": 13,
+    "critChance": 0.13,
+    "ignoreDefense": 0.065
+  },
+  {
+    "id": "storm_caller",
+    "level": 60,
+    "name": "风暴召唤者",
+    "type": "weapon",
+    "slot": "weapon",
+    "attack": 170,
+    "strength": 25,
+    "critChance": 0.14,
+    "comboChance": 0.13,
+    "hp": 120
+  },
+  {
+    "id": "storm_plate",
+    "level": 60,
+    "name": "风暴板甲",
+    "type": "armor",
+    "slot": "armor",
+    "hp": 310,
+    "defense": 95,
+    "constitution": 25,
+    "critResist": 0.14,
+    "counterChance": 0.12,
+    "attack": 32
+  },
+  {
+    "id": "storm_boots",
+    "level": 60,
+    "name": "风暴之靴",
+    "type": "boots",
+    "slot": "boots",
+    "defense": 50,
+    "moveSpeed": 14,
+    "agility": 25,
+    "counterChance": 0.12,
+    "comboChance": 0.12,
+    "hp": 120,
+    "attack": 20
+  },
+  {
+    "id": "storm_ring",
+    "level": 60,
+    "name": "风暴戒指",
+    "type": "ring",
+    "slot": "ring",
+    "hp": 120,
+    "attack": 50,
+    "strength": 14,
+    "agility": 14,
+    "constitution": 14,
+    "critChance": 0.14,
+    "ignoreDefense": 0.07
+  },
+  {
+    "id": "celestial_blade",
+    "level": 65,
+    "name": "天界之刃",
+    "type": "weapon",
+    "slot": "weapon",
+    "attack": 190,
+    "strength": 28,
+    "critChance": 0.15,
+    "comboChance": 0.14,
+    "hp": 130
+  },
+  {
+    "id": "celestial_plate",
+    "level": 65,
+    "name": "天界板甲",
+    "type": "armor",
+    "slot": "armor",
+    "hp": 340,
+    "defense": 105,
+    "constitution": 28,
+    "critResist": 0.15,
+    "counterChance": 0.13,
+    "attack": 36
+  },
+  {
+    "id": "celestial_boots",
+    "level": 65,
+    "name": "天界之靴",
+    "type": "boots",
+    "slot": "boots",
+    "defense": 55,
+    "moveSpeed": 15,
+    "agility": 28,
+    "counterChance": 0.13,
+    "comboChance": 0.13,
+    "hp": 130,
+    "attack": 23
+  },
+  {
+    "id": "celestial_ring",
+    "level": 65,
+    "name": "天界戒指",
+    "type": "ring",
+    "slot": "ring",
+    "hp": 130,
+    "attack": 55,
+    "strength": 15,
+    "agility": 15,
+    "constitution": 15,
+    "critChance": 0.15,
+    "ignoreDefense": 0.075
+  },
+  {
+    "id": "demonic_blade",
+    "level": 70,
+    "name": "恶魔之刃",
+    "type": "weapon",
+    "slot": "weapon",
+    "attack": 210,
+    "strength": 31,
+    "critChance": 0.16,
+    "comboChance": 0.15,
+    "hp": 140
+  },
+  {
+    "id": "demonic_plate",
+    "level": 70,
+    "name": "恶魔板甲",
+    "type": "armor",
+    "slot": "armor",
+    "hp": 370,
+    "defense": 115,
+    "constitution": 31,
+    "critResist": 0.16,
+    "counterChance": 0.14,
+    "attack": 40
+  },
+  {
+    "id": "demonic_boots",
+    "level": 70,
+    "name": "恶魔之靴",
+    "type": "boots",
+    "slot": "boots",
+    "defense": 60,
+    "moveSpeed": 16,
+    "agility": 31,
+    "counterChance": 0.14,
+    "comboChance": 0.14,
+    "hp": 140,
+    "attack": 26
+  },
+  {
+    "id": "demonic_ring",
+    "level": 70,
+    "name": "恶魔戒指",
+    "type": "ring",
+    "slot": "ring",
+    "hp": 140,
+    "attack": 60,
+    "strength": 16,
+    "agility": 16,
+    "constitution": 16,
+    "critChance": 0.16,
+    "ignoreDefense": 0.08
+  },
+  {
+    "id": "divine_blade",
+    "level": 75,
+    "name": "神圣之刃",
+    "type": "weapon",
+    "slot": "weapon",
+    "attack": 230,
+    "strength": 34,
+    "critChance": 0.17,
+    "comboChance": 0.16,
+    "hp": 150
+  },
+  {
+    "id": "divine_plate",
+    "level": 75,
+    "name": "神圣板甲",
+    "type": "armor",
+    "slot": "armor",
+    "hp": 400,
+    "defense": 125,
+    "constitution": 34,
+    "critResist": 0.17,
+    "counterChance": 0.15,
+    "attack": 44
+  },
+  {
+    "id": "divine_boots",
+    "level": 75,
+    "name": "神圣之靴",
+    "type": "boots",
+    "slot": "boots",
+    "defense": 65,
+    "moveSpeed": 17,
+    "agility": 34,
+    "counterChance": 0.15,
+    "comboChance": 0.15,
+    "hp": 150,
+    "attack": 29
+  },
+  {
+    "id": "divine_ring",
+    "level": 75,
+    "name": "神圣戒指",
+    "type": "ring",
+    "slot": "ring",
+    "hp": 150,
+    "attack": 65,
+    "strength": 17,
+    "agility": 17,
+    "constitution": 17,
+    "critChance": 0.17,
+    "ignoreDefense": 0.085
+  },
+  {
+    "id": "eternal_blade",
+    "level": 80,
+    "name": "永恒之刃",
+    "type": "weapon",
+    "slot": "weapon",
+    "attack": 250,
+    "strength": 37,
+    "critChance": 0.18,
+    "comboChance": 0.17,
+    "hp": 160
+  },
+  {
+    "id": "eternal_plate",
+    "level": 80,
+    "name": "永恒板甲",
+    "type": "armor",
+    "slot": "armor",
+    "hp": 430,
+    "defense": 135,
+    "constitution": 37,
+    "critResist": 0.18,
+    "counterChance": 0.16,
+    "attack": 48
+  },
+  {
+    "id": "eternal_boots",
+    "level": 80,
+    "name": "永恒之靴",
+    "type": "boots",
+    "slot": "boots",
+    "defense": 70,
+    "moveSpeed": 18,
+    "agility": 37,
+    "counterChance": 0.16,
+    "comboChance": 0.16,
+    "hp": 160,
+    "attack": 32
+  },
+  {
+    "id": "eternal_ring",
+    "level": 80,
+    "name": "永恒戒指",
+    "type": "ring",
+    "slot": "ring",
+    "hp": 160,
+    "attack": 70,
+    "strength": 18,
+    "agility": 18,
+    "constitution": 18,
+    "critChance": 0.18,
+    "ignoreDefense": 0.09
+  },
+  {
+    "id": "infinity_blade",
+    "level": 85,
+    "name": "无限之刃",
+    "type": "weapon",
+    "slot": "weapon",
+    "attack": 270,
+    "strength": 40,
+    "critChance": 0.19,
+    "comboChance": 0.18,
+    "hp": 170
+  },
+  {
+    "id": "infinity_plate",
+    "level": 85,
+    "name": "无限板甲",
+    "type": "armor",
+    "slot": "armor",
+    "hp": 460,
+    "defense": 145,
+    "constitution": 40,
+    "critResist": 0.19,
+    "counterChance": 0.17,
+    "attack": 52
+  },
+  {
+    "id": "infinity_boots",
+    "level": 85,
+    "name": "无限之靴",
+    "type": "boots",
+    "slot": "boots",
+    "defense": 75,
+    "moveSpeed": 19,
+    "agility": 40,
+    "counterChance": 0.17,
+    "comboChance": 0.17,
+    "hp": 170,
+    "attack": 35
+  },
+  {
+    "id": "infinity_ring",
+    "level": 85,
+    "name": "无限戒指",
+    "type": "ring",
+    "slot": "ring",
+    "hp": 170,
+    "attack": 75,
+    "strength": 19,
+    "agility": 19,
+    "constitution": 19,
+    "critChance": 0.19,
+    "ignoreDefense": 0.095
+  },
+  {
+    "id": "omega_blade",
+    "level": 90,
+    "name": "欧米茄之刃",
+    "type": "weapon",
+    "slot": "weapon",
+    "attack": 290,
+    "strength": 43,
+    "critChance": 0.2,
+    "comboChance": 0.19,
+    "hp": 180
+  },
+  {
+    "id": "omega_plate",
+    "level": 90,
+    "name": "欧米茄板甲",
+    "type": "armor",
+    "slot": "armor",
+    "hp": 490,
+    "defense": 155,
+    "constitution": 43,
+    "critResist": 0.2,
+    "counterChance": 0.18,
+    "attack": 56
+  },
+  {
+    "id": "omega_boots",
+    "level": 90,
+    "name": "欧米茄之靴",
+    "type": "boots",
+    "slot": "boots",
+    "defense": 80,
+    "moveSpeed": 20,
+    "agility": 43,
+    "counterChance": 0.18,
+    "comboChance": 0.18,
+    "hp": 180,
+    "attack": 38
+  },
+  {
+    "id": "omega_ring",
+    "level": 90,
+    "name": "欧米茄戒指",
+    "type": "ring",
+    "slot": "ring",
+    "hp": 180,
+    "attack": 80,
+    "strength": 20,
+    "agility": 20,
+    "constitution": 20,
+    "critChance": 0.2,
+    "ignoreDefense": 0.1
+  },
+  {
+    "id": "galaxy_blade",
+    "level": 95,
+    "name": "银河之刃",
+    "type": "weapon",
+    "slot": "weapon",
+    "attack": 310,
+    "strength": 46,
+    "critChance": 0.21,
+    "comboChance": 0.2,
+    "hp": 190
+  },
+  {
+    "id": "galaxy_plate",
+    "level": 95,
+    "name": "银河板甲",
+    "type": "armor",
+    "slot": "armor",
+    "hp": 520,
+    "defense": 165,
+    "constitution": 46,
+    "critResist": 0.21,
+    "counterChance": 0.19,
+    "attack": 60
+  },
+  {
+    "id": "galaxy_boots",
+    "level": 95,
+    "name": "银河之靴",
+    "type": "boots",
+    "slot": "boots",
+    "defense": 85,
+    "moveSpeed": 21,
+    "agility": 46,
+    "counterChance": 0.19,
+    "comboChance": 0.19,
+    "hp": 190,
+    "attack": 41
+  },
+  {
+    "id": "galaxy_ring",
+    "level": 95,
+    "name": "银河戒指",
+    "type": "ring",
+    "slot": "ring",
+    "hp": 190,
+    "attack": 85,
+    "strength": 21,
+    "agility": 21,
+    "constitution": 21,
+    "critChance": 0.21,
+    "ignoreDefense": 0.105
+  },
+  {
+    "id": "multiverse_blade",
+    "level": 100,
+    "name": "多元宇宙之刃",
+    "type": "weapon",
+    "slot": "weapon",
+    "attack": 330,
+    "strength": 50,
+    "critChance": 0.22,
+    "comboChance": 0.21,
+    "hp": 200
+  },
+  {
+    "id": "multiverse_plate",
+    "level": 100,
+    "name": "多元宇宙板甲",
+    "type": "armor",
+    "slot": "armor",
+    "hp": 550,
+    "defense": 175,
+    "constitution": 50,
+    "critResist": 0.22,
+    "counterChance": 0.2,
+    "attack": 64
+  },
+  {
+    "id": "multiverse_boots",
+    "level": 100,
+    "name": "多元宇宙之靴",
+    "type": "boots",
+    "slot": "boots",
+    "defense": 90,
+    "moveSpeed": 22,
+    "agility": 50,
+    "counterChance": 0.2,
+    "comboChance": 0.2,
+    "hp": 200,
+    "attack": 44
+  },
+  {
+    "id": "multiverse_ring",
+    "level": 100,
+    "name": "多元宇宙戒指",
+    "type": "ring",
+    "slot": "ring",
+    "hp": 200,
+    "attack": 90,
+    "strength": 22,
+    "agility": 22,
+    "constitution": 22,
+    "critChance": 0.22,
+    "ignoreDefense": 0.11
   }
 ]

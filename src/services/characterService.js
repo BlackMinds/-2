@@ -31,7 +31,7 @@ export function initializePlayer (skillsData) {
     comboChance: 0.05,
     counterChance: 0.03,
     ignoreDefense: 0.0,
-    gold: 1000,
+    gold: 10000000,
     pets: [],
     activePetId: null,
     highestTowerLevel: 1,
@@ -105,6 +105,10 @@ export function updatePlayerStats (player, activePet) {
   let percentDefense = 0
   let percentHp = 0
 
+  // Reset passive skill bonuses before recalculating
+  player.goldBonus = 0
+  player.hpRegen = 0
+
   // Add stats from equipment
   for (const slot in player.equipment) {
     const item = player.equipment[slot]
@@ -144,8 +148,8 @@ export function updatePlayerStats (player, activePet) {
       flatComboChance += skill.comboChance || 0
       flatCounterChance += skill.counterChance || 0
       flatIgnoreDefense += skill.ignoreDefense || 0
-      if (skill.goldBonus) player.goldBonus = (player.goldBonus || 0) + skill.goldBonus
-      if (skill.hpRegen) player.hpRegen = (player.hpRegen || 0) + skill.hpRegen
+      if (skill.goldBonus) player.goldBonus += skill.goldBonus
+      if (skill.hpRegen) player.hpRegen += skill.hpRegen
     }
   })
 

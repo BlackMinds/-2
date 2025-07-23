@@ -100,6 +100,9 @@ function performAttack (attacker, defender, battleLog, activePet, player) {
     attacker.hp -= counterDamage
     logBattle(battleLog, `你发动了反击，对 ${attacker.name} 造成了 ${counterDamage} 点伤害！`)
   }
+  if (player.hp <= 0) {
+    logBattle(battleLog, '你被击败了！')
+  }
 }
 
 function processTurn (gameContext) {
@@ -138,7 +141,7 @@ function processTurn (gameContext) {
       logBattle(battleLog, `${enemy.name} 的目标是你！`)
     }
     performAttack(enemy, target, battleLog, activePet, player)
-    if (player.hp <= 0) {
+    if (player.hp <= 0 || (activePet && activePet.hp <= 0 && target === activePet)) {
       endBattle(false)
       return
     }

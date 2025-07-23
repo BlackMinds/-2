@@ -6,7 +6,7 @@ export function enhanceItem (player, item, location, logBattle, activePet, hideT
     return
   }
 
-  const cost = (item.enhancementLevel + 1) * 100
+  const cost = (item.enhancementLevel + 1) * 200
   if (player.gold < cost) {
     logBattle(`金币不足，需要 ${cost} 金币。`)
     return

@@ -403,6 +403,7 @@ export default {
       this.saveGame()
     },
     startBattle () {
+      if (this.inBattle) return
       if (this.battleEndTimer) clearTimeout(this.battleEndTimer)
       if (this.turnTimer) clearTimeout(this.turnTimer)
 
@@ -495,7 +496,7 @@ export default {
         this.logBattle(`恭喜你通过锁妖塔第 ${this.currentTowerLevel - 1} 层！`)
       }
 
-      const goldGained = monster.level * 5
+      const goldGained = Math.round(monster.level * 5 * (1 + (this.player.goldBonus || 0)))
       const xpGained = monster.level * 10
       this.player.gold += goldGained
       this.player.xp += xpGained
