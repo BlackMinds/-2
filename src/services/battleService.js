@@ -108,7 +108,7 @@ function performAttack (attacker, defender, battleLog, activePet, player) {
 function processTurn (gameContext) {
   const { player, enemies, battleLog, activePet, endBattle, updateState } = gameContext
   if (!gameContext.inBattle || player.hp <= 0 || enemies.every(e => e.hp <= 0)) {
-    endBattle(enemies.every(e => e.hp <= 0))
+    endBattle(enemies.every(e => e.hp <= 0), player, enemies)
     return
   }
 
@@ -120,7 +120,7 @@ function processTurn (gameContext) {
     logBattle(battleLog, '你的回合：')
     const livingEnemies = enemies.filter(e => e.hp > 0)
     if (livingEnemies.length === 0) {
-      endBattle(true)
+      endBattle(true, player, enemies)
       return
     }
     const targetEnemy = livingEnemies[Math.floor(Math.random() * livingEnemies.length)]
@@ -133,7 +133,7 @@ function processTurn (gameContext) {
       petService.performPetAction(activePet, player, targetEnemy, (msg) => logBattle(battleLog, msg), calculateDamage, 'player-turn-end')
     }
     if (enemies.every(e => e.hp <= 0)) {
-      endBattle(true)
+      endBattle(true, player, enemies)
       return
     }
     updateState({ currentTurn: 'enemy' })
@@ -157,7 +157,7 @@ function processTurn (gameContext) {
         }
 
         if (player.hp <= 0) {
-          endBattle(false)
+          endBattle(false, player, enemies)
         }
       }
     })

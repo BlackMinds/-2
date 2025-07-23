@@ -467,21 +467,21 @@ export default {
       if (!this.inBattle) return
       if (this.turnTimer) clearTimeout(this.turnTimer)
       this.logBattle('你成功逃跑了！')
-      this.endBattle(false)
+      this.endBattle(false, this.player, this.enemies)
     },
-    endBattle (isVictory) {
+    endBattle (isVictory, player, enemies) {
       if (this.turnTimer) clearTimeout(this.turnTimer)
-      const isTowerBattle = this.enemies.length > 0 && this.towerMonsters.some(m => m.name === this.enemies[0].name)
+      const isTowerBattle = enemies.length > 0 && this.towerMonsters.some(m => m.name === enemies[0].name)
 
       this.inBattle = false // Always exit battle state
       this.enemies = [] // Clear enemies
-      this.player.hp = this.player.maxHp // Restore player HP
+      player.hp = player.maxHp // Restore player HP
       if (this.activePet) this.activePet.hp = this.activePet.maxHp // Restore pet HP
       this.logBattle('你的生命值已完全恢复。')
 
       if (isVictory) {
         this.logBattle('你击败了所有敌人！')
-        this.enemies.forEach(enemy => this.handleMonsterDefeated(enemy))
+        enemies.forEach(enemy => this.handleMonsterDefeated(enemy, player))
         this.saveGame()
         if (isTowerBattle) {
           this.logBattle('3秒后将继续挑战锁妖塔...')
@@ -490,10 +490,10 @@ export default {
           this.logBattle('3秒后将开始新的战斗...')
           this.battleEndTimer = setTimeout(() => this.startBattle(), 3000)
         }
-      } else if (this.player.hp <= 0) { // Player defeated
+      } else if (player.hp <= 0) { // Player defeated
         this.logBattle('你被击败了...')
         if (isTowerBattle) {
-          this.currentTowerLevel = this.player.highestTowerLevel // Reset tower level on defeat
+          this.currentTowerLevel = player.highestTowerLevel // Reset tower level on defeat
           this.logBattle('3秒后将重新挑战锁妖塔...')
           this.battleEndTimer = setTimeout(() => this.startTowerBattle(), 3000)
         } else {
@@ -508,7 +508,7 @@ export default {
         }
       }
     },
-    handleMonsterDefeated (monster) {
+    handleMonsterDefeated (monster, player) {
       if (!monster || !monster.drops) return
 
       if (this.towerMonsters.some(m => m.name === monster.name)) {
@@ -522,18 +522,18 @@ export default {
         if (this.currentTowerLevel >= 50 && this.currentTowerLevel <= 100) {
           if (Math.random() < 0.15) { // 15% chance to drop a pet skill book
             const petSkillBook = { name: '宠物技能书', type: 'skill', skillId: 'generic_pet_skill_book' } // Placeholder skillId
-            this.player.inventory.push(petSkillBook)
+            player.inventory.push(petSkillBook)
             this.logBattle('掉落了宠物技能书！')
           }
         }
       }
 
-      const goldGained = Math.round(monster.level * 5 * (1 + (this.player.goldBonus || 0)))
+      const goldGained = Math.round(monster.level * 5 * (1 + (player.goldBonus || 0)))
       const xpGained = monster.level * 10
-      this.player.gold += goldGained
-      this.player.xp += xpGained
+      player.gold += goldGained
+      player.xp += xpGained
       this.logBattle(`你获得了 ${goldGained} 金币和 ${xpGained} 经验值。`)
-      this.checkLevelUp()
+      characterService.checkLevelUp(player, this.logBattle, this.activePet)
       if (this.activePet) {
         this.activePet.xp += xpGained
         this.logBattle(`你的宠物获得了 ${xpGained} 经验值。`)
@@ -546,28 +546,28 @@ export default {
             const equipmentData = this.equipment.find(e => e.id === drop.itemId)
             if (equipmentData) {
               const newEquipment = { ...equipmentData, type: 'equipment', enhancementLevel: 0, baseAttack: equipmentData.attack || 0, baseDefense: equipmentData.defense || 0, baseHp: equipmentData.hp || 0, baseStrength: equipmentData.strength || 0, baseAgility: equipmentData.agility || 0, baseConstitution: equipmentData.constitution || 0 }
-              this.player.inventory.push(newEquipment)
+              player.inventory.push(newEquipment)
               this.logBattle(`掉落了装备：${newEquipment.name}！`)
             }
           } else if (drop.type === 'material') {
-            const existingMaterial = this.player.inventory.find(item => item.name === drop.name)
+            const existingMaterial = player.inventory.find(item => item.name === drop.name)
             if (existingMaterial) existingMaterial.quantity = (existingMaterial.quantity || 1) + 1
-            else this.player.inventory.push({ name: drop.name, type: 'material', quantity: 1 })
+            else player.inventory.push({ name: drop.name, type: 'material', quantity: 1 })
             this.logBattle(`掉落了材料：${drop.name}！`)
           } else if (drop.type === 'skill') {
             const skill = this.skillsData.find(s => s.id === drop.skillId)
-            if (skill && !this.player.inventory.some(item => item.type === 'skill' && item.skillId === skill.id)) {
-              this.player.inventory.push({ name: `${skill.name} 技能书`, type: 'skill', skillId: skill.id })
+            if (skill && !player.inventory.some(item => item.type === 'skill' && item.skillId === skill.id)) {
+              player.inventory.push({ name: `${skill.name} 技能书`, type: 'skill', skillId: skill.id })
               this.logBattle(`掉落了技能书：${skill.name}！`)
             }
           } else if (drop.type === 'pet') {
-            if (this.player.pets.length < 5) {
+            if (player.pets.length < 5) {
               const petData = this.pets.find(p => p.id === drop.petId)
               if (petData) {
                 const newPet = petService.createPet(petData)
-                this.player.pets.push(newPet)
+                player.pets.push(newPet)
                 this.logBattle(`你获得了新的宠物：${petData.name}！`)
-                if (!this.player.activePetId) this.setPetStatus(newPet.instanceId, true)
+                if (!player.activePetId) this.setPetStatus(newPet.instanceId, true)
               }
             } else {
               this.logBattle('你找到了一个宠物，但你的宠物栏已满。')
