@@ -20,6 +20,7 @@
             <p>力量: {{ player.strength }} <button v-if="player.attributePoints > 0" @click="assignPoint('baseStrength')" :disabled="inBattle">+</button></p>
             <p>敏捷: {{ player.agility }} <button v-if="player.attributePoints > 0" @click="assignPoint('baseAgility')" :disabled="inBattle">+</button></p>
             <p>体质: {{ player.constitution }} <button v-if="player.attributePoints > 0" @click="assignPoint('baseConstitution')" :disabled="inBattle">+</button></p>
+            <button @click="resetAttributePoints" :disabled="inBattle">重置属性点</button>
             <p>攻击力: {{ player.attack }}</p>
             <p>防御力: {{ player.defense }}</p>
           </div>
@@ -608,6 +609,10 @@ export default {
       if (this.sections[sectionName]) {
         this.sections[sectionName].collapsed = !this.sections[sectionName].collapsed
       }
+    },
+    resetAttributePoints () {
+      characterService.resetAttributePoints(this.player, this.logBattle, this.activePet)
+      this.saveGame()
     }
   }
 }

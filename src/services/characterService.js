@@ -245,6 +245,31 @@ export function checkLevelUp (player, logCallback, activePet) {
 }
 
 /**
+ * Resets all assigned attribute points and returns them to the player.
+ * @param {object} player - The player object.
+ * @param {function} logCallback - A function to log messages.
+ * @param {object} activePet - The currently active pet, if any.
+ */
+export function resetAttributePoints (player, logCallback, activePet) {
+  const spentStrength = player.baseStrength - 10
+  const spentAgility = player.baseAgility - 10
+  const spentConstitution = player.baseConstitution - 10
+
+  const totalSpentPoints = spentStrength + spentAgility + spentConstitution
+
+  if (totalSpentPoints > 0) {
+    player.baseStrength = 10
+    player.baseAgility = 10
+    player.baseConstitution = 10
+    player.attributePoints += totalSpentPoints
+    updatePlayerStats(player, activePet)
+    logCallback(`你已成功重置属性点，返还 ${totalSpentPoints} 点。`)
+  } else {
+    logCallback('你没有已分配的属性点可以重置。')
+  }
+}
+
+/**
  * Loads player data from localStorage, applying compatibility fixes for older save files.
  * @param {object} skillsData - Data for all available skills.
  * @returns {object} The loaded player object.
