@@ -76,6 +76,9 @@ function processPlayerTurn (gameContext) {
     petService.performPetAction(activePet, player, targetEnemy, (msg) => logBattle(battleLog, msg), calculateDamage, 'player-turn-end')
   }
 
+  // Explicitly update enemies state to ensure reactivity
+  gameContext.updateState({ enemies: enemies })
+
   // Check if all enemies are defeated after player's action
   if (enemies.every(e => e.hp <= 0)) {
     endBattle(true, player, enemies)
