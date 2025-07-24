@@ -33,23 +33,27 @@ function performAttack (attacker, defender, battleLog, activePet, player) {
   }
 
   const damageDealt = calculateDamage(attacker.attack, defender.defense, attacker.critChance, defender.critResist, attacker.ignoreDefense, battleLog)
+  logBattle(battleLog, `${defenderName} 受到攻击前生命值: ${defender.hp}`)
   defender.hp -= damageDealt
-  logBattle(battleLog, `${attacker.name} 对 ${defenderName} 造成了 ${damageDealt} 点伤害。`)
+  logBattle(battleLog, `${attacker.name} 对 ${defenderName} 造成了 ${damageDealt} 点伤害。${defenderName} 当前生命值: ${defender.hp}`)
 
   if (Math.random() < attacker.comboChance) {
+    logBattle(battleLog, `${defenderName} 受到连击前生命值: ${defender.hp}`)
     const comboDamage = calculateDamage(attacker.attack * 0.5, defender.defense, attacker.critChance, defender.critResist, attacker.ignoreDefense, battleLog)
     defender.hp -= comboDamage
-    logBattle(battleLog, `${attacker.name} 发动了连击，对 ${defenderName} 额外造成了 ${comboDamage} 点伤害！`)
+    logBattle(battleLog, `${attacker.name} 发动了连击，对 ${defenderName} 额外造成了 ${comboDamage} 点伤害！${defenderName} 当前生命值: ${defender.hp}`)
   }
 
   if (defender.hp > 0 && attacker.name === player.name && Math.random() < defender.counterChance) {
     const counterDamage = calculateDamage(defender.attack * 0.7, attacker.defense, defender.critChance, attacker.critResist, defender.ignoreDefense, battleLog)
+    logBattle(battleLog, `你受到反击前生命值: ${attacker.hp}`)
     attacker.hp -= counterDamage
-    logBattle(battleLog, `${defender.name} 发动了反击，对你造成了 ${counterDamage} 点伤害！`)
+    logBattle(battleLog, `${defender.name} 发动了反击，对你造成了 ${counterDamage} 点伤害！你当前生命值: ${attacker.hp}`)
   } else if (defender.hp > 0 && defender.name === player.name && Math.random() < defender.counterChance) {
     const counterDamage = calculateDamage(defender.attack * 0.7, attacker.defense, defender.critChance, attacker.critResist, defender.ignoreDefense, battleLog)
+    logBattle(battleLog, `${attacker.name} 受到反击前生命值: ${attacker.hp}`)
     attacker.hp -= counterDamage
-    logBattle(battleLog, `你发动了反击，对 ${attacker.name} 造成了 ${counterDamage} 点伤害！`)
+    logBattle(battleLog, `你发动了反击，对 ${attacker.name} 造成了 ${counterDamage} 点伤害！${attacker.name} 当前生命值: ${attacker.hp}`)
   }
   if (player.hp <= 0) {
     logBattle(battleLog, '你被击败了！')
@@ -75,9 +79,6 @@ function processPlayerTurn (gameContext) {
   if (targetEnemy.hp > 0 && activePet) {
     petService.performPetAction(activePet, player, targetEnemy, (msg) => logBattle(battleLog, msg), calculateDamage, 'player-turn-end')
   }
-
-  // Explicitly update enemies state to ensure reactivity
-  gameContext.updateState({ enemies: enemies })
 
   // Check if all enemies are defeated after player's action
   if (enemies.every(e => e.hp <= 0)) {
@@ -107,12 +108,6 @@ function processEnemyTurn (enemy, gameContext) {
     logBattle(battleLog, `${enemy.name} 的目标是你！`)
   }
   performAttack(enemy, target, battleLog, activePet, player)
-
-  // Explicitly update player and activePet state to ensure reactivity
-  gameContext.updateState({ player: player }) // Access directly from gameContext
-  if (activePet) {
-    gameContext.updateState({ activePet: activePet }) // Access directly from gameContext
-  }
 
   // Check if player was defeated
   if (player.hp <= 0) {

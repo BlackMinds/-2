@@ -2,6 +2,7 @@
   <div class="header">
     <button @click="showForgeModal = true">打造</button>
     <button @click="showBlindBoxModal = true" style="margin-left: 10px;">盲盒</button>
+    <button @click="$emit('open-profession-system')" style="margin-left: 10px;">职业系统</button>
     <button @click="showHelpModal = true" style="margin-left: 10px;">帮助文档</button>
 
     <div v-if="showForgeModal" class="modal">

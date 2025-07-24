@@ -1,6 +1,6 @@
 <template>
   <div id="game-container" style="padding-top: 100px">
-    <app-header ref="appHeader" :player="player" @forge-item="handleForgeItem" @open-blind-box="handleOpenBlindBox"></app-header>
+    <app-header ref="appHeader" :player="player" @forge-item="handleForgeItem" @open-blind-box="handleOpenBlindBox" @open-profession-system="openProfessionSystem"></app-header>
     <div class="left-panel" >
       <div class="section character-attributes">
         <h2 @click="toggleSection('character')">
@@ -157,6 +157,15 @@
     </div>
 
     <div v-if="tooltip.visible" class="tooltip" :style="{ top: tooltip.top + 'px', left: tooltip.left + 'px' }" v-html="tooltip.content"></div>
+
+    <profession-system
+      :is-visible="isProfessionSystemVisible"
+      :player="player"
+      @close="isProfessionSystemVisible = false"
+      @select-profession="handleSelectProfession"
+      @select-branch="handleSelectBranch"
+      @learn-skill="handleLearnSkill"
+    ></profession-system>
   </div>
 
 </template>
@@ -173,15 +182,18 @@ import * as battleService from '../services/battleService.js'
 import * as uiService from '../services/uiService.js'
 import * as shopService from '../services/shopService.js'
 import AppHeader from './Header.vue'
+import ProfessionSystem from './ProfessionSystem.vue' // Import ProfessionSystem
 
 export default {
   name: 'TextGame',
   components: {
-    AppHeader
+    AppHeader,
+    ProfessionSystem // Register ProfessionSystem
   },
   data () {
     return {
       isEditingName: false,
+      isProfessionSystemVisible: false, // New data property for visibility
       player: characterService.initializePlayer(),
       enemies: [],
       inBattle: false,
@@ -335,11 +347,15 @@ export default {
       this.battleLog = [`你开始挑战锁妖塔第 ${this.currentTowerLevel} 层！`]
       this.logBattle(`你遇到了 ${this.enemies.length} 个 ${this.enemies[0].name}！`)
 
-      // Initialize combatants array and sort by moveSpeed
+      // Initialize combatants array with direct references and sort by moveSpeed
       this.combatants = [
-        { ...this.player, isPlayer: true, instanceId: 'player' }, // Mark player and give unique ID
-        ...this.enemies.map(e => ({ ...e, isPlayer: false })) // Mark enemies
+        this.player, // Direct reference to player
+        ...this.enemies // Direct references to enemies
       ]
+      // Add isPlayer flag to player object for combatant logic
+      this.player.isPlayer = true
+      this.player.instanceId = 'player' // Ensure player has an instanceId
+
       this.combatants.sort((a, b) => b.moveSpeed - a.moveSpeed) // Higher moveSpeed acts first
       this.currentCombatantIndex = 0
       this.logBattle('战斗开始！')
@@ -377,11 +393,15 @@ export default {
       this.inBattle = true
       this.battleLog = [`你遇到了 ${this.enemies.length} 个 ${this.enemies[0].name}！`]
 
-      // Initialize combatants array and sort by moveSpeed
+      // Initialize combatants array with direct references and sort by moveSpeed
       this.combatants = [
-        { ...this.player, isPlayer: true, instanceId: 'player' }, // Mark player and give unique ID
-        ...this.enemies.map(e => ({ ...e, isPlayer: false })) // Mark enemies
+        this.player, // Direct reference to player
+        ...this.enemies // Direct references to enemies
       ]
+      // Add isPlayer flag to player object for combatant logic
+      this.player.isPlayer = true
+      this.player.instanceId = 'player' // Ensure player has an instanceId
+
       this.combatants.sort((a, b) => b.moveSpeed - a.moveSpeed) // Higher moveSpeed acts first
       this.currentCombatantIndex = 0
       this.logBattle('战斗开始！')
@@ -409,16 +429,10 @@ export default {
 
       for (let i = 0; i < this.combatants.length; i++) {
         const index = (originalIndex + i) % this.combatants.length
-        const combatant = this.combatants[index]
+        const combatant = this.combatants[index] // This is now a direct reference
 
-        // Ensure we are using the latest player/enemy data from state
-        if (combatant.isPlayer) {
-          currentCombatant = player
-        } else {
-          currentCombatant = enemies.find(e => e.instanceId === combatant.instanceId) // Use instanceId for unique enemy tracking
-        }
-
-        if (currentCombatant && currentCombatant.hp > 0) {
+        if (combatant && combatant.hp > 0) {
+          currentCombatant = combatant // Use the direct reference
           this.currentCombatantIndex = index
           foundNext = true
           break
@@ -602,6 +616,33 @@ export default {
     resetAttributePoints () {
       characterService.resetAttributePoints(this.player, this.logBattle, this.activePet)
       this.saveGame()
+    },
+    openProfessionSystem () {
+      this.isProfessionSystemVisible = true
+    },
+    handleSelectProfession (professionId) {
+      this.player.profession = professionId
+      // Skill point is granted when selecting a branch, not just profession
+      this.logBattle(`你选择了职业：${professionId}！现在请选择你的分支。`)
+      this.saveGame()
+      // Do not close modal here, wait for branch selection
+    },
+    handleSelectBranch (branchId) {
+      this.player.branch = branchId
+      this.player.skillPoints += 1 // Grant 1 skill point upon branch selection
+      this.logBattle(`你选择了分支：${branchId}，并获得了1个技能点！`)
+      this.saveGame()
+      this.isProfessionSystemVisible = false // Close after branch selection
+    },
+    handleLearnSkill (skillId) {
+      if (this.player.skillPoints > 0 && !this.player.learnedSkills.includes(skillId)) {
+        this.player.learnedSkills.push(skillId)
+        this.player.skillPoints--
+        this.logBattle(`你学习了技能：${skillId}！`)
+        this.saveGame()
+      } else {
+        this.logBattle('无法学习技能：技能点不足或已学习。')
+      }
     }
   }
 }

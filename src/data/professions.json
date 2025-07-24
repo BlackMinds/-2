@@ -1,0 +1,31 @@
+[
+  {
+    "id": "warrior",
+    "name": "战士",
+    "description": "擅长近战攻击和防御。",
+    "branches": [
+      {
+        "id": "berserker",
+        "name": "狂暴战",
+        "description": "以血换伤，追求极致的输出。"
+      },
+      {
+        "id": "shieldguard",
+        "name": "盾卫",
+        "description": "坚不可摧的防御，保护队友。"
+      }
+    ]
+  },
+  {
+    "id": "mage",
+    "name": "法师",
+    "description": "精通元素魔法，远程输出。",
+    "branches": []
+  },
+  {
+    "id": "rogue",
+    "name": "刺客",
+    "description": "敏捷的潜行者，擅长爆发伤害。",
+    "branches": []
+  }
+]

@@ -35,6 +35,12 @@ export function initializePlayer (skillsData) {
     pets: [],
     activePetId: null,
     highestTowerLevel: 1,
+    profession: null, // New: Player's chosen profession ID
+    branch: null, // New: Player's chosen profession branch ID
+    skillPoints: 0, // New: Available skill points
+    learnedSkills: [], // New: Array of learned skill IDs
+    isPlayer: true, // Always mark player as player
+    instanceId: 'player', // Unique ID for player in combat
     equipment: {
       weapon: null,
       armor: null,
@@ -219,6 +225,18 @@ export function checkLevelUp (player, logCallback, activePet) {
   if (player.level >= maxLevel) {
     player.xp = 0 // Cap XP at max level
   }
+
+  // New: Grant skill point at level 10
+  if (player.level === 10 && !player.profession) { // Only if level 10 and no profession chosen yet
+    logCallback('你已达到10级，可以前往职业系统选择你的职业并获得技能点！')
+  } else if (player.level > 10 && player.level % 10 === 0 && player.profession) {
+    // Example: Grant a skill point every 10 levels after profession chosen
+    // The user specified "10级有一个技能点 点过的就不能在点了", so I will only grant one skill point at level 10
+    // and not every 10 levels. The logic for "点过的就不能在点了" is handled in ProfessionSystem.vue
+    // by checking player.learnedSkills.includes(skill.id)
+    // I will remove the `!player.learnedSkills.includes(`level_${player.level}_skill`)` check here
+    // as it's not directly related to the profession system's skill points.
+  }
 }
 
 /**
@@ -279,6 +297,14 @@ export function loadPlayer (skillsData) {
     player.activeSkillSlots = []
     player.passiveSkillSlots = []
     player.skillLevels = {}
+    // New: Compatibility for profession system
+    if (player.profession === undefined) player.profession = null
+    if (player.branch === undefined) player.branch = null // New: Compatibility for branch
+    if (player.skillPoints === undefined) player.skillPoints = 0
+    if (player.learnedSkills === undefined) player.learnedSkills = []
+    // New: Compatibility for isPlayer and instanceId
+    if (player.isPlayer === undefined) player.isPlayer = true
+    if (player.instanceId === undefined) player.instanceId = 'player'
   } else {
     player = initializePlayer(skillsData)
   }
